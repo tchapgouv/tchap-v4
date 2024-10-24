@@ -53,6 +53,7 @@ import { doesRoomHaveUnreadMessages } from "../../../Unread";
 import SettingsFlag from "../elements/SettingsFlag";
 
 import TchapUIFeature from "../../../../../../src/tchap/util/TchapUIFeature"; // :tchap: tchap-features-from-config
+import TchapUrls from "../../../../../../src/tchap/util/TchapUrls"; //:TCHAP: email-notification-setting-caption
 
 // TODO: this "view" component still has far too much application logic in it,
 // which should be factored out to other files.
@@ -701,7 +702,7 @@ export default class Notifications extends React.PureComponent<IProps, IState> {
                         {},
                         {
                             a: (sub) => (
-                                <AccessibleButton kind="link_inline" onClick={() => {window.open("https://aide.tchap.beta.gouv.fr/fr/article/notification-par-email-draft-6k7k89/","_blank")}}>
+                                <AccessibleButton kind="link_inline" onClick={() => {window.open(TchapUrls.helpEmailNotification, "_blank")}}>
                                     {sub}
                                 </AccessibleButton>
                             ),

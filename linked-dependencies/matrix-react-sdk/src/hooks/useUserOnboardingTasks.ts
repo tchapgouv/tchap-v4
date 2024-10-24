@@ -22,6 +22,7 @@ import { UseCase } from "../settings/enums/UseCase";
 import { useSettingValue } from "./useSettings";
 import { UserOnboardingContext } from "./useUserOnboardingContext";
 import { accessSecretStorage } from "../SecurityManager"; // :TCHAP: onboarding-add-secure-backup
+import TchapUrls from "../../../../src/tchap/util/TchapUrls"; // :TCHAP: onboarding-add-tchap-guide
 
 interface UserOnboardingTask {
     id: string;
@@ -153,7 +154,7 @@ const tasks: UserOnboardingTask[] = [
             label: _t("onboarding|check_user_guide_action"),
             onClick: (ev: ButtonEvent) => {
                 window.localStorage.setItem('tchap_user_guide_checked', 'true');
-                window.open("https://aide.tchap.beta.gouv.fr/fr/article/guide-de-prise-en-main-de-tchap-oswyn1/", "_blank");
+                window.open( TchapUrls.helpUserOnboarding, "_blank");
             },
         },
     }, /** end :TCHAP: onboarding-add-tchap-guide */
