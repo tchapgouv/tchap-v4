@@ -893,5 +893,13 @@
     "settings|general|redlist": {
         "en": "Red List",
         "fr": "Liste rouge"
+    },
+    "encryption|verification|help_link": {
+        "en": "<a>Learn more and get help<a>",
+        "fr": "<a>En savoir plus et obtenir de l'aide <a>"
+    },
+    "encryption|verification|help_button": {
+        "en": "<a>Help<a>",
+        "fr": "<a>Aide <a>"
     }
 }

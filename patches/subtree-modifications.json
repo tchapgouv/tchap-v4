@@ -100,5 +100,9 @@
         "files": [
             "src/components/views/settings/tabs/user/AccountUserSettingsTab.tsx"
         ]
+    },
+    "help-access-verify-device": {
+        "issue": "https://github.com/tchapgouv/tchap-web-v4/issues/1140",
+        "files": ["src/components/structures/auth/SetupEncryptionBody.tsx"]
     }
 }

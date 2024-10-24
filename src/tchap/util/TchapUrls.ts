@@ -10,4 +10,7 @@ export default class TchapUrls {
 
     //tchap FAQ page on locked messages. Should redirect to the appropriate crisp page on https://aide.tchap.beta.gouv.fr
     public static lockedMessagesPage = "https://tchap.beta.gouv.fr/faq/messages-verrouilles";
+
+    // help page to verify decices, used 
+    public static helpVerifyDevicesPage = "https://aide.tchap.beta.gouv.fr/fr/article/comment-verifier-un-nouvel-appareil-sur-tchap-xm0b0y/";
 }
