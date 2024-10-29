@@ -94,5 +94,11 @@
             "src/components/views/right_panel/RightPanelTabs.tsx",
             "src/components/views/settings/tabs/user/SecurityUserSettingsTab.tsx"
         ]
+    },
+    "red-list-settings": {
+        "issue": "https://github.com/tchapgouv/tchap-web-v4/issues/1134",
+        "files": [
+            "src/components/views/settings/tabs/user/AccountUserSettingsTab.tsx"
+        ]
     }
 }

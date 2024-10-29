@@ -881,5 +881,17 @@
     "encryption|verification|verification_skip_warning": {
         "en": "Without verifying, you won't have access to all your messages and may appear as untrusted to others.",
         "fr": "Sans vérification, vous n'aurez pas accès à tous vos messages et votre compte n'apparaitra pas comme fiable pour les autres utilisateurs"
+    },
+    "settings|general|redlist_description": {
+        "en": "The other users won't be able to discover my account during their search",
+        "fr": "Les autres utilisateurs ne pourront pas découvrir mon compte lors de leurs recherches"
+    },
+    "settings|general|redlist_title": {
+        "en": "Register my account on the red list",
+        "fr": "Inscrire mon compte sur la liste rouge"
+    },
+    "settings|general|redlist": {
+        "en": "Red List",
+        "fr": "Liste rouge"
     }
 }
