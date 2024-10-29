@@ -22,6 +22,7 @@ import { _t } from "matrix-react-sdk/src/languageHandler";
 import { TchapAnchor } from "../../../../components/views/common/TchapAnchor";
 import KeySavedImage from "../../../../../../res/img/tchap/key-saved.svg";
 import "../../../../../../res/css/views/dialogs/_TchapExportE2eKeysSuccessDialog.pcss";
+import TchapUrls from "../../../../util/TchapUrls";
 
 interface IProps {
     allowLogout: boolean;
@@ -65,7 +66,7 @@ export default class TchapExportE2eKeysSuccessDialog extends React.Component<IPr
                             {
                                 a: (sub) => (
                                     <TchapAnchor
-                                        href="https://aide.tchap.beta.gouv.fr/fr/article/comment-importer-manuellement-mes-cles-tchap-cles-de-chiffrement-web-xh376r"
+                                        href={TchapUrls.helpManuallyImportKeys}
                                         openInNewTab
                                     >
                                         {sub}

@@ -7,6 +7,7 @@ import classNames from 'classnames';
 import { _t } from '../../../../languageHandler';
 import "../../../../../res/css/common/_TchapLeftPanel.pcss";
 import IconizedContextMenu, { IconizedContextMenuOption, IconizedContextMenuOptionList } from 'matrix-react-sdk/src/components/views/context_menus/IconizedContextMenu';
+import TchapUrls from '../../../util/TchapUrls';
 
 const QuickFaqButton: React.FC<{
     isPanelCollapsed: boolean;
@@ -43,7 +44,7 @@ const QuickFaqButton: React.FC<{
                         iconClassName="mx_UserMenu_iconHome"
                         label={_t("quick_faq|guides")}
                         onClick={(e) => {
-                            window.open("https://aide.tchap.beta.gouv.fr/fr/article/guide-de-prise-en-main-de-tchap-oswyn1/", '_blank')
+                            window.open(TchapUrls.helpUserOnboarding, '_blank')
                         }}
                     />
                 </IconizedContextMenuOptionList>

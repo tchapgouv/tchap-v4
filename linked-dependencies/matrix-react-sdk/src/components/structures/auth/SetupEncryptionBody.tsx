@@ -23,6 +23,7 @@ import defaultDispatcher from "../../../dispatcher/dispatcher";
 import { Action } from "matrix-react-sdk/src/dispatcher/actions";
 import { UserTab } from "matrix-react-sdk/src/components/views/dialogs/UserTab";
 import { OpenToTabPayload } from "matrix-react-sdk/src/dispatcher/payloads/OpenToTabPayload";
+import TchapUrls from "../../../../../../src/tchap/util/TchapUrls"; // :TCHAP: help-access-verify-device
 
 function keyHasPassphrase(keyInfo: SecretStorageKeyDescription): boolean {
     return Boolean(keyInfo.passphrase && keyInfo.passphrase.salt && keyInfo.passphrase.iterations);
@@ -201,13 +202,34 @@ export default class SetupEncryptionBody extends React.Component<IProps, IState>
                     );
                 }
 
+                // :TCHAP:
+                const translationHelpLink =  (sub) => (
+                    <AccessibleButton kind="link_inline" onClick={() => {
+                        window.open(TchapUrls.helpVerifyDevicesPage,"_blank")
+                    }}>
+                        {sub}
+                    </AccessibleButton>
+                )
+                const tchapHelpButton = (
+                    <AccessibleButton kind="primary_outline" onClick={() => { window.open(TchapUrls.helpVerifyDevicesPage,"_blank") }}>
+                            {_t("common|help")}
+                    </AccessibleButton>
+                )
+                // end :TCHAP: 
                 return (
                     <div>
-                        <p>{_t("encryption|verification|verification_description")}</p>
-
+                        {/*:TCHAP: help-access-verify-device - <p>{_t("encryption|verification|verification_description")} */}
+                        <p>{_t("encryption|verification|verification_description")} {_t("encryption|verification|help_link",  {}, {
+                             a: translationHelpLink,
+                            })}
+                        </p>
+                        {/* end :TCHAP: */}
                         <div className="mx_CompleteSecurity_actionRow">
                             {verifyButton}
                             {useRecoveryKeyButton}
+                            {/* :TCHAP: help-access-verify-device */}
+                            {tchapHelpButton}
+                            {/* end :TCHAP: */}
                         </div>
                         <div className="mx_SetupEncryptionBody_reset">
                             {_t("encryption|reset_all_button", undefined, {

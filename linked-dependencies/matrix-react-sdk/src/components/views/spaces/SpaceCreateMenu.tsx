@@ -43,6 +43,7 @@ import { KeyBindingAction } from "../../../accessibility/KeyboardShortcuts";
 import defaultDispatcher from "../../../dispatcher/dispatcher";
 import { Action } from "../../../dispatcher/actions";
 import { Filter } from "../dialogs/spotlight/Filter";
+import TchapUrls from "../../../../../../src/tchap/util/TchapUrls"; // :TCHAP: space-remove-public-and-subspace
 
 export const createSpace = async (
     client: MatrixClient,
@@ -348,7 +349,7 @@ const SpaceCreateMenu: React.FC<{
                 {_t("create_space|add_details_prompt")} {_t("create_space|add_details_prompt_2", {}, {
                     a: (sub) => (
                             <AccessibleButton kind="link_inline" onClick={() => {
-                                window.open("https://aide.tchap.beta.gouv.fr/fr/article/comment-creer-un-espace-sur-tchap-1wmlenx","_blank")
+                                window.open(TchapUrls.helpCreateSpace, "_blank")
                             }}>
                                 {sub}
                             </AccessibleButton>
