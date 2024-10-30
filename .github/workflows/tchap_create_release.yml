@@ -37,10 +37,6 @@ jobs:
               run: scripts/tchap/package-tchap.sh
               env:
                   CONFIG: prod
-            - name: Build the archive ${{ steps.version.outputs.version }} for prod rie
-              run: scripts/tchap/package-tchap.sh
-              env:
-                  CONFIG: prod_rie
             - name: Get current date
               id: date
               run: echo "::set-output name=date::$(date +'%Y%m%d')"
@@ -54,6 +50,5 @@ jobs:
                   artifacts: >
                       /home/runner/work/tchap-web-v4/tchap-web-v4/tchap-${{ steps.version.outputs.version }}-dev-${{ steps.date.outputs.date }}.tar.gz,
                       /home/runner/work/tchap-web-v4/tchap-web-v4/tchap-${{ steps.version.outputs.version }}-preprod-${{ steps.date.outputs.date }}.tar.gz,
-                      /home/runner/work/tchap-web-v4/tchap-web-v4/tchap-${{ steps.version.outputs.version }}-prod-${{ steps.date.outputs.date }}.tar.gz,
-                      /home/runner/work/tchap-web-v4/tchap-web-v4/tchap-${{ steps.version.outputs.version }}-prod_rie-${{ steps.date.outputs.date }}.tar.gz
+                      /home/runner/work/tchap-web-v4/tchap-web-v4/tchap-${{ steps.version.outputs.version }}-prod-${{ steps.date.outputs.date }}.tar.gz
                   token: ${{ secrets.GITHUB_TOKEN }}
