@@ -15,7 +15,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import React, { ReactNode } from "react";
+import React, { ReactNode, useState } from "react";
 import { IJoinRuleEventContent, JoinRule, RestrictedAllowType } from "matrix-js-sdk/src/@types/partials";
 import { Room } from "matrix-js-sdk/src/models/room";
 import { EventType } from "matrix-js-sdk/src/@types/event";
@@ -43,6 +43,8 @@ import QuestionDialog from "matrix-react-sdk/src/components/views/dialogs/Questi
 
 import TchapUIFeature from "../../../util/TchapUIFeature";
 import { TchapRoomAccessRule, TchapIAccessRuleEventContent, TchapRoomAccessRulesEventId } from "../../../@types/tchap";
+import TchapRoomLinkAccess from "../rooms/TchapRoomLinkAccess";
+import TchapRoomUtils from "../../../util/TchapRoomUtils";
 
 interface IProps {
     room: Room;
@@ -55,6 +57,9 @@ interface IProps {
 
 const JoinRuleSettings = ({ room, promptUpgrade, aliasWarning, onError, beforeChange, closeSettingsFn }: IProps) => {
     const cli = room.client;
+
+    // Used to hide join rule option if link is activated
+    const [isShareLinkActivated, setIsLinkSharingActivated] = useState(false);
 
     const roomSupportsRestricted = doesRoomVersionSupport(room.getVersion(), PreferredRoomVersions.RestrictedRooms);
     const preferredRestrictionVersion =
@@ -419,15 +424,65 @@ const JoinRuleSettings = ({ room, promptUpgrade, aliasWarning, onError, beforeCh
         setContent(newContent);
     };
 
+    // This is a callback function  used by the child link sharing component
+    // It will indicate wether or not to hide the joinrule options or not
+    const activateLinkSharingChange = async (checked: boolean, init: boolean, cb?: Function) => {
+        setIsLinkSharingActivated(checked);
+        // if its the initialisation phase we dont need to do anything more other than hide or not the join options 
+        if (init) {
+            return;
+        }
+
+        // deactivating the share link
+        if (!checked) {
+            const currentJoinRule = TchapRoomUtils.getRoomJoinRule(room);
+            setContent(currentJoinRule ? { join_rule: JoinRule.Invite } : {} as IJoinRuleEventContent);
+        }
+
+        // getting the callback from the link sharing component
+        if (checked && cb) {
+            // showing the modal to confirm we want to turn the room to public
+            const resultConfirmed = await activateLinksharingModal(); 
+            setIsLinkSharingActivated(resultConfirmed);
+            // if we cancel the modal, we need to revert back the switch and values
+            cb(resultConfirmed);
+        };
+    }
+
+    const activateLinksharingModal = async (): Promise<boolean> => {
+        const dialog = Modal.createDialog(QuestionDialog, {
+            title: _t("room_settings|security|link_sharing_title"),
+            description: (
+                <div>
+                    <p>
+                        {_t("room_settings|security|link_sharing_modal_confirmation", null,   {
+                        p: (sub) => <p>{sub}</p>,
+                    },)}
+                    </p>
+                </div>
+            ),
+        });
+        const { finished } = dialog;
+        const [confirm] = await finished;
+        return !!confirm
+    }
+
+    const renderLinkSharing = () => {
+        return <TchapRoomLinkAccess room={room} onBeforeChangeCallback={activateLinkSharingChange}></TchapRoomLinkAccess>
+    }
+
     return (
-        <StyledRadioGroup
-            name="joinRule"
-            value={joinRule}
-            onChange={onChange}
-            definitions={definitions}
-            disabled={disabled}
-            className="mx_JoinRuleSettings_radioButton"
-        />
+        <>
+            {!isShareLinkActivated && <StyledRadioGroup
+                name="joinRule"
+                value={joinRule}
+                onChange={onChange}
+                definitions={definitions}
+                disabled={disabled}
+                className="mx_JoinRuleSettings_radioButton"
+            />}
+            { renderLinkSharing() }
+        </>
     );
 };
 
