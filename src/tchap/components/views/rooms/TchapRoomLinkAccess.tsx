@@ -3,20 +3,21 @@ import { EventType, GuestAccess, JoinRule, Room } from "matrix-js-sdk/src/matrix
 import React, { useEffect, useState } from 'react';
 import LabelledToggleSwitch from 'matrix-react-sdk/src/components/views/elements/LabelledToggleSwitch';
 import { _t } from 'matrix-react-sdk/src/languageHandler';
-import { MatrixClientPeg } from 'matrix-react-sdk/src/MatrixClientPeg';
 import { randomString } from 'matrix-js-sdk/src/randomstring';
 import TchapRoomUtils from '../../../util/TchapRoomUtils';
 import { makeRoomPermalink } from "matrix-react-sdk/src/utils/permalinks/Permalinks";
 import { TchapRoomType } from "../../../@types/tchap";
 import { RoomJoinRulesEventContent } from "matrix-js-sdk/lib/types";
 import CopyableText from "matrix-react-sdk/src/components/views/elements/CopyableText";
+import Modal from "matrix-react-sdk/src/Modal";
+import QuestionDialog from "matrix-react-sdk/src/components/views/dialogs/QuestionDialog";
 
 interface ITchapRoomLinkAccessProps {
     room: Room,
-    onBeforeChangeCallback: Function
+    onUpdateParentView: Function
 }
 
-export default function TchapRoomLinkAccess({room, onBeforeChangeCallback}: ITchapRoomLinkAccessProps) : JSX.Element {
+export default function TchapRoomLinkAccess({room, onUpdateParentView}: ITchapRoomLinkAccessProps) : JSX.Element {
 
     const [isLinkSharingActivated, setIsLinkSharingActivated] = useState(false);
     const [linkSharingUrl, setLinkSharingUrl] = useState("");
@@ -39,7 +40,7 @@ export default function TchapRoomLinkAccess({room, onBeforeChangeCallback}: ITch
         }
         setIsLinkSharingActivated(isActivated)
         // updating the parent join rule options 
-        onBeforeChangeCallback(isActivated, true);
+        onUpdateParentView(isActivated, true);
     }
 
     useEffect(() => {
@@ -48,14 +49,13 @@ export default function TchapRoomLinkAccess({room, onBeforeChangeCallback}: ITch
 
     // Create the permalink to share
     const _setUpRoomByLink = async () => {
-        const client = MatrixClientPeg.get()!;
         try {
             // create an alias if not existing
             if (!room.getCanonicalAlias()) {
                 const aliasName = (room.name?.replace(/[^a-z0-9]/gi, "") ?? "") + randomString(11);
-                const fullAlias = `#${aliasName}:${client.getDomain()}`;
-                await client.createAlias(fullAlias, room.roomId)
-                await client.sendStateEvent(room.roomId, EventType.RoomCanonicalAlias, { alias: fullAlias }, "")
+                const fullAlias = `#${aliasName}:${room.client.getDomain()}`;
+                await room.client.createAlias(fullAlias, room.roomId)
+                await room.client.sendStateEvent(room.roomId, EventType.RoomCanonicalAlias, { alias: fullAlias }, "")
             }
 
             // it will take the new alias created previously or the existing one to make a link
@@ -99,25 +99,44 @@ export default function TchapRoomLinkAccess({room, onBeforeChangeCallback}: ITch
         // if the link sharing is deactivated we also need to update the joinrule parent view to show the other options
         if (!checked) {
             await _setJoinRules(newJoinRule);
-            onBeforeChangeCallback(checked)
+            onUpdateParentView(checked)
             return;
         }
 
-        // call parent join rule access, to confirm we want to change to public access and hide the other join options
-        onBeforeChangeCallback(checked, false, async (actionConfirmed: boolean) => {
+        // Show modal for confirmation
+        const activationIsConfirmed = await activateLinksharingModal();
+
+        if (activationIsConfirmed) {
             // create link if we activate the sharing, otherwise change nothing
-            if (actionConfirmed) {
-                if (TchapRoomUtils.getRoomGuessAccessRule(room) === GuestAccess.CanJoin) {
-                    await _setGuestAccessRules(GuestAccess.Forbidden)
-                }
-                _setUpRoomByLink();
-                _setJoinRules(JoinRule.Public)
-            } else {
-                // we revert because the action was not confirmed 
-                setIsLinkSharingActivated(!checked);
+            if (TchapRoomUtils.getRoomGuessAccessRule(room) === GuestAccess.CanJoin) {
+                await _setGuestAccessRules(GuestAccess.Forbidden)
             }
-        })
+            await Promise.all([_setUpRoomByLink(), _setJoinRules(JoinRule.Public)]);
+            onUpdateParentView(checked, false);
+        } else {
+            // we revert because the action was not confirmed 
+            setIsLinkSharingActivated(!checked);
+        }
     };
+
+
+    const activateLinksharingModal = async (): Promise<boolean> => {
+        const dialog = Modal.createDialog(QuestionDialog, {
+            title: _t("room_settings|security|link_sharing_title"),
+            description: (
+                <div>
+                    <p>
+                        {_t("room_settings|security|link_sharing_modal_confirmation", null,   {
+                        p: (sub) => <p>{sub}</p>,
+                    },)}
+                    </p>
+                </div>
+            ),
+        });
+        const { finished } = dialog;
+        const [confirm] = await finished;
+        return !!confirm
+    }
 
     return (
         <div>
@@ -125,8 +144,9 @@ export default function TchapRoomLinkAccess({room, onBeforeChangeCallback}: ITch
                 onChange={ _onLinkSharingSwitchChange }
                 label={_t("room_settings|security|link_sharing_title")}
                 caption={_t("room_settings|security|link_sharing_caption")}
-                disabled={disableLinkSharing}/>
-            
+                disabled={disableLinkSharing}
+                data-testid="share_link_switch"
+                />
             {
                 isLinkSharingActivated ? 
                     <CopyableText getTextToCopy={() => linkSharingUrl} aria-labelledby="shared_room_link">

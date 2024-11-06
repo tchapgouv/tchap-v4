@@ -426,8 +426,10 @@ const JoinRuleSettings = ({ room, promptUpgrade, aliasWarning, onError, beforeCh
 
     // This is a callback function  used by the child link sharing component
     // It will indicate wether or not to hide the joinrule options or not
-    const activateLinkSharingChange = async (checked: boolean, init: boolean, cb?: Function) => {
+    const activateLinkSharingChange = async (checked: boolean, init: boolean) => {
+        // hide or display the join rules
         setIsLinkSharingActivated(checked);
+
         // if its the initialisation phase we dont need to do anything more other than hide or not the join options 
         if (init) {
             return;
@@ -438,37 +440,10 @@ const JoinRuleSettings = ({ room, promptUpgrade, aliasWarning, onError, beforeCh
             const currentJoinRule = TchapRoomUtils.getRoomJoinRule(room);
             setContent(currentJoinRule ? { join_rule: JoinRule.Invite } : {} as IJoinRuleEventContent);
         }
-
-        // getting the callback from the link sharing component
-        if (checked && cb) {
-            // showing the modal to confirm we want to turn the room to public
-            const resultConfirmed = await activateLinksharingModal(); 
-            setIsLinkSharingActivated(resultConfirmed);
-            // if we cancel the modal, we need to revert back the switch and values
-            cb(resultConfirmed);
-        };
-    }
-
-    const activateLinksharingModal = async (): Promise<boolean> => {
-        const dialog = Modal.createDialog(QuestionDialog, {
-            title: _t("room_settings|security|link_sharing_title"),
-            description: (
-                <div>
-                    <p>
-                        {_t("room_settings|security|link_sharing_modal_confirmation", null,   {
-                        p: (sub) => <p>{sub}</p>,
-                    },)}
-                    </p>
-                </div>
-            ),
-        });
-        const { finished } = dialog;
-        const [confirm] = await finished;
-        return !!confirm
     }
 
     const renderLinkSharing = () => {
-        return <TchapRoomLinkAccess room={room} onBeforeChangeCallback={activateLinkSharingChange}></TchapRoomLinkAccess>
+        return <TchapRoomLinkAccess room={room} onUpdateParentView={activateLinkSharingChange}></TchapRoomLinkAccess>
     }
 
     return (

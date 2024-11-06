@@ -900,7 +900,7 @@
     },
     "room_settings|security|link_sharing_modal_confirmation": {
         "en": "<p>If you activate the access by link, everyone having the link will be able to share it and join the room without invitation.</p> <p>External users will still have to be invited manually to the room.</p>",
-        "fr": "<p>L'activation de l'accès au salon par lien permettra à n'importe qui en sa possession, de le partager et de rejoindre le salon sans invitation.</p> <p>Les agents externes à la fonction publique devront tout de même être invités manuellement.</p>"
+        "fr": "<p>L'activation de l'accès au salon par lien permettra à n'importe qui en sa possession, de le partager et de rejoindre le salon sans invitation.</p> <p>Les personnes externes à la fonction publique devront tout de même être invitées manuellement.</p>"
     },
     "room_settings|security|link_sharing_title": {
         "en": "Activate access by link for this room",
