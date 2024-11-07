@@ -909,5 +909,13 @@
     "room_settings|security|link_sharing_caption": {
         "en": "The users will be able to join from this link and share it with other users",
         "fr": "Les utilisateurs pourront rejoindre ce salon à partir d'un lien puis le partager à d'autres utilisateurs"
+    },
+    "error_dialog|activate_room_share_link|title": {
+        "en": "Failed to activate link sharing",
+        "fr": "Impossible d'activer le partage de salon par lien"
+    },
+    "error_dialog|activate_room_share_link|description": {
+        "en": "An error occured, we could'nt activate the access by link to the room",
+        "fr": "Une erreur est survenue, nous n'avons pas pu activer le partage de salon par lien"
     }
 }

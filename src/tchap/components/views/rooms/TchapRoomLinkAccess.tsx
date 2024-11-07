@@ -11,6 +11,7 @@ import { RoomJoinRulesEventContent } from "matrix-js-sdk/lib/types";
 import CopyableText from "matrix-react-sdk/src/components/views/elements/CopyableText";
 import Modal from "matrix-react-sdk/src/Modal";
 import QuestionDialog from "matrix-react-sdk/src/components/views/dialogs/QuestionDialog";
+import ErrorDialog from "matrix-react-sdk/src/components/views/dialogs/ErrorDialog";
 
 interface ITchapRoomLinkAccessProps {
     room: Room,
@@ -63,6 +64,7 @@ export default function TchapRoomLinkAccess({room, onUpdateParentView}: ITchapRo
             setLinkSharingUrl(link);    
         } catch(err) {
             console.error(err);
+            throw err;
         }
     };
 
@@ -74,48 +76,46 @@ export default function TchapRoomLinkAccess({room, onUpdateParentView}: ITchapRo
     }
 
     // Set the new join rule (public or invite)
-    const _setJoinRules = async (joinRule: JoinRule) => {
-        try {
-            await room.client.sendStateEvent(room.roomId, EventType.RoomJoinRules, { join_rule: joinRule } as RoomJoinRulesEventContent, "");
-            setIsLinkSharingActivated(joinRule === JoinRule.Public);
-        } catch(err) {
-            console.error(err);
-        }
+    const _setJoinRules = (joinRule: JoinRule) => {
+        return room.client.sendStateEvent(room.roomId, EventType.RoomJoinRules, { join_rule: joinRule } as RoomJoinRulesEventContent, "");
     };
 
-    const _setGuestAccessRules = async (guestAccess: GuestAccess) => {
-        try {
-            await room.client.sendStateEvent(room.roomId, EventType.RoomGuestAccess, {guest_access: guestAccess}, "")
-        } catch(err) {
-            console.error(err);
-        }
+    const _setGuestAccessRules = (guestAccess: GuestAccess) => {
+        return room.client.sendStateEvent(room.roomId, EventType.RoomGuestAccess, {guest_access: guestAccess}, "")
     };
     
     // Handler to listen on the switch change 
     const _onLinkSharingSwitchChange = async (checked: boolean) => {
-        let newJoinRule :JoinRule = checked ? JoinRule.Public : JoinRule.Invite;
-        setIsLinkSharingActivated(checked);
-        
-        // if the link sharing is deactivated we also need to update the joinrule parent view to show the other options
-        if (!checked) {
-            await _setJoinRules(newJoinRule);
-            onUpdateParentView(checked)
-            return;
-        }
+        try {
+            let newJoinRule :JoinRule = checked ? JoinRule.Public : JoinRule.Invite;
 
-        // Show modal for confirmation
-        const activationIsConfirmed = await activateLinksharingModal();
-
-        if (activationIsConfirmed) {
-            // create link if we activate the sharing, otherwise change nothing
-            if (TchapRoomUtils.getRoomGuessAccessRule(room) === GuestAccess.CanJoin) {
-                await _setGuestAccessRules(GuestAccess.Forbidden)
+            // if the link sharing is deactivated we also need to update the joinrule parent view to show the other options
+            if (!checked) {
+                await _setJoinRules(newJoinRule);
+                onUpdateParentView(checked)
+                setIsLinkSharingActivated(checked);
+                return;
             }
-            await Promise.all([_setUpRoomByLink(), _setJoinRules(JoinRule.Public)]);
-            onUpdateParentView(checked, false);
-        } else {
-            // we revert because the action was not confirmed 
-            setIsLinkSharingActivated(!checked);
+    
+            // Show modal for confirmation
+            const activationIsConfirmed = await activateLinksharingModal();
+    
+            if (activationIsConfirmed) {
+                // create link if we activate the sharing, otherwise change nothing
+                if (TchapRoomUtils.getRoomGuessAccessRule(room) === GuestAccess.CanJoin) {
+                    await _setGuestAccessRules(GuestAccess.Forbidden)
+                }
+                await Promise.all([_setUpRoomByLink(), _setJoinRules(JoinRule.Public)]);
+                setIsLinkSharingActivated(checked);
+                onUpdateParentView(checked, false);
+            }
+        } catch(err) {
+            // we do nothing if there was an error
+            console.error(err);
+            Modal.createDialog(ErrorDialog, {
+                title: _t("error_dialog|activate_room_share_link|title"),
+                description: err && err.message ? err.message : _t("error_dialog|activate_room_share_link|description"),
+            });
         }
     };
 
