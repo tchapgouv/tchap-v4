@@ -26,20 +26,10 @@ const config: Config = {
     testEnvironmentOptions: {
         url: "http://localhost/",
     },
-<<<<<<< HEAD
-    testMatch: ["<rootDir>/test/unit-tests/tchap/**/*-test.[tj]s?(x)"], // :TCHAP: only tchap tests
-    setupFiles: ["jest-canvas-mock"],
-    setupFilesAfterEnv: [
-        "<rootDir>/node_modules/matrix-react-sdk/test/setupTests.ts",
-        "<rootDir>/test/setup/setupLanguage.ts",
-        "<rootDir>/test/setupTests.ts",
-    ],
-=======
     testMatch: ["<rootDir>/test/**/*-test.[tj]s?(x)"],
     globalSetup: "<rootDir>/test/globalSetup.ts",
     setupFiles: ["jest-canvas-mock", "web-streams-polyfill/polyfill"],
     setupFilesAfterEnv: ["<rootDir>/test/setupTests.ts"],
->>>>>>> v1.11.85
     moduleNameMapper: {
         "\\.(css|scss|pcss)$": "<rootDir>/__mocks__/cssMock.js",
         "\\.(gif|png|ttf|woff2)$": "<rootDir>/__mocks__/imageMock.js",
@@ -71,9 +61,6 @@ const config: Config = {
         "matrix-react-sdk/(.*)": "<rootDir>/linked-dependencies/matrix-react-sdk/$1",
         // end :TCHAP:
     },
-<<<<<<< HEAD
-    transformIgnorePatterns: ["/node_modules/(?!matrix-js-sdk|matrix-react-sdk).+$"],
-=======
     transformIgnorePatterns: ["/node_modules/(?!(mime|matrix-js-sdk)).+$"],
     collectCoverageFrom: [
         "<rootDir>/src/**/*.{js,ts,tsx}",
@@ -83,7 +70,6 @@ const config: Config = {
         // Coverage chokes on type definition files
         "!<rootDir>/src/**/*.d.ts",
     ],
->>>>>>> v1.11.85
     coverageReporters: ["text-summary", "lcov"],
     testResultsProcessor: "@casualbot/jest-sonar-reporter",
     prettierPath: null,

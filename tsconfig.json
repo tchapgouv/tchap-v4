@@ -16,20 +16,13 @@
         "jsx": "react",
         "lib": ["es2022", "dom", "dom.iterable"],
         "strict": true,
-<<<<<<< HEAD
         /* :TCHAP: */
         "paths": {
             "~tchap-web/*": ["./*"],
-            "~matrix-react-sdk/*": ["./linked-dependencies/matrix-react-sdk/*"],
-            "matrix-react-sdk/*": ["./linked-dependencies/matrix-react-sdk/*"]
+            "jest-matrix-react": ["./test/test-utils/jest-matrix-react"]
         },
         "types": ["node", "jest", "@testing-library/jest-dom"]
         /* end :TCHAP: */
-=======
-        "paths": {
-            "jest-matrix-react": ["./test/test-utils/jest-matrix-react"]
-        }
->>>>>>> v1.11.85
     },
     "include": [
         "./node_modules/matrix-js-sdk/src/@types/*.d.ts",

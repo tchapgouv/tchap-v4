@@ -1,12 +1,8 @@
 {
     "name": "element-web",
-<<<<<<< HEAD
     "productName": "Tchap",
     "version": "4.10.3",
-    "version-element-web": "1.11.81",
-=======
-    "version": "1.11.85",
->>>>>>> v1.11.85
+    "version-element-web": "1.11.85",
     "description": "A feature-rich client for Matrix.org",
     "author": "DINUM",
     "repository": {
@@ -44,13 +40,9 @@
         "i18n:sort": "jq --sort-keys '.' src/i18n/strings/en_EN.json > src/i18n/strings/en_EN.json.tmp && mv src/i18n/strings/en_EN.json.tmp src/i18n/strings/en_EN.json",
         "i18n:lint": "matrix-i18n-lint && prettier --log-level=silent --write src/i18n/strings/ --ignore-path /dev/null",
         "i18n:diff": "cp src/i18n/strings/en_EN.json src/i18n/strings/en_EN_orig.json && yarn i18n && matrix-compare-i18n-files src/i18n/strings/en_EN_orig.json src/i18n/strings/en_EN.json",
-<<<<<<< HEAD
-        "clean": "rimraf lib webapp dist",
-=======
         "make-component": "node scripts/make-react-component.js",
         "rethemendex": "res/css/rethemendex.sh",
-        "clean": "rimraf lib webapp",
->>>>>>> v1.11.85
+        "clean": "rimraf lib webapp dist",
         "build": "yarn clean && yarn build:genfiles && yarn build:bundle",
         "build-stats": "yarn clean && yarn build:genfiles && yarn build:bundle-stats",
         "build:res": "ts-node scripts/copy-res.ts",
@@ -68,13 +60,8 @@
         "start:js": "webpack serve --output-path webapp --output-filename=bundles/_dev_/[name].js --output-chunk-filename=bundles/_dev_/[name].js --mode development",
         "lint": "yarn lint:types && yarn lint:js && yarn lint:style && yarn lint:workflows",
         "lint:js": "yarn lint:js:src && yarn lint:js:module_system",
-<<<<<<< HEAD
-        "lint:js:src": "eslint --max-warnings 100 src test && prettier --check .",
-        "lint:js:module_system": "eslint --max-warnings 100 --config .eslintrc-module_system.js module_system",
-=======
         "lint:js:src": "eslint --max-warnings 0 src test playwright && prettier --check .",
         "lint:js:module_system": "eslint --max-warnings 0 --config .eslintrc-module_system.js module_system",
->>>>>>> v1.11.85
         "lint:js-fix": "yarn lint:js-fix:src && yarn lint:js-fix:module_system",
         "lint:js-fix:src": "prettier --log-level=warn --write . && eslint --fix src test playwright",
         "lint:js-fix:module_system": "eslint --fix --config .eslintrc-module_system.js module_system",
@@ -84,16 +71,13 @@
         "lint:style": "stylelint \"res/css/**/*.pcss\"",
         "lint:workflows": "find .github/workflows -type f \\( -iname '*.yaml' -o -iname '*.yml' \\) | xargs -I {} sh -c 'echo \"Linting {}\"; action-validator \"{}\"'",
         "test": "jest",
-<<<<<<< HEAD
         "test:cypress": "cypress run",
         "test:cypress:open": "cypress open",
-=======
         "test:playwright": "playwright test",
         "test:playwright:open": "yarn test:playwright --ui",
         "test:playwright:screenshots": "yarn test:playwright:screenshots:build && yarn test:playwright:screenshots:run",
         "test:playwright:screenshots:build": "docker build playwright -t element-web-playwright",
         "test:playwright:screenshots:run": "docker run --rm --network host -e BASE_URL -e CI -v $(pwd):/work/ -v $(node -e 'console.log(require(`path`).dirname(require.resolve(`matrix-js-sdk/package.json`)))'):/work/node_modules/matrix-js-sdk -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/:/tmp/ -it element-web-playwright",
->>>>>>> v1.11.85
         "coverage": "yarn test --coverage",
         "analyse:unused-exports": "ts-node ./scripts/analyse_unused_exports.ts",
         "patch-package": "patch-package",
@@ -114,17 +98,13 @@
     "dependencies": {
         "@babel/runtime": "^7.12.5",
         "@formatjs/intl-segmenter": "^11.5.7",
-<<<<<<< HEAD
         "@gouvfr-lasuite/integration": "^1.0.1",
         "@matrix-org/olm": "3.2.15",
-        "@matrix-org/react-sdk-module-api": "^2.3.0",
-=======
         "@matrix-org/analytics-events": "^0.27.0",
         "@matrix-org/emojibase-bindings": "^1.3.3",
         "@matrix-org/react-sdk-module-api": "^2.4.0",
         "@matrix-org/spec": "^1.7.0",
         "@sentry/browser": "^8.0.0",
->>>>>>> v1.11.85
         "@vector-im/compound-design-tokens": "^1.8.0",
         "@vector-im/compound-web": "^7.1.0",
         "@vector-im/matrix-wysiwyg": "2.37.13",
@@ -159,14 +139,6 @@
         "linkify-string": "4.1.3",
         "linkifyjs": "4.1.3",
         "lodash": "^4.17.21",
-<<<<<<< HEAD
-        "matrix-js-sdk": "34.8.0",
-        "matrix-react-sdk": "file:./linked-dependencies/matrix-react-sdk",
-        "matrix-widget-api": "^1.8.2",
-        "react": "17.0.2",
-        "react-dom": "17.0.2",
-        "ua-parser-js": "^1.0.0"
-=======
         "maplibre-gl": "^2.0.0",
         "matrix-encrypt-attachment": "^1.0.3",
         "matrix-events-sdk": "0.0.1",
@@ -195,7 +167,6 @@
         "ua-parser-js": "^1.0.2",
         "uuid": "^10.0.0",
         "what-input": "^5.2.10"
->>>>>>> v1.11.85
     },
     "devDependencies-comments": {
         "tchap-added": {
@@ -227,33 +198,16 @@
         "@babel/preset-typescript": "^7.12.7",
         "@babel/register": "^7.12.10",
         "@babel/runtime": "^7.12.5",
-<<<<<<< HEAD
-        "@casualbot/jest-sonar-reporter": "2.3.1",
         "@percy/cli": "^1.3.0",
         "@percy/cypress": "^3.1.2",
-=======
         "@casualbot/jest-sonar-reporter": "2.2.7",
         "@peculiar/webcrypto": "^1.4.3",
         "@playwright/test": "^1.40.1",
->>>>>>> v1.11.85
         "@principalstudio/html-webpack-inject-preload": "^1.2.7",
         "@sentry/webpack-plugin": "^2.7.1",
         "@stylistic/eslint-plugin": "^2.9.0",
         "@svgr/webpack": "^8.0.0",
-<<<<<<< HEAD
         "@testing-library/cypress": "^9.0.0",
-        "@testing-library/jest-dom": "^6.4.2",
-        "@testing-library/react": "^12.1.5",
-        "@testing-library/user-event": "^14.5.2",
-        "@types/commonmark": "^0.27.9",
-        "@types/content-type": "^1.1.8",
-        "@types/counterpart": "^0.18.4",
-        "@types/diff-match-patch": "^1.0.36",
-        "@types/escape-html": "^1.0.4",
-        "@types/file-saver": "^2.0.7",
-        "@types/glob-to-regexp": "^0.4.4",
-        "@types/jest": "^29.0.0",
-=======
         "@testing-library/dom": "^10.4.0",
         "@testing-library/jest-dom": "^6.4.8",
         "@testing-library/react": "^16.0.0",
@@ -269,7 +223,6 @@
         "@types/fs-extra": "^11.0.0",
         "@types/glob-to-regexp": "^0.4.1",
         "@types/jest": "29.5.12",
->>>>>>> v1.11.85
         "@types/jitsi-meet": "^2.0.2",
         "@types/jsrsasign": "^10.5.4",
         "@types/katex": "^0.16.0",
@@ -292,17 +245,11 @@
         "@types/testing-library__jest-dom": "^6.0.0",
         "@types/ua-parser-js": "^0.7.36",
         "@types/uuid": "^10.0.0",
-<<<<<<< HEAD
-        "@typescript-eslint/eslint-plugin": "^7.0.0",
-        "@typescript-eslint/parser": "^7.0.0",
-        "allchange": "^1.0.6",
-        "autoprefixer": "^10.4.8",
-        "axe-core": "^4.4.3",
-=======
         "@typescript-eslint/eslint-plugin": "^8.0.0",
         "@typescript-eslint/parser": "^8.0.0",
+        "allchange": "^1.0.6",
+        "autoprefixer": "^10.4.8",
         "axe-core": "4.10.0",
->>>>>>> v1.11.85
         "babel-jest": "^29.0.0",
         "babel-loader": "^9.0.0",
         "babel-plugin-jsx-remove-data-test-id": "^3.0.0",
@@ -352,16 +299,11 @@
         "mini-css-extract-plugin": "2.9.0",
         "minimist": "^1.2.6",
         "mkdirp": "^3.0.0",
-<<<<<<< HEAD
-        "modernizr": "3.12.0",
-        "node-fetch": "^2.6.7",
         "patch-package": "^8.0.0",
-=======
         "mocha-junit-reporter": "^2.2.0",
         "modernizr": "^3.12.0",
         "node-fetch": "^2.6.7",
         "playwright-core": "^1.45.1",
->>>>>>> v1.11.85
         "postcss": "8.4.38",
         "postcss-easings": "^4.0.0",
         "postcss-hexrgba": "2.1.0",

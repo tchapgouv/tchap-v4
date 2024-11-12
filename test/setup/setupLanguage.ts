@@ -7,19 +7,10 @@ Please see LICENSE files in the repository root for full details.
 */
 
 import fetchMock from "fetch-mock-jest";
-<<<<<<< HEAD
-import _ from "lodash";
-import { setupLanguageMock as reactSetupLanguageMock } from "matrix-react-sdk/test/setup/setupLanguage";
-import reactEn from "matrix-react-sdk/src/i18n/strings/en_EN.json"; // :TCHAP: we want to have the sdk translation and element since we might have test for both repo
-=======
->>>>>>> v1.11.85
 
 import * as languageHandler from "../../src/languageHandler";
 import en from "../../src/i18n/strings/en_EN.json";
-<<<<<<< HEAD
-=======
 import de from "../../src/i18n/strings/de_DE.json";
->>>>>>> v1.11.85
 
 const lv = {
     Save: "Saglabāt",

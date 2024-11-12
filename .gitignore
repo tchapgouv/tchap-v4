@@ -39,7 +39,6 @@ electron/pub
 #/build_config.yaml # :TCHAP: writes this by hand.
 /book
 /index.html
-<<<<<<< HEAD
 
 /cypress/videos
 /cypress/downloads
@@ -51,7 +50,5 @@ electron/pub
 
 # File from translations checkin scripts.
 modules/tchap-translations/tmp/*
-=======
 # version file and tarball created by `npm pack` / `yarn pack`
 /git-revision.txt
->>>>>>> v1.11.85

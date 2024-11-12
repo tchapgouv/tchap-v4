@@ -27,43 +27,18 @@ if (!process.env.VERSION) {
 
 const cssThemes = {
     // CSS themes
-<<<<<<< HEAD
-    //"theme-legacy-light": "./node_modules/matrix-react-sdk/res/themes/legacy-light/css/legacy-light.pcss",
-    //"theme-legacy-dark": "./node_modules/matrix-react-sdk/res/themes/legacy-dark/css/legacy-dark.pcss",
-    //"theme-light": "./node_modules/matrix-react-sdk/res/themes/light/css/light.pcss",
-    "theme-light-high-contrast":
-        "./node_modules/matrix-react-sdk/res/themes/light-high-contrast/css/light-high-contrast.pcss",
-    //"theme-dark": "./node_modules/matrix-react-sdk/res/themes/dark/css/dark.pcss",
-    //"theme-light-custom": "./node_modules/matrix-react-sdk/res/themes/light-custom/css/light-custom.pcss",
-    //"theme-dark-custom": "./node_modules/matrix-react-sdk/res/themes/dark-custom/css/dark-custom.pcss",
+    // "theme-legacy-light": "./res/themes/legacy-light/css/legacy-light.pcss",
+    // "theme-legacy-dark": "./res/themes/legacy-dark/css/legacy-dark.pcss",
+    // "theme-light": "./res/themes/light/css/light.pcss",
+    "theme-light-high-contrast": "./res/themes/light-high-contrast/css/light-high-contrast.pcss",
+    // "theme-dark": "./res/themes/dark/css/dark.pcss",
+    // "theme-light-custom": "./res/themes/light-custom/css/light-custom.pcss",
+    // "theme-dark-custom": "./res/themes/dark-custom/css/dark-custom.pcss",
     //:tchap: use path from our project
     "theme-light": "./res/themes/tchap-light/css/tchap-light.pcss",
     "theme-dark": "./res/themes/tchap-dark/css/tchap-dark.pcss",
 };
 
-function getActiveThemes() {
-    // :old: :TCHAP: We need both themes to avoid "unknown theme light-custom" or "unknown theme light"
-    // :old: :TCHAP: being thrown on login page.
-    // :old: :TCHAP: Browsers recover, but e2e tests crash, so we add both themes in default here.
-    // Default to `light,dark` theme when the MATRIX_THEMES environment variable is not defined.
-    const theme = process.env.MATRIX_THEMES ?? "light,dark";
-    return theme
-        .split(",")
-        .map((x) => x.trim())
-        .filter(Boolean);
-}
-
-=======
-    "theme-legacy-light": "./res/themes/legacy-light/css/legacy-light.pcss",
-    "theme-legacy-dark": "./res/themes/legacy-dark/css/legacy-dark.pcss",
-    "theme-light": "./res/themes/light/css/light.pcss",
-    "theme-light-high-contrast": "./res/themes/light-high-contrast/css/light-high-contrast.pcss",
-    "theme-dark": "./res/themes/dark/css/dark.pcss",
-    "theme-light-custom": "./res/themes/light-custom/css/light-custom.pcss",
-    "theme-dark-custom": "./res/themes/dark-custom/css/dark-custom.pcss",
-};
-
->>>>>>> v1.11.85
 // See docs/customisations.md
 let fileOverrides = {
     /* {[file: string]: string} */
@@ -147,28 +122,6 @@ module.exports = (env, argv) => {
     // directory, so we don't have to rely on an index.js or similar file existing.
     const jsSdkSrcDir = path.resolve(require.resolve("matrix-js-sdk/package.json"), "..", "src");
 
-<<<<<<< HEAD
-    const ACTIVE_THEMES = getActiveThemes();
-    function getThemesImports() {
-        const imports = ACTIVE_THEMES.map((t) => {
-            if (useHMR) {
-                //:tchap: path is taken from src/vector/devcss.ts more info -> search "use theming"
-                return cssThemes[`theme-${t}`].replace(".", "../../");
-            }
-
-            // return cssThemes[`theme-${t}`].replace("./node_modules/", ""); // theme import path
-            return cssThemes[`theme-${t}`];
-        });
-        const s = JSON.stringify(ACTIVE_THEMES);
-        return `
-            window.MX_insertedThemeStylesCounter = 0;
-            window.MX_DEV_ACTIVE_THEMES = (${s});
-            ${imports.map((i) => `import("${i}")`).join("\n")};
-        `;
-    }
-
-=======
->>>>>>> v1.11.85
     return {
         ...development,
 
@@ -734,12 +687,7 @@ module.exports = (env, argv) => {
                     { from: "themes/**", context: path.resolve(__dirname, "res") },
                     { from: "vector-icons/**", context: path.resolve(__dirname, "res") },
                     { from: "decoder-ring/**", context: path.resolve(__dirname, "res") },
-<<<<<<< HEAD
-                    { from: "media/**", context: path.resolve(__dirname, "node_modules/matrix-react-sdk/res/") },
-                    "node_modules/@matrix-org/olm/olm_legacy.js",
-=======
                     { from: "media/**", context: path.resolve(__dirname, "res/") },
->>>>>>> v1.11.85
                     { from: "config.json", noErrorOnMissing: true },
                     "contribute.json",
                 ],
