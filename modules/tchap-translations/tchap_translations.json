@@ -917,5 +917,9 @@
     "error_dialog|activate_room_share_link|description": {
         "en": "An error occured, we could'nt activate the access by link to the room",
         "fr": "Une erreur est survenue, nous n'avons pas pu activer le partage de salon par lien"
+    },
+    "user_info|demote_self_confirm_room": {
+        "en": "Before removing your admin role, verify that another admin is in the room. Without it, the room won't be manageable. Note that only another admin can give you back the admin role",
+        "fr": "Avant de retirer votre rôle d'administrateur, vérifiez qu'un autre administrateur est présent dans le salon. Sans cela, le salon ne pourra plus être géré. Notez que seul un administrateur pourra vous réattribuer ce rôle."
     }
 }
