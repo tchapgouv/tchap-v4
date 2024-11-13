@@ -52,6 +52,9 @@ import SettingsSubsection from "./shared/SettingsSubsection";
 import { doesRoomHaveUnreadMessages } from "../../../Unread";
 import SettingsFlag from "../elements/SettingsFlag";
 
+import TchapUIFeature from "../../../../../../src/tchap/util/TchapUIFeature"; // :tchap: tchap-features-from-config
+import TchapUrls from "../../../../../../src/tchap/util/TchapUrls"; //:TCHAP: email-notification-setting-caption
+
 // TODO: this "view" component still has far too much application logic in it,
 // which should be factored out to other files.
 
@@ -195,9 +198,15 @@ const maximumVectorState = (
 
 const NotificationActivitySettings = (): JSX.Element => {
     return (
-        <div>
+        // <div> :TCHAP: extend-remove-thread-buttons - we add data-testid to the parent for testing purpose, it is diffult to get to this element otherwise
+        <div data-testid="tac-notification-parent"> 
             <SettingsFlag name="Notifications.showbold" level={SettingLevel.DEVICE} />
-            <SettingsFlag name="Notifications.tac_only_notifications" level={SettingLevel.DEVICE} />
+            {/* :TCHAP: extend-remove-thread-buttons <SettingsFlag name="Notifications.tac_only_notifications" level={SettingLevel.DEVICE} /> */}
+            { TchapUIFeature.isFeatureActiveForHomeserver("feature_thread") ? 
+                <SettingsFlag name="Notifications.tac_only_notifications" level={SettingLevel.DEVICE} />
+                : null   
+            }
+            {/* end :TCHAP: */}
         </div>
     );
 };
@@ -687,6 +696,19 @@ export default class Notifications extends React.PureComponent<IProps, IState> {
                     key={e.address}
                     value={!!this.state.pushers?.some((p) => p.kind === "email" && p.pushkey === e.address)}
                     label={_t("settings|notifications|enable_email_notifications", { email: e.address })}
+                    /** :TCHAP: email-notification-setting-caption*/
+                    caption={_t(
+                        "settings|notifications|enable_notifications_email_detail",
+                        {},
+                        {
+                            a: (sub) => (
+                                <AccessibleButton kind="link_inline" onClick={() => {window.open(TchapUrls.helpEmailNotification, "_blank")}}>
+                                    {sub}
+                                </AccessibleButton>
+                            ),
+                        }
+                    )}
+                    /** end :TCHAP: email-notification-setting-caption */ 
                     onChange={this.onEmailNotificationsChanged.bind(this, e.address)}
                     disabled={this.state.phase === Phase.Persisting}
                 />
@@ -730,7 +752,11 @@ export default class Notifications extends React.PureComponent<IProps, IState> {
                     </>
                 )}
 
+                {/* :TCHAP: tchap-features-from-config - show button only if feature is active on homeserver
                 {emailSwitches}
+                */}
+                { TchapUIFeature.isFeatureActiveForHomeserver("feature_email_notification") ? emailSwitches : null}
+                {/* :TCHAP: end */}
             </SettingsSubsection>
         );
     }

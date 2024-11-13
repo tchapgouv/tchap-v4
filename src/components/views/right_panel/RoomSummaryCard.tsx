@@ -77,6 +77,9 @@ import { isVideoRoom as calcIsVideoRoom } from "../../../utils/video-rooms";
 import { usePinnedEvents } from "../../../hooks/usePinnedEvents";
 import { ReleaseAnnouncement } from "../../structures/ReleaseAnnouncement.tsx";
 
+import DecoratedRoomAvatar from "../avatars/DecoratedRoomAvatar"; // :TCHAP: tchap-room-icons
+
+
 interface IProps {
     room: Room;
     permalinkCreator: RoomPermalinkCreator;
@@ -271,7 +274,11 @@ const RoomSummaryCard: React.FC<IProps> = ({
     const alias = room.getCanonicalAlias() || room.getAltAliases()[0] || "";
     const roomInfo = (
         <header className="mx_RoomSummaryCard_container">
+            {/** :TCHAP: tchap-room-icons - decorate the avatar with the tchap lock icons
             <RoomAvatar room={room} size="80px" viewAvatarOnClick />
+            */}
+            <DecoratedRoomAvatar room={room} size="80px" viewAvatarOnClick />
+            {/* end :TCHAP: */}
             <RoomName room={room}>
                 {(name) => (
                     <Heading
@@ -295,6 +302,7 @@ const RoomSummaryCard: React.FC<IProps> = ({
                 {alias}
             </Text>
 
+            {/* :TCHAP: tchap-room-icons - remove badges
             <Flex as="section" justify="center" gap="var(--cpd-space-2x)" className="mx_RoomSummaryCard_badges">
                 {!isDirectMessage && roomState.getJoinRule() === JoinRule.Public && (
                     <Badge kind="grey">
@@ -324,6 +332,7 @@ const RoomSummaryCard: React.FC<IProps> = ({
                     </Badge>
                 )}
             </Flex>
+            */}
 
             <RoomTopic room={room} />
         </header>

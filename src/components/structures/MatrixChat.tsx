@@ -136,6 +136,9 @@ import { ConfirmSessionLockTheftView } from "./auth/ConfirmSessionLockTheftView"
 import { LoginSplashView } from "./auth/LoginSplashView";
 import { cleanUpDraftsIfRequired } from "../../DraftCleaner";
 
+import TchapUrls from "../../../../../src/tchap/util/TchapUrls"; // :TCHAP: activate-cross-signing-and-secure-storage-react
+import EmailVerificationPage from "../../../../../src/tchap/components/views/sso/EmailVerificationPage"; // :TCHAP: sso-agentconnect-flow
+
 // legacy export
 export { default as Views } from "../../Views";
 
@@ -955,6 +958,15 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
                     true,
                 );
                 break;
+            // :TCHAP: sso-agentconnect-flow
+            case Action.EmailPrecheckSSO:
+                if (Lifecycle.isSoftLogout()) {
+                    this.onSoftLogout();
+                    break;
+                }
+                this.viewEmailPrecheckSSO();
+                break;
+            // end :TCHAP:
         }
     };
 
@@ -1125,6 +1137,17 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
         ThemeController.isLogin = true;
         this.themeWatcher.recheck();
     }
+
+    // :TCHAP: sso-agentconnect-flow
+    private viewEmailPrecheckSSO() {
+        this.setStateForNewView({
+            view: Views.EMAIL_PRECHECK_SSO
+        });
+        this.notifyNewScreen("email-precheck-sso");
+        ThemeController.isLogin = true;
+        this.themeWatcher.recheck();
+    }
+    // end :TCHAP:
 
     private viewHome(justRegistered = false): void {
         // The home page requires the "logged in" view, so we'll set that.
@@ -1742,6 +1765,15 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
             return;
         }
 
+        //:tchap: activate-cross-signing-and-secure-storage-react - add a screen to open user tab security
+        if (screen === TchapUrls.secureBackupFragment) {
+            //open the security tab
+            //there is no anchor to sauvegarde-automatique subection
+            const payload: OpenToTabPayload = { action: Action.ViewUserSettings, initialTabId: UserTab.Security };
+            dis.dispatch(payload);
+        } else
+        //:tchap: end
+
         if (screen === "register") {
             dis.dispatch({
                 action: "start_registration",
@@ -1889,6 +1921,13 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
                 userId: userId,
                 subAction: params?.action,
             });
+        // :TCHAP: sso-agentconnect-flow
+        } else if (screen = "email-precheck-sso") {
+            dis.dispatch({
+                action: "email_precheck_sso",
+                params
+            });
+        // end :TCHAP:
         } else {
             logger.info(`Ignoring showScreen for '${screen}'`);
         }
@@ -2057,7 +2096,9 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
         if (
             initialScreenAfterLogin &&
             // XXX: workaround for https://github.com/vector-im/element-web/issues/11643 causing a login-loop
-            !["welcome", "login", "register", "start_sso", "start_cas"].includes(initialScreenAfterLogin.screen)
+            // :TCHAP: sso-agentconnect-flow !["welcome", "login", "register", "start_sso", "start_cas"].includes(initialScreenAfterLogin.screen)
+            !["welcome", "login", "register", "start_sso", "start_cas", "email-precheck-sso"].includes(initialScreenAfterLogin.screen)
+            // end :TCHAP:
         ) {
             fragmentAfterLogin = `/${initialScreenAfterLogin.screen}`;
         }
@@ -2088,7 +2129,6 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
         } else if (this.state.view === Views.E2E_SETUP) {
             view = (
                 <E2eSetup
-                    matrixClient={MatrixClientPeg.safeGet()}
                     onFinished={this.onCompleteSecurityE2eSetupFinished}
                     accountPassword={this.stores.accountPasswordStore.getPassword()}
                     tokenLogin={!!this.tokenLogin}
@@ -2179,6 +2219,10 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
             view = <UseCaseSelection onFinished={(useCase): Promise<void> => this.onShowPostLoginScreen(useCase)} />;
         } else if (this.state.view === Views.LOCK_STOLEN) {
             view = <SessionLockStolenView />;
+        // :TCHAP: sso-agentconnect-flow
+        } else if (this.state.view === Views.EMAIL_PRECHECK_SSO) {
+            view = <EmailVerificationPage />;
+        // end :TCHAP:
         } else {
             logger.error(`Unknown view ${this.state.view}`);
             return null;

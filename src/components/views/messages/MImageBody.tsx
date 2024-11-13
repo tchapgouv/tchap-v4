@@ -16,7 +16,7 @@ import { ClientEvent } from "matrix-js-sdk/src/matrix";
 import { ImageContent } from "matrix-js-sdk/src/types";
 import { Tooltip } from "@vector-im/compound-web";
 
-import MFileBody from "./MFileBody";
+import MFileBody from "../../../../../../src/tchap/components/views/messages/OriginalFileBody"; // :TCHAP: content-scanner
 import Modal from "../../../Modal";
 import { _t } from "../../../languageHandler";
 import SettingsStore from "../../../settings/SettingsStore";

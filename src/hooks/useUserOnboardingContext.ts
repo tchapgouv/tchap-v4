@@ -21,6 +21,8 @@ export interface UserOnboardingContext {
     hasDevices: boolean;
     hasDmRooms: boolean;
     showNotificationsPrompt: boolean;
+    hasSecureStorage: boolean, // :TCHAP: onboarding-add-secure-backup
+    hasCheckedUserGuide: boolean, // :TCHAP: onboarding-add-tchap-guide
 }
 
 const USER_ONBOARDING_CONTEXT_INTERVAL = 5000;
@@ -115,10 +117,25 @@ export function useUserOnboardingContext(): UserOnboardingContext {
         const dmRooms = DMRoomMap.shared().getUniqueRoomsWithIndividuals() ?? {};
         return Boolean(Object.keys(dmRooms).length);
     });
-    const showNotificationsPrompt = useShowNotificationsPrompt();
 
+     /** :TCHAP: onboarding-add-secure-backup */
+     const hasSecureStorage = useUserOnboardingContextValue(false, async (cli) => {
+        const hasKey = await cli.secretStorage.hasKey()
+        return hasKey
+    });
+    /** end :TCHAP: onboarding-add-secure-backup */
+
+    /** :TCHAP: onboarding-add-tchap-guide */
+    const hasCheckedUserGuide = useUserOnboardingContextValue(false, async (cli) => {
+        const hasKey = window.localStorage.getItem('tchap_user_guide_checked') ?? 'false';
+        return Promise.resolve(JSON.parse(hasKey))
+    });
+    /** end :TCHAP: onboarding-add-tchap-guide */
+
+    const showNotificationsPrompt = useShowNotificationsPrompt();
+    
     return useMemo(
-        () => ({ hasAvatar, hasDevices, hasDmRooms, showNotificationsPrompt }),
-        [hasAvatar, hasDevices, hasDmRooms, showNotificationsPrompt],
+        () => ({ hasAvatar, hasDevices, hasDmRooms, showNotificationsPrompt, hasSecureStorage, hasCheckedUserGuide }),
+        [hasAvatar, hasDevices, hasDmRooms, showNotificationsPrompt, hasSecureStorage, hasCheckedUserGuide],
     );
 }

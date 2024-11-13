@@ -252,6 +252,7 @@ export default class SecurityRoomSettingsTab extends React.Component<IProps, ISt
         const room = this.props.room;
 
         let aliasWarning: JSX.Element | undefined;
+        /* :TCHAP: disable-access-options - remove
         if (room.getJoinRule() === JoinRule.Public && !this.state.hasAliases) {
             aliasWarning = (
                 <div className="mx_SecurityRoomSettingsTab_warning">
@@ -260,12 +261,13 @@ export default class SecurityRoomSettingsTab extends React.Component<IProps, ISt
                 </div>
             );
         }
+        end :TCHAP: */
         const description = _t("room_settings|security|join_rule_description", {
             roomName: room.name,
         });
 
         let advanced: JSX.Element | undefined;
-        if (room.getJoinRule() === JoinRule.Public) {
+        if (false) { // :TCHAP: disable-access-options - no guest access - if(room.getJoinRule() === JoinRule.Public) {
             advanced = (
                 <div>
                     <AccessibleButton
@@ -419,9 +421,14 @@ export default class SecurityRoomSettingsTab extends React.Component<IProps, ISt
         const client = this.context;
         const room = this.props.room;
         const isEncrypted = this.state.encrypted;
+        /* :TCHAP: disable-access-options - does not allow changing encryption
         const hasEncryptionPermission = room.currentState.mayClientSendStateEvent(EventType.RoomEncryption, client);
         const isEncryptionForceDisabled = shouldForceDisableEncryption(client);
         const canEnableEncryption = !isEncrypted && !isEncryptionForceDisabled && hasEncryptionPermission;
+        */
+        const isEncryptionForceDisabled = false;
+        const canEnableEncryption = false;
+        // end :TCHAP:
 
         let encryptionSettings: JSX.Element | undefined;
         if (

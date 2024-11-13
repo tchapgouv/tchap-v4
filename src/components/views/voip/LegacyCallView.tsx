@@ -28,6 +28,7 @@ import LegacyCallViewButtons from "./LegacyCallView/LegacyCallViewButtons";
 import { ActionPayload } from "../../../dispatcher/payloads";
 import { getKeyBindingsManager } from "../../../KeyBindingsManager";
 import { KeyBindingAction } from "../../../accessibility/KeyboardShortcuts";
+import TchapUIFeature from "../../../../../../src/tchap/util/TchapUIFeature"; /** :TCHAP: hide-video-button-on-call-screen */ 
 
 interface IProps {
     // The call for us to display
@@ -340,14 +341,29 @@ export default class LegacyCallView extends React.Component<IProps, IState> {
         const { callState, micMuted, vidMuted, screensharing, sidebarShown, secondaryFeed, sidebarFeeds } = this.state;
 
         // If SDPStreamMetadata isn't supported don't show video mute button in voice calls
-        const vidMuteButtonShown = call.opponentSupportsSDPStreamMetadata() || call.hasLocalUserMediaVideoTrack;
+        /** :TCHAP: hide-video-button-on-call-screen */ 
+        // const vidMuteButtonShown = call.opponentSupportsSDPStreamMetadata() || call.hasLocalUserMediaVideoTrack;
+        let vidMuteButtonShown = false // hide by default
+        if (TchapUIFeature.isFeatureActiveForHomeserver("feature_video_call")) {
+            vidMuteButtonShown = call.opponentSupportsSDPStreamMetadata() || call.hasLocalUserMediaVideoTrack;
+        };
+        /** end :TCHAP: */
         // Screensharing is possible, if we can send a second stream and
         // identify it using SDPStreamMetadata or if we can replace the already
         // existing usermedia track by a screensharing track. We also need to be
         // connected to know the state of the other side
-        const screensharingButtonShown =
-            (call.opponentSupportsSDPStreamMetadata() || call.hasLocalUserMediaVideoTrack) &&
-            call.state === CallState.Connected;
+        /** :TCHAP: hide-screensharing-button */ 
+        // const screensharingButtonShown =
+        //     (call.opponentSupportsSDPStreamMetadata() || call.hasLocalUserMediaVideoTrack) &&
+        //     call.state === CallState.Connected;
+        // const vidMuteButtonShown = call.opponentSupportsSDPStreamMetadata() || call.hasLocalUserMediaVideoTrack;
+        let screensharingButtonShown = false // hide by default
+        if (TchapUIFeature.isFeatureActiveForHomeserver("feature_screenshare_call")) {
+            screensharingButtonShown = 
+                (call.opponentSupportsSDPStreamMetadata() || call.hasLocalUserMediaVideoTrack) &&
+                call.state === CallState.Connected;
+        };
+        /** end :TCHAP: */
         // Show the sidebar button only if there is something to hide/show
         const sidebarButtonShown = (secondaryFeed && !secondaryFeed.isVideoMuted()) || sidebarFeeds.length > 0;
         // The dial pad & 'more' button actions are only relevant in a connected call

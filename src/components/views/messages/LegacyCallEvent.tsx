@@ -19,6 +19,10 @@ import InfoTooltip, { InfoTooltipKind } from "../elements/InfoTooltip";
 import { formatPreciseDuration } from "../../../DateUtils";
 import Clock from "../audio_messages/Clock";
 
+import Modal from "matrix-react-sdk/src/Modal"; // :TCHAP: bug-reporting
+import BugReportDialog from "matrix-react-sdk/src/components/views/dialogs/BugReportDialog"; // :TCHAP: bug-reporting
+import "../../../../../../res/css/views/messages/TchapLegacyCallEvent.pcss"; // :TCHAP: bug-reporting
+
 const MAX_NON_NARROW_WIDTH = (450 / 70) * 100;
 
 interface IProps {
@@ -55,7 +59,7 @@ export default class LegacyCallEvent extends React.PureComponent<IProps, IState>
         this.props.callEventGrouper.addListener(LegacyCallEventGrouperEvent.LengthChanged, this.onLengthChanged);
 
         this.resizeObserver = new ResizeObserver(this.resizeObserverCallback);
-        if (this.wrapperElement.current) this.resizeObserver.observe(this.wrapperElement.current);
+        this.wrapperElement.current && this.resizeObserver.observe(this.wrapperElement.current);
     }
 
     public componentWillUnmount(): void {
@@ -183,6 +187,9 @@ export default class LegacyCallEvent extends React.PureComponent<IProps, IState>
                 return (
                     <div className="mx_LegacyCallEvent_content">
                         {text}
+                        {/* :TCHAP: bug-reporting */}
+                        {this.renderBugReportButton()}
+                        {/* end :TCHAP: */}
                         {this.props.timestamp}
                     </div>
                 );
@@ -254,6 +261,26 @@ export default class LegacyCallEvent extends React.PureComponent<IProps, IState>
             </div>
         );
     }
+    // :TCHAP: bug-reporting
+    private onReportBugClick = (): void => {
+        Modal.createDialog(BugReportDialog, {
+            initialText: _t("tchap_voip_bug_report_prefill"),
+            label: "voip-feedback",
+        });
+    };
+
+    private renderBugReportButton(): JSX.Element {
+        return (
+            <AccessibleButton
+                className="mx_LegacyCallEvent_content_button mx_LegacyCallEvent_content_button_reportBug"
+                onClick={this.onReportBugClick}
+                kind="primary"
+            >
+                <span> {_t("Report a problem")} </span>
+            </AccessibleButton>
+        );
+    }
+    //end :TCHAP:
 
     public render(): React.ReactNode {
         const event = this.props.mxEvent;

@@ -23,6 +23,10 @@ import DMRoomMap from "../../../utils/DMRoomMap";
 import { IOOBData } from "../../../stores/ThreepidInviteStore";
 import { getJoinedNonFunctionalMembers } from "../../../utils/room/getJoinedNonFunctionalMembers";
 
+import TchapRoomUtils from "../../../../../../src/tchap/util/TchapRoomUtils";
+import "../../../../../../res/css/views/avatars/_TchapDecoratedRoomAvatar.pcss";
+import { TchapRoomType } from "../../../../../../src/tchap/@types/tchap";
+
 interface IProps {
     room: Room;
     size: string;
@@ -50,6 +54,11 @@ enum Icon {
     // Note: the names here are used in CSS class names
     None = "NONE", // ... except this one
     Globe = "GLOBE",
+    // :TCHAP: tchap-room-icons - add icons for custom room types
+    Forum = "FORUM",
+    Private = "PRIVATE",
+    External = "EXTERNAL",
+    // end :TCHAP:
     PresenceOnline = "ONLINE",
     PresenceAway = "AWAY",
     PresenceOffline = "OFFLINE",
@@ -60,6 +69,14 @@ function tooltipText(variant: Icon): string | undefined {
     switch (variant) {
         case Icon.Globe:
             return _t("room|header|room_is_public");
+        // :TCHAP: tchap-room-icons - add icons for custom room types
+        case Icon.Forum:
+            return _t("This room is a public forum");
+        case Icon.Private:
+            return _t("This room is private");
+        case Icon.External:
+            return _t("This room is private and open to external users");
+        // end :TCHAP:
         case Icon.PresenceOnline:
             return _t("presence|online");
         case Icon.PresenceAway:
@@ -163,7 +180,23 @@ export default class DecoratedRoomAvatar extends React.PureComponent<IProps, ISt
             }
         } else {
             // Track publicity
-            icon = this.isPublicRoom ? Icon.Globe : Icon.None;
+            //icon = this.isPublicRoom ? Icon.Globe : Icon.None;
+            //:tchap: tchap-room-icons - use custom icons for tchap room types
+            const roomType: TchapRoomType = TchapRoomUtils.getTchapRoomType(this.props.room);
+            switch(roomType) {
+                case TchapRoomType.Forum:
+                    icon = Icon.Forum;
+                    break;
+                case TchapRoomType.Private:
+                    icon = Icon.Private;
+                    break;
+                case TchapRoomType.External:
+                    icon = Icon.External;
+                    break;
+                default:
+                    icon = Icon.None;
+            }
+            //end :tchap:
             if (!this.isWatchingTimeline) {
                 this.props.room.on(RoomEvent.Timeline, this.onRoomTimeline);
                 this.isWatchingTimeline = true;
@@ -202,7 +235,11 @@ export default class DecoratedRoomAvatar extends React.PureComponent<IProps, ISt
         });
 
         return (
-            <div className={classes} {...props}>
+            <div className={classes} {...props }>
+                { /*:TCHAP: tchap-room-icons - extra div to fix positioning.
+                https://github.com/tchapgouv/tchap-web-v4/issues/890
+                Issue should be opened in element-web. */ }
+                <div className="mx_DecoratedRoomAvatar_positionedParent">
                 <RoomAvatar
                     room={this.props.room}
                     size={this.props.size}
@@ -215,6 +252,7 @@ export default class DecoratedRoomAvatar extends React.PureComponent<IProps, ISt
                     </Tooltip>
                 )}
                 {badge}
+                </div> { /*:TCHAP: close div */ }
             </div>
         );
     }

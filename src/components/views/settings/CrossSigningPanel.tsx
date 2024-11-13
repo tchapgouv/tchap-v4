@@ -219,23 +219,32 @@ export default class CrossSigningPanel extends React.PureComponent<{}, IState> {
             userSigningPrivateKeyCached;
 
         const actions: JSX.Element[] = [];
+        // :TCHAP: activate-cross-signing-and-secure-storage-react - move Reset button to advanced section
+        const advancedActions: JSX.Element[] = [];
+        // end :TCHAP:
 
         // TODO: determine how better to expose this to users in addition to prompts at login/toast
         if (!keysExistEverywhere && homeserverSupportsCrossSigning) {
-            let buttonCaption = _t("encryption|set_up_toast_title");
+            // :TCHAP: activate-cross-signing-and-secure-storage-react - let buttonCaption = _t("encryption|set_up_toast_title");
+            let buttonCaption = _t("Activate on this device");
+            // end :TCHAP:
             if (crossSigningPrivateKeysInStorage) {
                 buttonCaption = _t("encryption|verify_toast_title");
             }
-            actions.push(
-                <AccessibleButton key="setup" kind="primary_outline" onClick={this.onBootstrapClick}>
+            // :TCHAP: activate-cross-signing-and-secure-storage-react - actions.push(
+            advancedActions.push(
+            // end :TCHAP:
+                <AccessibleButton key="setup" kind="primary" onClick={this.onBootstrapClick}>
                     {buttonCaption}
                 </AccessibleButton>,
             );
         }
 
         if (keysExistAnywhere) {
-            actions.push(
-                <AccessibleButton key="reset" kind="danger_outline" onClick={this.onResetCrossSigningClick}>
+            // :TCHAP activate-cross-signing-and-secure-storage-react - actions.push(
+            advancedActions.push(
+            // end :TCHAP:
+                <AccessibleButton key="reset" kind="danger" onClick={this.onResetCrossSigningClick}>
                     {_t("action|reset")}
                 </AccessibleButton>,
             );
@@ -245,6 +254,13 @@ export default class CrossSigningPanel extends React.PureComponent<{}, IState> {
         if (actions.length) {
             actionRow = <div className="mx_CrossSigningPanel_buttonRow">{actions}</div>;
         }
+
+        // :TCHAP: activate-cross-signing-and-secure-storage-react - add
+        let advancedActionRow;
+        if (advancedActions.length) {
+            advancedActionRow = <div className="mx_CrossSigningPanel_buttonRow">{advancedActions}</div>;
+        }
+        // end :TCHAP:
 
         return (
             <>
@@ -303,6 +319,7 @@ export default class CrossSigningPanel extends React.PureComponent<{}, IState> {
                             </tr>
                         </tbody>
                     </table>
+                    {advancedActionRow}
                 </details>
                 {errorSection}
                 {actionRow}

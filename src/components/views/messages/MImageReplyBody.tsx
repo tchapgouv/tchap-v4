@@ -9,7 +9,8 @@ Please see LICENSE files in the repository root for full details.
 import React from "react";
 import { ImageContent } from "matrix-js-sdk/src/types";
 
-import MImageBody from "./MImageBody";
+import MImageBody from "../../../../../../src/tchap/components/views/messages/OriginalImageBody"; // :TCHAP: content-scanner
+// import MImageBody from "./MImageBody"; // :TCHAP: content-scanner
 
 const FORCED_IMAGE_HEIGHT = 44;
 

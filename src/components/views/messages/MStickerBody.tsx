@@ -9,7 +9,7 @@ import React, { ComponentProps, ReactNode } from "react";
 import { Tooltip } from "@vector-im/compound-web";
 import { MediaEventContent } from "matrix-js-sdk/src/types";
 
-import MImageBody from "./MImageBody";
+import MImageBody from "../../../../../../src/tchap/components/views/messages/OriginalImageBody"; // :TCHAP: content-scanner
 import { BLURHASH_FIELD } from "../../../utils/image-media";
 import IconsShowStickersSvg from "../../../../res/img/icons-show-stickers.svg";
 
