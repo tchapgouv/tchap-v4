@@ -65,6 +65,9 @@ import { shouldShowComponent } from "../../../customisations/helpers/UIComponent
 import { UIComponent } from "../../../settings/UIFeature";
 import { ThreadsActivityCentre } from "./threads-activity-centre/";
 import AccessibleButton from "../elements/AccessibleButton";
+import TchapUIFeature from "../../../../../../src/tchap/util/TchapUIFeature"; // :TCHAP: extend-remove-thread-buttons
+import TchapGaufre from "../../../../../../src/tchap/components/views/common/Gaufre";
+import QuickFaqButton from "../../../../../../src/tchap/components/views/common/QuickFaq"; // :TCHAP: improve-faq-visibility
 import { Landmark, LandmarkNavigation } from "../../../accessibility/LandmarkNavigation";
 import { KeyboardShortcut } from "../settings/KeyboardShortcut";
 
@@ -424,9 +427,16 @@ const SpacePanel: React.FC = () => {
                             )}
                         </Droppable>
 
-                        <ThreadsActivityCentre displayButtonLabel={!isPanelCollapsed} />
-
-                        <QuickSettingsButton isPanelCollapsed={isPanelCollapsed} />
+                        {/* :TCHAP: extend-remove-thread-buttons <ThreadsActivityCentre displayButtonLabel={!isPanelCollapsed} /> */}
+                        {TchapUIFeature.isFeatureActiveForHomeserver("feature_thread") ? <ThreadsActivityCentre displayButtonLabel={!isPanelCollapsed} /> : null}
+                        {/** end :TCHAP: */}
+                        
+                        {/* :TCHAP: improve-faq-visibility <QuickSettingsButton isPanelCollapsed={isPanelCollapsed} /> */}
+                        <QuickFaqButton isPanelCollapsed={isPanelCollapsed}></QuickFaqButton>
+                        {/* end :TCHAP: */}
+                        {/* :TCHAP: lasuite-gaufre-integration */}
+                        <TchapGaufre isPanelCollapsed={isPanelCollapsed}></TchapGaufre>
+                        {/* end :TCHAP: */}
                     </nav>
                 </DragDropContext>
             )}

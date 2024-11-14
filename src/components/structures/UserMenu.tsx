@@ -238,6 +238,11 @@ export default class UserMenu extends React.Component<IProps, IState> {
         this.setState({ contextMenuPosition: null }); // also close the menu
     };
 
+    // :TCHAP: user-menu
+    private onOpenFAQPage = () => {
+        window.open("https://www.tchap.gouv.fr/faq", '_blank');
+    };
+
     private onProvideFeedback = (ev: ButtonEvent): void => {
         ev.preventDefault();
         ev.stopPropagation();
@@ -362,6 +367,11 @@ export default class UserMenu extends React.Component<IProps, IState> {
                     onClick={(e) => this.onSettingsOpen(e)}
                 />
                 {feedbackButton}
+                <IconizedContextMenuOption
+                    iconClassName="mx_UserMenu_iconInfo"
+                    label={_t("common|help")}
+                    onClick={this.onOpenFAQPage}
+                />
                 <IconizedContextMenuOption
                     className="mx_IconizedContextMenu_option_red"
                     iconClassName="mx_UserMenu_iconSignOut"

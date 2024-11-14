@@ -220,3 +220,14 @@ export interface ISsoRedirectOptions {
     on_welcome_page?: boolean;
     on_login_page?: boolean;
 }
+
+/* :tchap: tchap-features-from-config
+* Add tchap specific options to IConfigOptions. Both interfaces get merged in compilation. https://www.typescriptlang.org/docs/handbook/declaration-merging.html#merging-interfaces
+* IConfigOptions declares which options can get retrieved with SdkConfig, if not declared SdkConfig complains it does not know the parameter.
+*/
+export interface IConfigOptions {
+    tchap_features?: {
+        feature_email_notification?:[string]//activate email notification on a list of home servers, ie : "dev01.tchap.incubateur.net"
+    }
+}
+//end :tchap:

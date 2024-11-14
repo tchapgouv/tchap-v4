@@ -185,7 +185,8 @@ const SpaceContextMenu: React.FC<IProps> = ({ space, hideHeader, onFinished, ...
                         <BetaPill />
                     </IconizedContextMenuOption>
                 )}
-                {canAddSubSpaces && (
+                {/* :TCHAP: space-remove-public-and-subspace */}
+                {/* {canAddSubSpaces && (
                     <IconizedContextMenuOption
                         data-testid="new-subspace-option"
                         iconClassName="mx_SpacePanel_iconPlus"
@@ -194,7 +195,8 @@ const SpaceContextMenu: React.FC<IProps> = ({ space, hideHeader, onFinished, ...
                     >
                         <BetaPill />
                     </IconizedContextMenuOption>
-                )}
+                )} */}
+                {/* end :TCHAP: */}
             </>
         );
     }

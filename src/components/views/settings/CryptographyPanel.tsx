@@ -93,6 +93,7 @@ export default class CryptographyPanel extends React.Component<IProps, IState> {
             );
         }
 
+        /* :TCHAP: change-sections-order-in-security-privacy-settings - redesign the returned component
         return (
             <SettingsSubsection heading={_t("settings|security|cryptography_section")}>
                 <SettingsSubsectionText>
@@ -119,7 +120,44 @@ export default class CryptographyPanel extends React.Component<IProps, IState> {
                 {noSendUnverifiedSetting}
             </SettingsSubsection>
         );
+        */
+        return (
+            <SettingsSubsection heading={_t("settings|security|cryptography_section")}> {/* :TCHAP: change-sections-order-in-security-privacy-settings - name changed in translations */}
+            <div className="mx_SettingsTab_subsectionText">
+                <div>
+                    {_t("These keys only apply to the current session.")}
+                </div>
+                <div>
+                    <b>{_t("Please note this is not your recovery code for your automatic backup.")}</b>
+                </div>
+            </div>
+            <details>
+                <summary>{_t("common|advanced")}</summary>
+                <SettingsSubsectionText>
+                    <table className="mx_CryptographyPanel_sessionInfo">
+                        <tr>
+                            <th scope="row">{_t("settings|security|session_id")}</th>
+                            <td>
+                                <code>{deviceId}</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">{_t("settings|security|session_key")}</th>
+                            <td>
+                                <code>
+                                    <b>{identityKey}</b>
+                                </code>
+                            </td>
+                        </tr>
+                    </table>
+                </SettingsSubsectionText>
+            </details>
+            {importExportButtons}
+            {noSendUnverifiedSetting}
+            </SettingsSubsection>
+        );
     }
+    // end :TCHAP:
 
     private onExportE2eKeysClicked = (): void => {
         Modal.createDialogAsync(

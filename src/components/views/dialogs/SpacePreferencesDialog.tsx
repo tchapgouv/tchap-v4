@@ -46,7 +46,7 @@ const SpacePreferencesAppearanceTab: React.FC<Pick<IProps, "space">> = ({ space 
                             );
                         }}
                     >
-                        {_t("common|people")}
+                        {_t("Direct Messages") /* TCHAP: use-the-term-direct-messages-not-people - change label _t("common|people") */}
                     </StyledCheckbox>
                     <SettingsSubsectionText>
                         {_t("space|preferences|show_people_in_space", {

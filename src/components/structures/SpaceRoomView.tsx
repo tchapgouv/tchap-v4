@@ -165,7 +165,8 @@ const SpaceLandingAddButton: React.FC<{ space: Room }> = ({ space }) => {
                             showAddExistingRooms(space);
                         }}
                     />
-                    {canCreateSpace && (
+                    {/* :TCHAP: space-remove-public-and-subspace */}
+                    {/* {canCreateSpace && (
                         <IconizedContextMenuOption
                             label={_t("room_list|add_space_label")}
                             iconClassName="mx_RoomList_iconPlus"
@@ -178,7 +179,8 @@ const SpaceLandingAddButton: React.FC<{ space: Room }> = ({ space }) => {
                         >
                             <BetaPill />
                         </IconizedContextMenuOption>
-                    )}
+                    )} */}
+                    {/* end :TCHAP: */}
                 </IconizedContextMenuOptionList>
             </IconizedContextMenu>
         );

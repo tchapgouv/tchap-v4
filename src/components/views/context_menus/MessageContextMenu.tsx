@@ -51,6 +51,8 @@ import { getForwardableEvent } from "../../../events/forward/getForwardableEvent
 import { getShareableLocationEvent } from "../../../events/location/getShareableLocationEvent";
 import { ShowThreadPayload } from "../../../dispatcher/payloads/ShowThreadPayload";
 import { CardContext } from "../right_panel/context";
+//:tchap: remove-thread-buttons - add feature flags
+import TchapUIFeature from "../../../../../../src/tchap/util/TchapUIFeature";
 import PinningUtils from "../../../utils/PinningUtils";
 import PosthogTrackers from "../../../PosthogTrackers.ts";
 
@@ -645,7 +647,10 @@ export default class MessageContextMenu extends React.Component<IProps, IState> 
                 <IconizedContextMenuOptionList>
                     {reactButton}
                     {replyButton}
-                    {replyInThreadButton}
+                    {/* :TCHAP: remove-thread-buttons - activate Thread based on homeserver feature flag
+                    {replyInThreadButton} */}
+                    {TchapUIFeature.isFeatureActiveForHomeserver("feature_thread") ? replyInThreadButton : null}
+                    {/*:TCHAP: end */}
                     {editButton}
                     {pinButton}
                 </IconizedContextMenuOptionList>

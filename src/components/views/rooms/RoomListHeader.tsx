@@ -261,7 +261,8 @@ const RoomListHeader: React.FC<IProps> = ({ onVisibilityChange }) => {
                         disabled={!canAddSubRooms}
                         title={!canAddSubRooms ? _t("spaces|error_no_permission_add_room") : undefined}
                     />
-                    {canCreateSpaces && (
+                    {/* :TCHAP: space-remove-public-and-subspace */}
+                    {/* {canCreateSpaces && (
                         <IconizedContextMenuOption
                             label={_t("room_list|add_space_label")}
                             iconClassName="mx_RoomListHeader_iconPlus"
@@ -276,7 +277,8 @@ const RoomListHeader: React.FC<IProps> = ({ onVisibilityChange }) => {
                         >
                             <BetaPill />
                         </IconizedContextMenuOption>
-                    )}
+                    )} */}
+                    {/* end :TCHAP: */}
                 </IconizedContextMenuOptionList>
             </IconizedContextMenu>
         );

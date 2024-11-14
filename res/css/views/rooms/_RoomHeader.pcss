@@ -89,7 +89,16 @@ Please see LICENSE files in the repository root for full details.
     flex-shrink: 0;
 }
 
-.mx_RoomHeader_videoCallOption {
-    /* Workaround for https://github.com/element-hq/compound/issues/331 */
-    min-width: 240px;
+/* :tchap: customize-room-header-bar - largely inspired from ;mx_RoomHeader_topic but I couldn't get this add-on to work with $variable */
+.tc_RoomHeader_external {
+    color: var(--external-color);
+    width: 80px;
+    font-weight: 400;
+    font-size: 0.8125rem;
+    line-height: 0.8125rem;
+    max-height: calc(0.8125rem * 2);
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
 }

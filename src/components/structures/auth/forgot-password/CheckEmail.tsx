@@ -53,6 +53,9 @@ export const CheckEmail: React.FC<CheckEmailProps> = ({
                         {_t("auth|check_email_wrong_email_button")}
                     </AccessibleButton>
                 </div>
+                {/* :TCHAP: reset-password-warning-close-window */}
+                <ErrorMessage message={_t("auth|warning|dont_close_windows")} />
+                {/* end :TCHAP: */}
             </div>
             {errorText && <ErrorMessage message={errorText} />}
             <input onClick={onSubmitForm} type="button" className="mx_Login_submit" value={_t("action|next")} />

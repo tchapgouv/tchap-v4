@@ -19,6 +19,7 @@ import { SetupEncryptionStore, Phase } from "../../../stores/SetupEncryptionStor
 import EncryptionPanel from "../../views/right_panel/EncryptionPanel";
 import AccessibleButton, { ButtonEvent } from "../../views/elements/AccessibleButton";
 import Spinner from "../../views/elements/Spinner";
+import TchapUrls from "../../../../../../src/tchap/util/TchapUrls"; // :TCHAP: help-access-verify-device
 
 function keyHasPassphrase(keyInfo: SecretStorageKeyDescription): boolean {
     return Boolean(keyInfo.passphrase && keyInfo.passphrase.salt && keyInfo.passphrase.iterations);
@@ -150,11 +151,22 @@ export default class SetupEncryptionBody extends React.Component<IProps, IState>
             if (lostKeys) {
                 return (
                     <div>
-                        <p>{_t("encryption|verification|no_key_or_device")}</p>
+                        { /*:TCHAP: cross-signing-ui - change <p>{_t("encryption|verification|no_key_or_device")}</p> */ }
+                        <p>
+                            {_t(
+                                "<p>The Tchap team is working on the deployment of a new feature to "+
+                                "prevent encryption key loss.</p>"+
+                                "<p> You can access it in the section :</p><p>Security and privacy > Secure Backup</p>",
+                                 {}, { 'p': (sub) => <p>{sub}</p>}
+                            )}
+                        </p>
+                        {/* end :TCHAP: */}
 
                         <div className="mx_CompleteSecurity_actionRow">
                             <AccessibleButton kind="primary" onClick={this.onResetConfirmClick}>
-                                {_t("encryption|verification|reset_proceed_prompt")}
+                                {/* :TCHAP: cross-signing-ui - _t("encryption|verification|reset_proceed_prompt") */}
+                                {_t("Set up")}
+                                {/* end :TCHAP: */}
                             </AccessibleButton>
                         </div>
                     </div>
@@ -186,13 +198,34 @@ export default class SetupEncryptionBody extends React.Component<IProps, IState>
                     );
                 }
 
+                // :TCHAP:
+                const translationHelpLink =  (sub) => (
+                    <AccessibleButton kind="link_inline" onClick={() => {
+                        window.open(TchapUrls.helpVerifyDevicesPage,"_blank")
+                    }}>
+                        {sub}
+                    </AccessibleButton>
+                )
+                const tchapHelpButton = (
+                    <AccessibleButton kind="primary_outline" onClick={() => { window.open(TchapUrls.helpVerifyDevicesPage,"_blank") }}>
+                            {_t("common|help")}
+                    </AccessibleButton>
+                )
+                // end :TCHAP: 
                 return (
                     <div>
-                        <p>{_t("encryption|verification|verification_description")}</p>
-
+                        {/*:TCHAP: help-access-verify-device - <p>{_t("encryption|verification|verification_description")} */}
+                        <p>{_t("encryption|verification|verification_description")} {_t("encryption|verification|help_link",  {}, {
+                             a: translationHelpLink,
+                            })}
+                        </p>
+                        {/* end :TCHAP: */}
                         <div className="mx_CompleteSecurity_actionRow">
                             {verifyButton}
                             {useRecoveryKeyButton}
+                            {/* :TCHAP: help-access-verify-device */}
+                            {tchapHelpButton}
+                            {/* end :TCHAP: */}
                         </div>
                         <div className="mx_SetupEncryptionBody_reset">
                             {_t("encryption|reset_all_button", undefined, {

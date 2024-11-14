@@ -14,6 +14,8 @@ import { WarningIcon } from "@vector-im/compound-design-tokens/assets/web/icons"
 
 import { _t } from "../../../languageHandler";
 import { IBodyProps } from "./IBodyProps";
+import TchapUrls from "../../../../../../src/tchap/util/TchapUrls"; // :TCHAP: better-text-for-locked-messages
+import ExternalLink from "../elements/ExternalLink"; // :TCHAP: better-text-for-locked-messages
 import { LocalDeviceVerificationStateContext } from "../../../contexts/LocalDeviceVerificationStateContext";
 
 function getErrorMessage(mxEvent: MatrixEvent, isVerified: boolean | undefined): string | React.JSX.Element {
@@ -51,7 +53,19 @@ function getErrorMessage(mxEvent: MatrixEvent, isVerified: boolean | undefined):
             //   To be revisited as part of https://github.com/element-hq/element-meta/issues/2449
             return _t("timeline|decryption_failure|sender_unsigned_device");
     }
-    return _t("timeline|decryption_failure|unable_to_decrypt");
+     // :TCHAP: better-text-for-locked-messages : return _t("timeline|decryption_failure|unable_to_decrypt");
+    return _t(
+            "threads|unable_to_decrypt_with_info_message",
+            {},
+            {
+                a: (sub) => (
+                    <ExternalLink href={TchapUrls.lockedMessagesPage}>
+                        {sub}
+                    </ExternalLink>
+                ),
+            },
+        );
+    // end :TCHAP:
 }
 
 /** Get an extra CSS class, specific to the decryption failure reason */

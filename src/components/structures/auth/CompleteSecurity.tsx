@@ -59,7 +59,9 @@ export default class CompleteSecurity extends React.Component<IProps, IState> {
             return null;
         } else if (phase === Phase.Intro) {
             if (lostKeys) {
+                /* :tchap: cross-signing-uihide anxious icon of warning
                 icon = <span className="mx_CompleteSecurity_headerIcon mx_E2EIcon_warning" />;
+                end :tchap: */
                 title = _t("encryption|verification|after_new_login|unable_to_verify");
             } else {
                 icon = <span className="mx_CompleteSecurity_headerIcon mx_E2EIcon_warning" />;

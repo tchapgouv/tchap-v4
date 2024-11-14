@@ -36,6 +36,7 @@ import SettingsSubsection, { SettingsSubsectionText } from "../../shared/Setting
 import { useOwnDevices } from "../../devices/useOwnDevices";
 import DiscoverySettings from "../../discovery/DiscoverySettings";
 import SetIntegrationManager from "../../SetIntegrationManager";
+import TchapUIFeature from "../../../../../../../../src/tchap/util/TchapUIFeature";
 
 interface IIgnoredUserProps {
     userId: string;
@@ -287,12 +288,21 @@ export default class SecurityUserSettingsTab extends React.Component<IProps, ISt
     }
 
     public render(): React.ReactNode {
+        // :TCHAP: change-sections-order-in-security-privacy-settings - we're moving this subsection out, so it's now a section
+        const secureBackup = (
+            <SettingsSection heading={_t("common|secure_backup")}>
+                <SecureBackupPanel />
+            </SettingsSection>
+        );
+        /*
         const secureBackup = (
             <SettingsSubsection heading={_t("common|secure_backup")}>
                 <SecureBackupPanel />
                 <DehydratedDeviceStatus />
             </SettingsSubsection>
         );
+        */
+        // end :TCHAP:
 
         const eventIndex = (
             <SettingsSubsection heading={_t("settings|security|message_search_section")}>
@@ -366,14 +376,17 @@ export default class SecurityUserSettingsTab extends React.Component<IProps, ISt
         return (
             <SettingsTab>
                 {warning}
-                <SetIntegrationManager />
+                { /* :TCHAP: change-sections-order-in-security-privacy-settings - move secureBackup and privacySection, and remove eventIndex */ }
+                {secureBackup}
+                {/* :TCHAP: hide-widgets-settings - <SetIntegrationManager />*/}
+                { TchapUIFeature.showWidgetsSettings && <SetIntegrationManager />}
+                {/* end :TCHAP: */}
                 <SettingsSection heading={_t("settings|security|encryption_section")}>
-                    {secureBackup}
-                    {eventIndex}
                     {crossSigning}
                     <CryptographyPanel />
+                    {privacySection}
                 </SettingsSection>
-                {privacySection}
+                { /* end :TCHAP: */ }
                 {advancedSection}
             </SettingsTab>
         );

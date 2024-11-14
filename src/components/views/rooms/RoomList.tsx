@@ -77,11 +77,11 @@ interface IState {
 export const TAG_ORDER: TagID[] = [
     DefaultTagID.Invite,
     DefaultTagID.Favourite,
+    DefaultTagID.ServerNotice, // :TCHAP: tchap-annonces
     DefaultTagID.DM,
     DefaultTagID.Untagged,
     DefaultTagID.Conference,
     DefaultTagID.LowPriority,
-    DefaultTagID.ServerNotice,
     DefaultTagID.Suggested,
     // DefaultTagID.Archived isn't here any more: we don't show it at all.
     // The section still exists in the code as a place for rooms that we know
@@ -378,7 +378,7 @@ const TAG_AESTHETICS: TagAestheticsMap = {
         defaultHidden: false,
     },
     [DefaultTagID.DM]: {
-        sectionLabel: _td("common|people"),
+        sectionLabel: _td("Direct Messages"), /* TCHAP: use-the-term-direct-messages-not-people - change label _td("common|people"), */
         isInvite: false,
         defaultHidden: false,
         AuxButtonComponent: DmAuxButton,

@@ -7,7 +7,7 @@ Please see LICENSE files in the repository root for full details.
 */
 
 import { Room } from "matrix-js-sdk/src/matrix";
-import React, { ReactNode, useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { CallType } from "matrix-js-sdk/src/webrtc/call";
 
 import { useFeatureEnabled } from "../useSettings";
@@ -35,7 +35,6 @@ import { isVideoRoom } from "../../utils/video-rooms";
 import { useGuestAccessInformation } from "./useGuestAccessInformation";
 import SettingsStore from "../../settings/SettingsStore";
 import { UIFeature } from "../../settings/UIFeature";
-import { BetaPill } from "../../components/views/beta/BetaCard";
 
 export enum PlatformCallType {
     ElementCall,
@@ -50,14 +49,6 @@ export const getPlatformCallTypeLabel = (platformCallType: PlatformCallType): st
             return _t("voip|jitsi_call");
         case PlatformCallType.LegacyCall:
             return _t("voip|legacy_call");
-    }
-};
-export const getPlatformCallTypeChildren = (platformCallType: PlatformCallType): ReactNode => {
-    switch (platformCallType) {
-        case PlatformCallType.ElementCall:
-            return <BetaPill />;
-        default:
-            return null;
     }
 };
 const enum State {
@@ -245,8 +236,12 @@ export const useRoomCall = (
     let videoCallDisabledReason: string | null;
     switch (state) {
         case State.NoPermission:
-            voiceCallDisabledReason = _t("voip|disabled_no_perms_start_voice_call");
-            videoCallDisabledReason = _t("voip|disabled_no_perms_start_video_call");
+            // :tchap: display-call-button-anyway - disable noPermission
+            // voiceCallDisabledReason = _t("voip|disabled_no_perms_start_voice_call");
+            // videoCallDisabledReason = _t("voip|disabled_no_perms_start_video_call");
+            voiceCallDisabledReason = null;
+            videoCallDisabledReason = null;
+            // end :TCHAP:
             break;
         case State.Ongoing:
             voiceCallDisabledReason = _t("voip|disabled_ongoing_call");

@@ -26,6 +26,7 @@ import SettingsSubsection, { SettingsSubsectionText } from "../../shared/Setting
 import { SDKContext } from "../../../../../contexts/SDKContext";
 import UserPersonalInfoSettings from "../../UserPersonalInfoSettings";
 import { useMatrixClientContext } from "../../../../../contexts/MatrixClientContext";
+import TchapRedListSettings from "../../../../../../../../src/tchap/components/views/settings/tabs/user/TchapRedListSettings"; // :TCHAP: red-list-settings
 
 interface IProps {
     closeSettingsFn: () => void;
@@ -186,12 +187,17 @@ const AccountUserSettingsTab: React.FC<IProps> = ({ closeSettingsFn }) => {
                     canSetDisplayName={canSetDisplayName}
                     canSetAvatar={canSetAvatar}
                 />
-                <UserPersonalInfoSettings canMake3pidChanges={canMake3pidChanges} />
+                {/* :TCHAP: hide-discovery-email-phone-settings-updated */}
+                {/* <UserPersonalInfoSettings canMake3pidChanges={canMake3pidChanges} /> */}
+                {/* end :TCHAP: */}
                 <AccountSection
                     canChangePassword={canChangePassword}
                     onPasswordChanged={onPasswordChanged}
                     onPasswordChangeError={onPasswordChangeError}
                 />
+                {/* :TCHAP: red-list-settings */}
+                <TchapRedListSettings />
+                {/* end :TCHAP: */}
             </SettingsSection>
             {accountManagementSection}
         </SettingsTab>
