@@ -36,7 +36,7 @@ import SettingsSubsection, { SettingsSubsectionText } from "../../shared/Setting
 import { useOwnDevices } from "../../devices/useOwnDevices";
 import DiscoverySettings from "../../discovery/DiscoverySettings";
 import SetIntegrationManager from "../../SetIntegrationManager";
-import TchapUIFeature from "../../../../../../../../src/tchap/util/TchapUIFeature";
+import TchapUIFeature from "~tchap-web/src/tchap/util/TchapUIFeature";
 
 interface IIgnoredUserProps {
     userId: string;

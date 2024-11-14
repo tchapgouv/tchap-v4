@@ -32,8 +32,8 @@ import { ValidatedServerConfig } from "../../../utils/ValidatedServerConfig";
 import { filterBoolean } from "../../../utils/arrays";
 import { Features } from "../../../settings/Settings";
 import { startOidcLogin } from "../../../utils/oidc/authorize";
-import TchapUtils from '../../../../../../src/tchap/util/TchapUtils'; // :TCHAP: login
-import Tchapi18nUtils from '../../../../../../src/tchap/i18n/Tchapi18nUtils'; // :TCHAP: login
+import TchapUtils from '~tchap-web/src/tchap/util/TchapUtils'; // :TCHAP: login
+import Tchapi18nUtils from '~tchap-web/src/tchap/i18n/Tchapi18nUtils'; // :TCHAP: login
 
 interface IProps {
     serverConfig: ValidatedServerConfig;

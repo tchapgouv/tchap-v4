@@ -14,7 +14,7 @@ import { WarningIcon } from "@vector-im/compound-design-tokens/assets/web/icons"
 
 import { _t } from "../../../languageHandler";
 import { IBodyProps } from "./IBodyProps";
-import TchapUrls from "../../../../../../src/tchap/util/TchapUrls"; // :TCHAP: better-text-for-locked-messages
+import TchapUrls from "~tchap-web/src/tchap/util/TchapUrls"; // :TCHAP: better-text-for-locked-messages
 import ExternalLink from "../elements/ExternalLink"; // :TCHAP: better-text-for-locked-messages
 import { LocalDeviceVerificationStateContext } from "../../../contexts/LocalDeviceVerificationStateContext";
 

@@ -8,20 +8,13 @@ source scripts/tchap/translations/helpers.sh
 
 # Usage : crawl repo inputfile outputfile
 crawl () {
-    export repo=$1
     # Run the original gen-i18n script from matrix-web-i18n.
     # gen-i18n crawls through the code files in src and res, looking for translations.
     # For each translation key, it finds the values in INPUT_FILE. If no value found, it uses value=key.
     # Then it writes key:value in OUTPUT_FILE.
-    export INPUT_FILE=$2 # var read by matrix-gen-i18n, don't rename
-    export OUTPUT_FILE=$3 # var read by matrix-gen-i18n, don't rename
-    if [[ "$repo" == "react-sdk" ]]; then
-        cd linked-dependencies/matrix-react-sdk
-        yarn matrix-gen-i18n;
-        cd ../../
-    else
-        yarn matrix-gen-i18n;
-    fi
+    export INPUT_FILE=$1 # var read by matrix-gen-i18n, don't rename
+    export OUTPUT_FILE=$2 # var read by matrix-gen-i18n, don't rename
+    yarn matrix-gen-i18n;
     retVal=$?
     if [ $retVal -ne 0 ]; then
         echo "gen-i18n failed. Aborting."
@@ -38,16 +31,7 @@ export REFERENCE_TRANSLATIONS=$1
 export CRAWLED=$2
 
 # Repo web
-export REPO="web";
-export CRAWLED_WEB=`realpath modules/tchap-translations/tmp/crawled_${REPO}.json`
-crawl $REPO $REFERENCE_TRANSLATIONS $CRAWLED_WEB
-
-# Repo react-sdk
-export REPO="react-sdk";
-export CRAWLED_REACT=`realpath modules/tchap-translations/tmp/crawled_${REPO}.json`
-crawl $REPO $REFERENCE_TRANSLATIONS $CRAWLED_REACT
-
-merge_json_files $CRAWLED_WEB $CRAWLED_REACT $CRAWLED
+crawl $REFERENCE_TRANSLATIONS $CRAWLED
 
 # Extra hack : config.json is not crawled by matrix-gen-i18n, so the terms_and_conditions_links are missing. Add them in.
 # Get the terms_and_conditions strings from config.json

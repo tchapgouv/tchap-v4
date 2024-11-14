@@ -1,5 +1,5 @@
 import React from "react";
-import { _t } from "matrix-react-sdk/src/languageHandler";
+import { _t } from "~tchap-web/src/languageHandler";
 import TchapUrls from "../util/TchapUrls";
 
 

@@ -1,6 +1,6 @@
-import defaultDispatcher from "matrix-react-sdk/src/dispatcher/dispatcher";
-import { ActionPayload } from "matrix-react-sdk/src/dispatcher/payloads";
-import PlatformPeg from "matrix-react-sdk/src/PlatformPeg";
+import defaultDispatcher from "~tchap-web/src/dispatcher/dispatcher";
+import { ActionPayload } from "~tchap-web/src/dispatcher/payloads";
+import PlatformPeg from "~tchap-web/src/PlatformPeg";
 
 import TchapVersionManagement from "../util/TchapVersionManagement";
 import TchapUserSettings from "../util/TchapUserSettings";

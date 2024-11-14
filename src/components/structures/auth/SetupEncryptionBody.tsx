@@ -19,7 +19,7 @@ import { SetupEncryptionStore, Phase } from "../../../stores/SetupEncryptionStor
 import EncryptionPanel from "../../views/right_panel/EncryptionPanel";
 import AccessibleButton, { ButtonEvent } from "../../views/elements/AccessibleButton";
 import Spinner from "../../views/elements/Spinner";
-import TchapUrls from "../../../../../../src/tchap/util/TchapUrls"; // :TCHAP: help-access-verify-device
+import TchapUrls from "~tchap-web/src/tchap/util/TchapUrls"; // :TCHAP: help-access-verify-device
 
 function keyHasPassphrase(keyInfo: SecretStorageKeyDescription): boolean {
     return Boolean(keyInfo.passphrase && keyInfo.passphrase.salt && keyInfo.passphrase.iterations);

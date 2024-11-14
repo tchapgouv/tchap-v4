@@ -27,7 +27,7 @@ import ResizeNotifier from "../../utils/ResizeNotifier";
 import MatrixClientContext from "../../contexts/MatrixClientContext";
 import { RoomPermalinkCreator } from "../../utils/permalinks/Permalinks";
 import RoomContext from "../../contexts/RoomContext";
-import Tchapi18nUtils from "../../../../../src/tchap/i18n/Tchapi18nUtils"; // :tchap: error-tchap-is-down
+import Tchapi18nUtils from "~tchap-web/src/tchap/i18n/Tchapi18nUtils"; // :tchap: error-tchap-is-down
 
 const DEBUG = false;
 let debuglog = function (msg: string): void {};

@@ -21,7 +21,7 @@ import {
 } from "./utils/IdentityServerUtils";
 import QuestionDialog from "./components/views/dialogs/QuestionDialog";
 import { abbreviateUrl } from "./utils/UrlUtils";
-import TchapUIFeature from "../../../src/tchap/util/TchapUIFeature";
+import TchapUIFeature from "~tchap-web/src/tchap/util/TchapUIFeature";
 
 export class AbortedIdentityActionError extends Error {}
 

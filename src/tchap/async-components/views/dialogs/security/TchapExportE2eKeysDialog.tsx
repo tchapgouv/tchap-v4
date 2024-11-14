@@ -16,24 +16,24 @@ limitations under the License.
 
 import FileSaver from "file-saver";
 import React, { ComponentType } from "react";
-import BaseDialog from "matrix-react-sdk/src/components/views/dialogs/BaseDialog";
-import { IDialogProps } from "matrix-react-sdk/src/components/views/dialogs/IDialogProps";
-import { _t } from "matrix-react-sdk/src/languageHandler";
-import Field from "matrix-react-sdk/src/components/views/elements/Field";
-import Modal from "matrix-react-sdk/src/Modal";
-import * as MegolmExportEncryption from "matrix-react-sdk/src/utils/MegolmExportEncryption";
-import { KeysStartingWith } from "matrix-react-sdk/src/@types/common";
+import BaseDialog from "~tchap-web/src/components/views/dialogs/BaseDialog";
+import { _t } from "~tchap-web/src/languageHandler";
+import Field from "~tchap-web/src/components/views/elements/Field";
+import Modal from "~tchap-web/src/Modal";
+import * as MegolmExportEncryption from "~tchap-web/src/utils/MegolmExportEncryption";
+import { KeysStartingWith } from "~tchap-web/src/@types/common";
 import { MatrixClient } from "matrix-js-sdk/src/client";
 import { logger } from "matrix-js-sdk/src/logger";
 
 import "../../../../../../res/css/views/dialogs/_TchapExportE2eKeysDialog.pcss";
+import { DialogProps } from "@matrix-org/react-sdk-module-api/lib/components/DialogContent";
 
 enum Phase {
     Edit = "edit",
     Exporting = "exporting",
 }
 
-interface IProps extends IDialogProps {
+interface IProps extends DialogProps {
     allowLogout: boolean;
     matrixClient: MatrixClient;
     onFinished: (success: boolean) => void;

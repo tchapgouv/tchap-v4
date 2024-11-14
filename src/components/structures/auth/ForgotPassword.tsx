@@ -33,8 +33,8 @@ import { VerifyEmailModal } from "./forgot-password/VerifyEmailModal";
 import Spinner from "../../views/elements/Spinner";
 import { formatSeconds } from "../../../DateUtils";
 import AutoDiscoveryUtils from "../../../utils/AutoDiscoveryUtils";
-import TchapUtils from "../../../../../../src/tchap/util/TchapUtils"; // :TCHAP: forgot-password
-import Tchapi18nUtils from "../../../../../../src/tchap/i18n/Tchapi18nUtils";
+import TchapUtils from "~tchap-web/src/tchap/util/TchapUtils"; // :TCHAP: forgot-password
+import Tchapi18nUtils from "~tchap-web/src/tchap/i18n/Tchapi18nUtils";
 
 const emailCheckInterval = 2000;
 

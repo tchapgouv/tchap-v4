@@ -1,22 +1,22 @@
 import React from "react";
 import { render, screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
 import { mocked } from "jest-mock";
-import { mkStubRoom, stubClient } from "matrix-react-sdk/test/test-utils/test-utils";
+import { mkStubRoom, stubClient } from "~tchap-web//test/test-utils/test-utils";
 import { EventType, GuestAccess, JoinRule, MatrixClient, Room } from "matrix-js-sdk/src/matrix";
-import { makeRoomPermalink } from "matrix-react-sdk/src/utils/permalinks/Permalinks";
+import { makeRoomPermalink } from "~tchap-web//src/utils/permalinks/Permalinks";
 import userEvent from "@testing-library/user-event";
 
-import TchapRoomLinkAccess from "../../../../../../src/tchap/components/views/rooms/TchapRoomLinkAccess";
-import { TchapRoomType } from "../../../../../../src/tchap/@types/tchap";
+import TchapRoomLinkAccess from "~tchap-web//src/tchap/components/views/rooms/TchapRoomLinkAccess";
+import { TchapRoomType } from "~tchap-web//src/tchap/@types/tchap";
 
 import TchapRoomUtils from "~tchap-web/src/tchap/util/TchapRoomUtils";
 import {
     flushPromises,
     waitEnoughCyclesForModal,
-} from "~tchap-web/linked-dependencies/matrix-react-sdk/test/test-utils";
+} from "../../../../../test-utils";
 
 jest.mock("~tchap-web/src/tchap/util/TchapRoomUtils");
-jest.mock("matrix-react-sdk/src/utils/permalinks/Permalinks");
+jest.mock("~tchap-web//src/utils/permalinks/Permalinks");
 
 describe("TchapRoomLinkAccess", () => {
     const client: MatrixClient = stubClient();

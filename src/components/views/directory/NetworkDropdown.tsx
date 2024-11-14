@@ -26,7 +26,7 @@ import {
 import TextInputDialog from "../dialogs/TextInputDialog";
 import AccessibleButton from "../elements/AccessibleButton";
 import withValidation from "../elements/Validation";
-import TchapUtils from "../../../../../../src/tchap/util/TchapUtils";
+import TchapUtils from "~tchap-web/src/tchap/util/TchapUtils";
 
 const SETTING_NAME = "room_directory_servers";
 

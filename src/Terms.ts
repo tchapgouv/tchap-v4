@@ -16,7 +16,7 @@ import {
     doesAccountDataHaveIdentityServer,
     setToDefaultIdentityServer,
 } from './utils/IdentityServerUtils';
-import TchapUIFeature from "../../../src/tchap/util/TchapUIFeature";
+import TchapUIFeature from "~tchap-web/src/tchap/util/TchapUIFeature";
 
 export class TermsNotSignedError extends Error {}
 

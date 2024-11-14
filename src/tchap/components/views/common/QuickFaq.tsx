@@ -1,12 +1,12 @@
 
 import React from 'react'
 
-import { ChevronFace, alwaysAboveRightOf, useContextMenu } from 'matrix-react-sdk/src/components/structures/ContextMenu';
-import AccessibleButton from 'matrix-react-sdk/src/components/views/elements/AccessibleButton';
+import { ChevronFace, alwaysAboveRightOf, useContextMenu } from '~tchap-web/src/components/structures/ContextMenu';
+import AccessibleButton from '~tchap-web/src/components/views/elements/AccessibleButton';
 import classNames from 'classnames';
 import { _t } from '../../../../languageHandler';
 import "../../../../../res/css/common/_TchapLeftPanel.pcss";
-import IconizedContextMenu, { IconizedContextMenuOption, IconizedContextMenuOptionList } from 'matrix-react-sdk/src/components/views/context_menus/IconizedContextMenu';
+import IconizedContextMenu, { IconizedContextMenuOption, IconizedContextMenuOptionList } from '~tchap-web/src/components/views/context_menus/IconizedContextMenu';
 import TchapUrls from '../../../util/TchapUrls';
 
 const QuickFaqButton: React.FC<{

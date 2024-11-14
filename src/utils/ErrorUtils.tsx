@@ -14,7 +14,7 @@ import SdkConfig from "../SdkConfig";
 import { ValidatedServerConfig } from "./ValidatedServerConfig";
 import ExternalLink from "../components/views/elements/ExternalLink";
 
-import Tchapi18nUtils from '../../../../src/tchap/i18n/Tchapi18nUtils'; // :TCHAP: login
+import Tchapi18nUtils from '~tchap-web/src/tchap/i18n/Tchapi18nUtils'; // :TCHAP: login
 
 export const resourceLimitStrings = {
     "monthly_active_user": _td("error|mau"),

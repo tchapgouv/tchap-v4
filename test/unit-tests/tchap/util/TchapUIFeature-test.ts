@@ -1,5 +1,5 @@
-import { stubClient } from "matrix-react-sdk/test/test-utils";
-import SdkConfig, { ConfigOptions } from "matrix-react-sdk/src/SdkConfig";
+import { stubClient } from "~tchap-web/test/test-utils";
+import SdkConfig, { ConfigOptions } from "~tchap-web/src/SdkConfig";
 import { MatrixClient } from "matrix-js-sdk/src/matrix";
 
 import TchapUIFeature from "~tchap-web/src/tchap/util/TchapUIFeature";

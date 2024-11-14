@@ -15,7 +15,7 @@ import { UIFeature } from "../../../settings/UIFeature";
 import LanguageSelector from "./LanguageSelector";
 import EmbeddedPage from "../../structures/EmbeddedPage";
 import { MATRIX_LOGO_HTML } from "../../structures/static-page-vars";
-import TchapUIFeature from "../../../../../../src/tchap/util/TchapUIFeature";
+import TchapUIFeature from "~tchap-web/src/tchap/util/TchapUIFeature";
 
 interface IProps {}
 

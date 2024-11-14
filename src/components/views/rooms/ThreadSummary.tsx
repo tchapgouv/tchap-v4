@@ -27,7 +27,7 @@ import defaultDispatcher from "../../../dispatcher/dispatcher";
 import { useUnreadNotifications } from "../../../hooks/useUnreadNotifications";
 import { notificationLevelToIndicator } from "../../../utils/notifications";
 import ExternalLink from "../elements/ExternalLink"; // :TCHAP: better-text-for-locked-messages
-import TchapUrls from "../../../../../../src/tchap/util/TchapUrls"; // :TCHAP: better-text-for-locked-messages
+import TchapUrls from "~tchap-web/src/tchap/util/TchapUrls"; // :TCHAP: better-text-for-locked-messages
 
 interface IProps {
     mxEvent: MatrixEvent;

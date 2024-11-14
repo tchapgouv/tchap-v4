@@ -15,8 +15,8 @@ limitations under the License.
 */
 
 import React from "react";
-import { _t } from "matrix-react-sdk/src/languageHandler";
-import DialogButtons from "matrix-react-sdk/src/components/views/elements/DialogButtons";
+import { _t } from "~tchap-web/src/languageHandler";
+import DialogButtons from "~tchap-web/src/components/views/elements/DialogButtons";
 
 interface IProps {
     onDone: () => void;

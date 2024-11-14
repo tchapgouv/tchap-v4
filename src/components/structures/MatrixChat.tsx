@@ -136,8 +136,8 @@ import { ConfirmSessionLockTheftView } from "./auth/ConfirmSessionLockTheftView"
 import { LoginSplashView } from "./auth/LoginSplashView";
 import { cleanUpDraftsIfRequired } from "../../DraftCleaner";
 
-import TchapUrls from "../../../../../src/tchap/util/TchapUrls"; // :TCHAP: activate-cross-signing-and-secure-storage-react
-import EmailVerificationPage from "../../../../../src/tchap/components/views/sso/EmailVerificationPage"; // :TCHAP: sso-agentconnect-flow
+import TchapUrls from "~tchap-web/src/tchap/util/TchapUrls"; // :TCHAP: activate-cross-signing-and-secure-storage-react
+import EmailVerificationPage from "~tchap-web/src/tchap/components/views/sso/EmailVerificationPage"; // :TCHAP: sso-agentconnect-flow
 
 // legacy export
 export { default as Views } from "../../Views";

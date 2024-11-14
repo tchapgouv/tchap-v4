@@ -26,7 +26,7 @@ import SettingsSubsection, { SettingsSubsectionText } from "../../shared/Setting
 import { SDKContext } from "../../../../../contexts/SDKContext";
 import UserPersonalInfoSettings from "../../UserPersonalInfoSettings";
 import { useMatrixClientContext } from "../../../../../contexts/MatrixClientContext";
-import TchapRedListSettings from "../../../../../../../../src/tchap/components/views/settings/tabs/user/TchapRedListSettings"; // :TCHAP: red-list-settings
+import TchapRedListSettings from "~tchap-web/src/tchap/components/views/settings/tabs/user/TchapRedListSettings"; // :TCHAP: red-list-settings
 
 interface IProps {
     closeSettingsFn: () => void;

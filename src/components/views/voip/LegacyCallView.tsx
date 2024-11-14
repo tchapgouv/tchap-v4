@@ -28,7 +28,7 @@ import LegacyCallViewButtons from "./LegacyCallView/LegacyCallViewButtons";
 import { ActionPayload } from "../../../dispatcher/payloads";
 import { getKeyBindingsManager } from "../../../KeyBindingsManager";
 import { KeyBindingAction } from "../../../accessibility/KeyboardShortcuts";
-import TchapUIFeature from "../../../../../../src/tchap/util/TchapUIFeature"; /** :TCHAP: hide-video-button-on-call-screen */ 
+import TchapUIFeature from "~tchap-web/src/tchap/util/TchapUIFeature"; /** :TCHAP: hide-video-button-on-call-screen */ 
 
 interface IProps {
     // The call for us to display

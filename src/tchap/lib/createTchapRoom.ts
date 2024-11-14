@@ -1,4 +1,4 @@
-import { IOpts } from "matrix-react-sdk/src/createRoom";
+import { IOpts } from "~tchap-web/src/createRoom";
 import { ICreateRoomOpts } from "matrix-js-sdk/src/@types/requests";
 import { HistoryVisibility, JoinRule, Preset, Visibility } from "matrix-js-sdk/src/@types/partials";
 

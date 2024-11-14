@@ -19,9 +19,9 @@ import InfoTooltip, { InfoTooltipKind } from "../elements/InfoTooltip";
 import { formatPreciseDuration } from "../../../DateUtils";
 import Clock from "../audio_messages/Clock";
 
-import Modal from "matrix-react-sdk/src/Modal"; // :TCHAP: bug-reporting
-import BugReportDialog from "matrix-react-sdk/src/components/views/dialogs/BugReportDialog"; // :TCHAP: bug-reporting
-import "../../../../../../res/css/views/messages/TchapLegacyCallEvent.pcss"; // :TCHAP: bug-reporting
+import Modal from "~tchap-web/src/Modal"; // :TCHAP: bug-reporting
+import BugReportDialog from "~tchap-web/src/components/views/dialogs/BugReportDialog"; // :TCHAP: bug-reporting
+import "~tchap-web/res/css/views/messages/TchapLegacyCallEvent.pcss"; // :TCHAP: bug-reporting
 
 const MAX_NON_NARROW_WIDTH = (450 / 70) * 100;
 

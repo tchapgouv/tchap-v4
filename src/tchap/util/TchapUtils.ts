@@ -1,8 +1,8 @@
-import { MatrixClientPeg } from "matrix-react-sdk/src/MatrixClientPeg";
-import SdkConfig from "matrix-react-sdk/src/SdkConfig";
-import AutoDiscoveryUtils from "matrix-react-sdk/src/utils/AutoDiscoveryUtils";
-import { ValidatedServerConfig } from "matrix-react-sdk/src/utils/ValidatedServerConfig";
-import { findMapStyleUrl } from "matrix-react-sdk/src/utils/location";
+import { MatrixClientPeg } from "~tchap-web/src/MatrixClientPeg";
+import SdkConfig from "~tchap-web/src/SdkConfig";
+import AutoDiscoveryUtils from "~tchap-web/src/utils/AutoDiscoveryUtils";
+import { ValidatedServerConfig } from "~tchap-web/src/utils/ValidatedServerConfig";
+import { findMapStyleUrl } from "~tchap-web/src/utils/location";
 import { logger } from "matrix-js-sdk/src/logger";
 
 import TchapApi from "./TchapApi";

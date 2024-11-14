@@ -14,14 +14,14 @@ Except when importing from other customisation files. Then imports must use rela
 */
 import React, { ChangeEvent, createRef, KeyboardEvent } from "react";
 import { Room } from "matrix-js-sdk/src/models/room";
-import withValidation, { IFieldState } from "matrix-react-sdk/src/components/views/elements/Validation";
-import { _t } from "matrix-react-sdk/src/languageHandler";
-import { IOpts } from "matrix-react-sdk/src/createRoom";
-import { getKeyBindingsManager } from "matrix-react-sdk/src/KeyBindingsManager";
-import { KeyBindingAction } from "matrix-react-sdk/src/accessibility/KeyboardShortcuts";
-import Field from "matrix-react-sdk/src/components/views/elements/Field";
-import DialogButtons from "matrix-react-sdk/src/components/views/elements/DialogButtons";
-import BaseDialog from "matrix-react-sdk/src/components/views/dialogs/BaseDialog";
+import withValidation, { IFieldState } from "~tchap-web/src/components/views/elements/Validation";
+import { _t } from "~tchap-web/src/languageHandler";
+import { IOpts } from "~tchap-web/src/createRoom";
+import { getKeyBindingsManager } from "~tchap-web/src/KeyBindingsManager";
+import { KeyBindingAction } from "~tchap-web/src/accessibility/KeyboardShortcuts";
+import Field from "~tchap-web/src/components/views/elements/Field";
+import DialogButtons from "~tchap-web/src/components/views/elements/DialogButtons";
+import BaseDialog from "~tchap-web/src/components/views/dialogs/BaseDialog";
 
 import TchapUtils from "../../../util/TchapUtils";
 import TchapRoomTypeSelector from "../elements/TchapRoomTypeSelector";

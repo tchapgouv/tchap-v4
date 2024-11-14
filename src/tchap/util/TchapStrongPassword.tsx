@@ -1,6 +1,6 @@
 import React from "react";
-import { IFieldState, IValidationResult } from "matrix-react-sdk/src/components/views/elements/Validation";
-import { _t } from "matrix-react-sdk/src/languageHandler";
+import { IFieldState, IValidationResult } from "~tchap-web/src/components/views/elements/Validation";
+import { _t } from "~tchap-web/src/languageHandler";
 
 import TchapApi from "./TchapApi";
 import TchapUtils from "./TchapUtils";

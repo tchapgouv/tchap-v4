@@ -52,7 +52,7 @@ import { getShareableLocationEvent } from "../../../events/location/getShareable
 import { ShowThreadPayload } from "../../../dispatcher/payloads/ShowThreadPayload";
 import { CardContext } from "../right_panel/context";
 //:tchap: remove-thread-buttons - add feature flags
-import TchapUIFeature from "../../../../../../src/tchap/util/TchapUIFeature";
+import TchapUIFeature from "~tchap-web/src/tchap/util/TchapUIFeature";
 import PinningUtils from "../../../utils/PinningUtils";
 import PosthogTrackers from "../../../PosthogTrackers.ts";
 

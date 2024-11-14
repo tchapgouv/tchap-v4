@@ -1,9 +1,9 @@
 /* eslint-disable max-len */
 import React from "react";
-import { _t } from "matrix-react-sdk/src/languageHandler";
-import BaseDialog from "matrix-react-sdk/src/components/views/dialogs/BaseDialog";
-import DialogButtons from "matrix-react-sdk/src/components/views/elements/DialogButtons";
-import InlineSpinner from "matrix-react-sdk/src/components/views/elements/InlineSpinner";
+import { _t } from "~tchap-web/src/languageHandler";
+import BaseDialog from "~tchap-web/src/components/views/dialogs/BaseDialog";
+import DialogButtons from "~tchap-web/src/components/views/elements/DialogButtons";
+import InlineSpinner from "~tchap-web/src/components/views/elements/InlineSpinner";
 
 import TchapUtils from "../../../util/TchapUtils";
 

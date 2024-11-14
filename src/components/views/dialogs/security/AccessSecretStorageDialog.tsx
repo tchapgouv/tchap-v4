@@ -414,7 +414,7 @@ export default class AccessSecretStorageDialog extends React.PureComponent<IProp
                                             onClick={() => this.setDisplayPassword()}
                                         >
                                             <img
-                                                src={require("../../../../../../../res/img/grey-eye.svg").default}
+                                                src={require("~tchap-web/res/img/grey-eye.svg").default}
                                                 width="24"
                                                 height="24"
                                                 alt={_t("Eye")}

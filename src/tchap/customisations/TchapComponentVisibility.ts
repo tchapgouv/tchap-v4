@@ -10,7 +10,7 @@ File copied from ComponentVisibility.ts in matrix-react-sdk v3.46.0
 
 // Populate this class with the details of your customisations when copying it.
 
-import { UIComponent } from "matrix-react-sdk/src/settings/UIFeature";
+import { UIComponent } from "~tchap-web/src/settings/UIFeature";
 import TchapUIFeature from "../util/TchapUIFeature";
 
 /**

@@ -23,9 +23,9 @@ import DMRoomMap from "../../../utils/DMRoomMap";
 import { IOOBData } from "../../../stores/ThreepidInviteStore";
 import { getJoinedNonFunctionalMembers } from "../../../utils/room/getJoinedNonFunctionalMembers";
 
-import TchapRoomUtils from "../../../../../../src/tchap/util/TchapRoomUtils";
-import "../../../../../../res/css/views/avatars/_TchapDecoratedRoomAvatar.pcss";
-import { TchapRoomType } from "../../../../../../src/tchap/@types/tchap";
+import TchapRoomUtils from "~tchap-web/src/tchap/util/TchapRoomUtils";
+import "~tchap-web/res/css/views/avatars/_TchapDecoratedRoomAvatar.pcss";
+import { TchapRoomType } from "~tchap-web/src/tchap/@types/tchap";
 
 interface IProps {
     room: Room;

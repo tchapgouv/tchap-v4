@@ -18,7 +18,7 @@ import {
     IMediaEventContent,
     IPreparedMedia,
     prepEventContentAsMedia,
-} from "matrix-react-sdk/src/customisations/models/IMediaEventContent";
+} from "~tchap-web/src/customisations/models/IMediaEventContent";
 import { MatrixClient } from "matrix-js-sdk/src/client";
 import { ResizeMethod } from "matrix-js-sdk/src/@types/partials";
 

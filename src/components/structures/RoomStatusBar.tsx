@@ -30,7 +30,7 @@ import InlineSpinner from "../views/elements/InlineSpinner";
 import MatrixClientContext from "../../contexts/MatrixClientContext";
 import { RoomStatusBarUnsentMessages } from "./RoomStatusBarUnsentMessages";
 import ExternalLink from "../views/elements/ExternalLink";
-import Tchapi18nUtils from '../../../../../src/tchap/i18n/Tchapi18nUtils'; // :TCHAP: error-tchap-is-down
+import Tchapi18nUtils from '~tchap-web/src/tchap/i18n/Tchapi18nUtils'; // :TCHAP: error-tchap-is-down
 
 const STATUS_BAR_HIDDEN = 0;
 const STATUS_BAR_EXPANDED = 1;

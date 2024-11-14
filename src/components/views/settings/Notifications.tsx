@@ -52,8 +52,8 @@ import SettingsSubsection from "./shared/SettingsSubsection";
 import { doesRoomHaveUnreadMessages } from "../../../Unread";
 import SettingsFlag from "../elements/SettingsFlag";
 
-import TchapUIFeature from "../../../../../../src/tchap/util/TchapUIFeature"; // :tchap: tchap-features-from-config
-import TchapUrls from "../../../../../../src/tchap/util/TchapUrls"; //:TCHAP: email-notification-setting-caption
+import TchapUIFeature from "~tchap-web/src/tchap/util/TchapUIFeature"; // :tchap: tchap-features-from-config
+import TchapUrls from "~tchap-web/src/tchap/util/TchapUrls"; //:TCHAP: email-notification-setting-caption
 
 // TODO: this "view" component still has far too much application logic in it,
 // which should be factored out to other files.

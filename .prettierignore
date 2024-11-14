@@ -34,8 +34,6 @@ package-lock.json
 #remove tchap files from prettier
 patches/
 patches_legacy/
-yarn-linked-dependencies/
-linked-dependencies/
 .github/
 res/
 scripts/tchap

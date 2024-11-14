@@ -15,7 +15,7 @@ import withValidation, { IFieldState, IValidationResult } from "../elements/Vali
 import { _t, _td, TranslationKey } from "../../../languageHandler";
 import Field, { IInputProps } from "../elements/Field";
 import { MatrixClientPeg } from "../../../MatrixClientPeg";
-import TchapStrongPassword from "../../../../../../src/tchap/util/TchapStrongPassword";
+import TchapStrongPassword from "~tchap-web/src/tchap/util/TchapStrongPassword";
 
 interface IProps extends Omit<IInputProps, "onValidate" | "element"> {
     autoFocus?: boolean;

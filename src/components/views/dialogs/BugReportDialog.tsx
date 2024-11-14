@@ -24,7 +24,7 @@ import DialogButtons from "../elements/DialogButtons";
 import { sendSentryReport } from "../../../sentry";
 import defaultDispatcher from "../../../dispatcher/dispatcher";
 import { Action } from "../../../dispatcher/actions";
-import TchapUtils from "../../../../../../src/tchap/util/TchapUtils"; // :TCHAP:
+import TchapUtils from "~tchap-web/src/tchap/util/TchapUtils"; // :TCHAP:
 import { getBrowserSupport } from "../../../SupportedBrowser";
 
 interface IProps {

@@ -1,12 +1,12 @@
 import { IncomingRoomKeyRequest, verificationMethods } from "matrix-js-sdk/src/crypto";
-import VerificationRequestDialog from "matrix-react-sdk/src/components/views/dialogs/VerificationRequestDialog";
-import Modal from "matrix-react-sdk/src/Modal";
-import { hideToast as hideUnverifiedSessionsToast } from "matrix-react-sdk/src/toasts/UnverifiedSessionToast";
+import VerificationRequestDialog from "~tchap-web/src/components/views/dialogs/VerificationRequestDialog";
+import Modal from "~tchap-web/src/Modal";
+import { hideToast as hideUnverifiedSessionsToast } from "~tchap-web/src/toasts/UnverifiedSessionToast";
 
 /**
 @deprecated
 * :tchap: inspired from
- * https://github.com/matrix-org/matrix-react-sdk/blob/515304d32ebcfee403791c6f4f11a5ecc29e9e65/src/KeyRequestHandler.js
+ * https://github.com/matrix-org/~tchap-web/blob/515304d32ebcfee403791c6f4f11a5ecc29e9e65/src/KeyRequestHandler.js
  
 
 This class was used in MatrixChat 

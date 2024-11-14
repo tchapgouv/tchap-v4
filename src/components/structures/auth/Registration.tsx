@@ -48,10 +48,10 @@ import { ValidatedServerConfig } from "../../../utils/ValidatedServerConfig";
 import { Features } from "../../../settings/Settings";
 import { startOidcLogin } from "../../../utils/oidc/authorize";
 
-import TchapUtils from '../../../../../../src/tchap/util/TchapUtils'; // :TCHAP: registration-for-mainlining
-import TchapUIFeature from "../../../../../../src/tchap/util/TchapUIFeature"; // :TCHAP: sso-agentconnect-flow
-import ProconnectButton from "../../../../../../src/tchap/components/views/sso/ProconnectButton"; // :TCHAP: sso-agentconnect-flow
-import TchapUrls from "../../../../../../src/tchap/util/TchapUrls";
+import TchapUtils from '~tchap-web/src/tchap/util/TchapUtils'; // :TCHAP: registration-for-mainlining
+import TchapUIFeature from "~tchap-web/src/tchap/util/TchapUIFeature"; // :TCHAP: sso-agentconnect-flow
+import ProconnectButton from "~tchap-web/src/tchap/components/views/sso/ProconnectButton"; // :TCHAP: sso-agentconnect-flow
+import TchapUrls from "~tchap-web/src/tchap/util/TchapUrls";
 
 const debuglog = (...args: any[]): void => {
     if (SettingsStore.getValue("debug_registration")) {

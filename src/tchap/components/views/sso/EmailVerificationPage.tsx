@@ -15,23 +15,23 @@ limitations under the License.
 */
 
 import React, { useState, useRef } from "react";
-import { _t, _td } from "matrix-react-sdk/src/languageHandler";
+import { _t, _td } from "~tchap-web/src/languageHandler";
 
-import AuthPage from "matrix-react-sdk/src/components/views/auth/AuthPage";
-import AuthBody from "matrix-react-sdk/src/components/views/auth/AuthBody";
-import AuthHeader from "matrix-react-sdk/src/components/views/auth/AuthHeader";
-import EmailField from "matrix-react-sdk/src/components/views/auth/EmailField";
-import Field from "matrix-react-sdk/src/components/views/elements/Field";
-import Spinner from "matrix-react-sdk/src/components/views/elements/Spinner";
-import AccessibleButton, { ButtonEvent } from "matrix-react-sdk/src/components/views/elements/AccessibleButton";
-import PlatformPeg from "matrix-react-sdk/src/PlatformPeg";
+import AuthPage from "~tchap-web/src/components/views/auth/AuthPage";
+import AuthBody from "~tchap-web/src/components/views/auth/AuthBody";
+import AuthHeader from "~tchap-web/src/components/views/auth/AuthHeader";
+import EmailField from "~tchap-web/src/components/views/auth/EmailField";
+import Field from "~tchap-web/src/components/views/elements/Field";
+import Spinner from "~tchap-web/src/components/views/elements/Spinner";
+import AccessibleButton, { ButtonEvent } from "~tchap-web/src/components/views/elements/AccessibleButton";
+import PlatformPeg from "~tchap-web/src/PlatformPeg";
 
-import { ErrorMessage } from "matrix-react-sdk/src/components/structures/ErrorMessage";
+import { ErrorMessage } from "~tchap-web/src/components/structures/ErrorMessage";
 import { SSOAction } from "matrix-js-sdk/src/matrix";
-import Login from "matrix-react-sdk/src/Login";
+import Login from "~tchap-web/src/Login";
 import TchapUtils from "../../../util/TchapUtils";
-import { ValidatedServerConfig } from "matrix-react-sdk/src/utils/ValidatedServerConfig";
-import * as Email from "matrix-react-sdk/src/email";
+import { ValidatedServerConfig } from "~tchap-web/src/utils/ValidatedServerConfig";
+import * as Email from "~tchap-web/src/email";
 import "../../../../../res/css/views/sso/TchapSSO.pcss";
 
 export default function EmailVerificationPage() {

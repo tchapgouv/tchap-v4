@@ -21,7 +21,7 @@ import SdkConfig from "../SdkConfig";
 import { UseCase } from "../settings/enums/UseCase";
 import { useSettingValue } from "./useSettings";
 import { UserOnboardingContext } from "./useUserOnboardingContext";
-import TchapUrls from "../../../../src/tchap/util/TchapUrls"; // :TCHAP: onboarding-add-tchap-guide
+import TchapUrls from "~tchap-web/src/tchap/util/TchapUrls"; // :TCHAP: onboarding-add-tchap-guide
 
 interface UserOnboardingTask {
     id: string;

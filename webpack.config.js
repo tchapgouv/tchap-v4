@@ -226,6 +226,9 @@ module.exports = (env, argv) => {
 
                 // Define a variable so the i18n stuff can load
                 "$webapp": path.resolve(__dirname, "webapp"),
+
+                // :TCHAP:
+                "~tchap-web": path.resolve(__dirname, ".")
             },
             fallback: {
                 // Mock out the NodeFS module: The opus decoder imports this wrongly.

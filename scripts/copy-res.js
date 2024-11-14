@@ -31,7 +31,7 @@ const COPY_LIST = [
     ["res/themes/**", "webapp/themes"],
     ["res/vector-icons/**", "webapp/vector-icons"],
     ["res/decoder-ring/**", "webapp/decoder-ring"],
-    ["node_modules/matrix-react-sdk/res/media/**", "webapp/media"],
+    ["res/media/**", "webapp/media"],
     ["node_modules/@matrix-org/olm/olm_legacy.js", "webapp", { directwatch: 1 }],
     ["./config.json", "webapp", { directwatch: 1 }],
     ["contribute.json", "webapp"],
@@ -114,20 +114,17 @@ function next(i, err) {
 }
 
 function genLangFile(lang, dest) {
-    const reactSdkFile = "node_modules/matrix-react-sdk/src/i18n/strings/" + lang + ".json";
     const riotWebFile = "src/i18n/strings/" + lang + ".json";
 
     const translations = {};
-    [reactSdkFile, riotWebFile].forEach(function (f) {
-        if (fs.existsSync(f)) {
-            try {
-                Object.assign(translations, JSON.parse(fs.readFileSync(f).toString()));
-            } catch (e) {
-                console.error("Failed: " + f, e);
-                throw e;
-            }
+    if (fs.existsSync(riotWebFile)) {
+        try {
+            Object.assign(translations, JSON.parse(fs.readFileSync(riotWebFile).toString()));
+        } catch (e) {
+            console.error("Failed: " + riotWebFile, e);
+            throw e;
         }
-    });
+    }
 
     const json = JSON.stringify(translations, null, 4);
     const jsonBuffer = Buffer.from(json);

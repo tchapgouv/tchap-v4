@@ -448,7 +448,7 @@ export default class PasswordLogin extends React.PureComponent<IProps, IState> {
                                 onMouseUp={() => this.setDisplayPassword(false)}
                             >
                                 <img
-                                    src={require("../../../../../../res/img/grey-eye.svg").default}
+                                    src={require("~tchap-web/res/img/grey-eye.svg").default}
                                     width="24"
                                     height="24"
                                     alt={_t("Eye")}

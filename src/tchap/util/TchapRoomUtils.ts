@@ -3,7 +3,7 @@
  */
 
 import { EventTimeline, EventType, Room } from "matrix-js-sdk/src/matrix";
-import { MatrixClientPeg } from "matrix-react-sdk/src/MatrixClientPeg";
+import { MatrixClientPeg } from "~tchap-web/src/MatrixClientPeg";
 
 import { TchapRoomAccessRule, TchapRoomAccessRulesEventId, TchapRoomType } from "../@types/tchap";
 import { GuestAccess, JoinRule } from "matrix-js-sdk/src/matrix";

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import LabelledToggleSwitch from 'matrix-react-sdk/src/components/views/elements/LabelledToggleSwitch';
-import SettingsSubsection from 'matrix-react-sdk/src/components/views/settings/shared/SettingsSubsection';
-import { _t } from "matrix-react-sdk/src/languageHandler";
+import LabelledToggleSwitch from '~tchap-web/src/components/views/elements/LabelledToggleSwitch';
+import SettingsSubsection from '~tchap-web/src/components/views/settings/shared/SettingsSubsection';
+import { _t } from "~tchap-web/src/languageHandler";
 import TchapUtils from '../../../../../util/TchapUtils';
-import ToggleSwitch from 'matrix-react-sdk/src/components/views/elements/ToggleSwitch';
+import ToggleSwitch from '~tchap-web/src/components/views/elements/ToggleSwitch';
 
 interface TchapRedListSettingsProps {
 }
