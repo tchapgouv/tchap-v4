@@ -11,9 +11,10 @@ import React from "react";
 import InlineSpinner from "../elements/InlineSpinner";
 import { _t } from "../../../languageHandler";
 import RecordingPlayback from "../audio_messages/RecordingPlayback";
-import MAudioBody from "../../../../../../src/tchap/components/views/messages/OriginalAudioBody"; // :TCHAP: content-scanner
-import MFileBody from "../../../../../../src/tchap/components/views/messages/OriginalFileBody"; // :TCHAP: content-scanner
 import MediaProcessingError from "./shared/MediaProcessingError";
+
+import MAudioBody from "~tchap-web/src/tchap/components/views/messages/OriginalAudioBody"; // :TCHAP: content-scanner
+import MFileBody from "~tchap-web/src/tchap/components/views/messages/OriginalFileBody"; // :TCHAP: content-scanner
 
 export default class MVoiceMessageBody extends MAudioBody {
     // A voice message is an audio file but rendered in a special way.

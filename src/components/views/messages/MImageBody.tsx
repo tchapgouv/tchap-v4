@@ -16,7 +16,6 @@ import { ClientEvent } from "matrix-js-sdk/src/matrix";
 import { ImageContent } from "matrix-js-sdk/src/types";
 import { Tooltip } from "@vector-im/compound-web";
 
-import MFileBody from "../../../../../../src/tchap/components/views/messages/OriginalFileBody"; // :TCHAP: content-scanner
 import Modal from "../../../Modal";
 import { _t } from "../../../languageHandler";
 import SettingsStore from "../../../settings/SettingsStore";
@@ -33,6 +32,8 @@ import { presentableTextForFile } from "../../../utils/FileUtils";
 import { createReconnectedListener } from "../../../utils/connection";
 import MediaProcessingError from "./shared/MediaProcessingError";
 import { DecryptError, DownloadError } from "../../../utils/DecryptFile";
+
+import MFileBody from "~tchap-web/src/tchap/components/views/messages/OriginalFileBody"; // :TCHAP: content-scanner
 
 enum Placeholder {
     NoImage,

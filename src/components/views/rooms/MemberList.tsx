@@ -49,7 +49,7 @@ import { SDKContext } from "../../../contexts/SDKContext";
 import { canInviteTo } from "../../../utils/room/canInviteTo";
 import { inviteToRoom } from "../../../utils/room/inviteToRoom";
 import { Action } from "../../../dispatcher/actions";
-import TchapExportMembersButton from "../../../../../../src/tchap/components/views/rooms/TchapExportMembersButton"; // :TCHAP: export-room-members
+import TchapExportMembersButton from "~tchap-web/src/tchap/components/views/rooms/TchapExportMembersButton"; // :TCHAP: export-room-members
 
 const INITIAL_LOAD_NUM_MEMBERS = 30;
 const INITIAL_LOAD_NUM_INVITED = 5;

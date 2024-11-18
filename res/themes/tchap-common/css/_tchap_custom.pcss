@@ -78,3 +78,15 @@
 .mx_CompleteSecurityBody {
     width: 726px;
 }
+
+
+/* tchap legacy call bytton*/
+.mx_LegacyCallEvent_wrapper {
+    .mx_LegacyCallEvent {
+      &.mx_LegacyCallEvent_voice {
+        .mx_LegacyCallEvent_content_button_reportBug span::before {
+          mask-image: url("$(res)/img/element-icons/warning-badge.svg");
+       }
+      }
+    }
+  }

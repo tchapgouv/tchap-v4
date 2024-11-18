@@ -15,7 +15,7 @@ import { Playback } from "../../../audio/Playback";
 import InlineSpinner from "../elements/InlineSpinner";
 import { _t } from "../../../languageHandler";
 import AudioPlayer from "../audio_messages/AudioPlayer";
-import MFileBody from "../../../../../../src/tchap/components/views/messages/OriginalFileBody"; // :TCHAP: content-scanner
+import MFileBody from "~tchap-web/src/tchap/components/views/messages/OriginalFileBody"; // :TCHAP: content-scanner
 // import MFileBody from "./MFileBody";// :TCHAP: content-scanner
 import { IBodyProps } from "./IBodyProps";
 import { PlaybackManager } from "../../../audio/PlaybackManager";

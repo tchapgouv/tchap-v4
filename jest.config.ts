@@ -50,10 +50,10 @@ const config: Config = {
         "^fetch-mock$": "<rootDir>/node_modules/fetch-mock",
         // :TCHAP:
         "MImageBody": "<rootDir>/src/tchap/customisations/components/views/messages/ContentScanningImageBody.tsx",
-        "../../../../../../src/tchap/components/views/messages/OriginalFileBody":
+        "<rootDir>/src/tchap/components/views/messages/OriginalFileBody":
             "<rootDir>/node_modules/matrix-react-sdk/src/components/views/messages/MImageBody.tsx",
         "MAudioBody": "<rootDir>/src/tchap/customisations/components/views/messages/ContentScanningAudioBody.tsx",
-        "../../../../../../src/tchap/components/views/messages/OriginalAudioBody":
+        "<rootDir>/src/tchap/components/views/messages/OriginalAudioBody":
             "<rootDir>/node_modules/matrix-react-sdk/src/components/views/messages/MAudioBody.tsx",
         "MStickerBody": "<rootDir>/src/tchap/customisations/components/views/messages/ContentScanningStickerBody.tsx",
         "~tchap-web/(.*)": "<rootDir>/$1",

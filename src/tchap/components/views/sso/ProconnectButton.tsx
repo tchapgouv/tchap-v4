@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../../../../../res/css/views/sso/TchapSSO.pcss";
+import "~tchap-web/res/css/views/sso/TchapSSO.pcss";
 import { _t } from "~tchap-web/src/languageHandler";
 
 export default function ProconnectButton(): JSX.Element {

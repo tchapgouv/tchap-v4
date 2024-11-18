@@ -17,10 +17,11 @@ import InlineSpinner from "../elements/InlineSpinner";
 import { mediaFromContent } from "../../../customisations/Media";
 import { BLURHASH_FIELD } from "../../../utils/image-media";
 import { IBodyProps } from "./IBodyProps";
-import MFileBody from "../../../../../../src/tchap/components/views/messages/OriginalFileBody"; // :TCHAP: content-scanner
 import { ImageSize, suggestedSize as suggestedVideoSize } from "../../../settings/enums/ImageSize";
 import RoomContext, { TimelineRenderingType } from "../../../contexts/RoomContext";
 import MediaProcessingError from "./shared/MediaProcessingError";
+
+import MFileBody from "~tchap-web/src/tchap/components/views/messages/OriginalFileBody"; // :TCHAP: content-scanner
 
 interface IState {
     decryptedUrl: string | null;

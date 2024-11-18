@@ -53,6 +53,10 @@ import { MainSplitContentType } from "../../structures/RoomView";
 import defaultDispatcher from "../../../dispatcher/dispatcher.ts";
 import { RoomSettingsTab } from "../dialogs/RoomSettingsDialog.tsx";
 
+import TchapUIFeature from "~tchap-web/src/tchap/util/TchapUIFeature"; // :TCHAP: customize-room-header-bar
+import TchapExternalRoomHeader from "~tchap-web/src/tchap/components/views/rooms/TchapExternalRoomHeader"; // :TCHAP: customize-room-header-bar
+import DecoratedRoomAvatar from "../avatars/DecoratedRoomAvatar"; // :TCHAP: customize-room-header-bar
+
 export default function RoomHeader({
     room,
     additionalButtons,
@@ -243,8 +247,9 @@ export default function RoomHeader({
     return (
         <>
             <Flex as="header" align="center" gap="var(--cpd-space-3x)" className="mx_RoomHeader light-panel">
-                <WithPresenceIndicator room={room} size="8px">
-                    {/* We hide this from the tabIndex list as it is a pointer shortcut and superfluous for a11y */}
+                {/* :TCHAP: customize-room-header-bar - RoomAvatar -> DecoratedRoomAvatar */}
+                {/* <WithPresenceIndicator room={room} size="8px">
+                    {/* We hide this from the tabIndex list as it is a pointer shortcut and superfluous for a11y
                     <RoomAvatar
                         room={room}
                         size="40px"
@@ -253,7 +258,12 @@ export default function RoomHeader({
                         tabIndex={-1}
                         aria-label={_t("room|header_avatar_open_settings_label")}
                     />
-                </WithPresenceIndicator>
+                </WithPresenceIndicator> */}
+                <DecoratedRoomAvatar room={room} size="40px" />
+                {/* end :TCHAP: */}
+                {/* :tchap: customize-room-header-bar - Add external caption when room is open to external */}
+                <TchapExternalRoomHeader room={room}></TchapExternalRoomHeader>
+                {/* :tchap: end */}
                 <button
                     aria-label={_t("right_panel|room_summary_card|title")}
                     tabIndex={0}
@@ -272,7 +282,8 @@ export default function RoomHeader({
                         >
                             <span className="mx_RoomHeader_truncated mx_lineClamp">{roomName}</span>
 
-                            {!isDirectMessage && joinRule === JoinRule.Public && (
+                            {/* :tchap: customize-room-header-bar - remove public forum icon
+                            {!isDirectMessage && joinRule === JoinRule.Publicc && (
                                 <Tooltip label={_t("common|public_room")} placement="right">
                                     <PublicIcon
                                         width="16px"
@@ -282,7 +293,9 @@ export default function RoomHeader({
                                     />
                                 </Tooltip>
                             )}
+                            */}
 
+                            {/* :tchap: customize-room-header-bar - do not show e2eStatus
                             {isDirectMessage && e2eStatus === E2EStatus.Verified && (
                                 <Tooltip label={_t("common|verified")} placement="right">
                                     <VerifiedIcon
@@ -293,7 +306,9 @@ export default function RoomHeader({
                                     />
                                 </Tooltip>
                             )}
+                            */}
 
+                            {/* :tchap: customize-room-header-bar - do not show E2EStatus.Warning
                             {isDirectMessage && e2eStatus === E2EStatus.Warning && (
                                 <Tooltip label={_t("room|header_untrusted_label")} placement="right">
                                     <ErrorIcon
@@ -304,6 +319,7 @@ export default function RoomHeader({
                                     />
                                 </Tooltip>
                             )}
+                            */}
                         </BodyText>
                     </Box>
                 </button>
@@ -332,8 +348,22 @@ export default function RoomHeader({
                         joinCallButton
                     ) : (
                         <>
+                            { /* :TCHAP: customize-room-header-bar - activate video call only if directmessage and if feature is activated on homeserver }
                             {!isVideoRoom && videoCallButton}
-                            {!useElementCallExclusively && !isVideoRoom && voiceCallButton}
+                            */ }
+                            {!isDirectMessage && TchapUIFeature.isFeatureActiveForHomeserver("feature_video_group_call") &&
+                              !isVideoRoom && videoCallButton}
+
+                            {isDirectMessage && TchapUIFeature.isFeatureActiveForHomeserver("feature_video_call") &&
+                              !isVideoRoom && videoCallButton}
+                            {/* end :TCHAP: */}
+
+                            { /* :TCHAP: customize-room-header-bar - activate audio call only if directmessage and if feature is activated on homeserver
+                            {!useElementCallExclusively && !isVideoRoom(room) && voiceCallButton}
+                            */ }
+                            {isDirectMessage && TchapUIFeature.isFeatureActiveForHomeserver("feature_audio_call") &&
+                              !useElementCallExclusively && !isVideoRoom && voiceCallButton}
+                            {/* end :TCHAP: */}
                         </>
                     )}
 
@@ -351,6 +381,8 @@ export default function RoomHeader({
 
                     {showChatButton && <VideoRoomChatButton room={room} />}
 
+                    {/* :TCHAP: extend-remove-thread-buttons <Tooltip label={_t("common|threads")}>
+
                     <Tooltip label={_t("common|threads")}>
                         <IconButton
                             indicator={notificationLevelToIndicator(threadNotifications)}
@@ -363,7 +395,25 @@ export default function RoomHeader({
                         >
                             <ThreadsIcon />
                         </IconButton>
-                    </Tooltip>
+                    </Tooltip> */}
+                    {
+                        TchapUIFeature.isFeatureActiveForHomeserver("feature_thread") ?
+                            <Tooltip label={_t("common|threads")} data-testid="room-header-thread-button">
+                                <IconButton
+                                    indicator={notificationLevelToIndicator(threadNotifications)}
+                                    onClick={(evt) => {
+                                        evt.stopPropagation();
+                                        RightPanelStore.instance.showOrHidePhase(RightPanelPhases.ThreadPanel);
+                                        PosthogTrackers.trackInteraction("WebRoomHeaderButtonsThreadsButton", evt);
+                                    }}
+                                    aria-label={_t("common|threads")}
+                                >
+                                    <ThreadsIcon />
+                                </IconButton>
+                            </Tooltip>
+                        : null
+                    }
+                    {/* end :TCHAP: */}
                     {notificationsEnabled && (
                         <Tooltip label={_t("notifications|enable_prompt_toast_title")}>
                             <IconButton

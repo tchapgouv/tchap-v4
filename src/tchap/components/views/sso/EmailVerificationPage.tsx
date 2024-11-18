@@ -32,7 +32,7 @@ import Login from "~tchap-web/src/Login";
 import TchapUtils from "../../../util/TchapUtils";
 import { ValidatedServerConfig } from "~tchap-web/src/utils/ValidatedServerConfig";
 import * as Email from "~tchap-web/src/email";
-import "../../../../../res/css/views/sso/TchapSSO.pcss";
+import "~tchap-web/res/css/views/sso/TchapSSO.pcss";
 
 export default function EmailVerificationPage() {
 

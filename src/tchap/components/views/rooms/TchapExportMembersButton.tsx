@@ -9,9 +9,9 @@ import AccessibleButton from "~tchap-web/src/components/views/elements/Accessibl
 import { ButtonEvent } from "~tchap-web/src/components/views/elements/AccessibleButton";
 import { Room } from "matrix-js-sdk/src/models/room";
 import { _t } from "~tchap-web/src/languageHandler";
-import { Icon as UserExportIcon } from "../../../../../res/img/tchap/user-export.svg";
+import { Icon as UserExportIcon } from "~tchap-web/res/img/tchap/user-export.svg";
 
-import "../../../../../res/css/views/rooms/TchapExportMembersButton.pcss";
+import "~tchap-web/res/css/views/rooms/TchapExportMembersButton.pcss";
 
 interface IProps {
   room: Room;
