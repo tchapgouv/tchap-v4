@@ -17,8 +17,8 @@ import {
     SyncState,
     SyncStateData,
 } from "matrix-js-sdk/src/matrix";
-
 import { WarningIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
+
 import { _t, _td } from "../../languageHandler";
 import Resend from "../../Resend";
 import dis from "../../dispatcher/dispatcher";
@@ -30,6 +30,7 @@ import InlineSpinner from "../views/elements/InlineSpinner";
 import MatrixClientContext from "../../contexts/MatrixClientContext";
 import { RoomStatusBarUnsentMessages } from "./RoomStatusBarUnsentMessages";
 import ExternalLink from "../views/elements/ExternalLink";
+
 import Tchapi18nUtils from '~tchap-web/src/tchap/i18n/Tchapi18nUtils'; // :TCHAP: error-tchap-is-down
 
 const STATUS_BAR_HIDDEN = 0;

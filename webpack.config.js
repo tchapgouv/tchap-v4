@@ -381,6 +381,8 @@ module.exports = (env, argv) => {
                         },
                     ],
                 },
+                // :TCHAP: we still use olm for the content scanner
+                // https://github.com/tchapgouv/tchap-web-v4/issues/1138
                 {
                     // the olm library wants to load its own wasm, rather than have webpack do it.
                     // We therefore use the `file-loader` to tell webpack to dump the contents to
@@ -395,6 +397,7 @@ module.exports = (env, argv) => {
                         outputPath: ".",
                     },
                 },
+                // end :TCHAP:
                 {
                     // Fix up the name of the opus-recorder worker (react-sdk dependency).
                     // We more or less just want it to be clear it's for opus and not something else.
@@ -436,8 +439,11 @@ module.exports = (env, argv) => {
                     },
                 },
                 {
-                    // Same deal as olm.wasm: the decoderWorker wants to load the wasm artifact
-                    // itself.
+                    // The decoderWorker wants to load its own wasm, rather than have webpack do it.
+                    // We therefore use the `file-loader` to tell webpack to dump the contents to
+                    // a separate file and return the name, and override the default `type` for `.wasm` files
+                    // (which is `webassembly/experimental` under webpack 4) to stop webpack trying to interpret
+                    // the filename as webassembly. (see also https://github.com/webpack/webpack/issues/6725)
                     test: /decoderWorker\.min\.wasm$/,
                     loader: "file-loader",
                     type: "javascript/auto",
@@ -764,6 +770,7 @@ function getAssetOutputPath(url, resourcePath) {
     // `res` is the parent dir for our own assets in various layers
     // `dist` is the parent dir for KaTeX assets
     const prefix = /^.*[/\\](dist|res)[/\\]/;
+
     /**
      * Only needed for https://github.com/element-hq/element-web/pull/15939
      * If keeping this, we are not able to load external assets such as SVG

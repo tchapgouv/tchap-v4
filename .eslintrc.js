@@ -169,7 +169,7 @@ module.exports = {
         "jsx-a11y/no-static-element-interactions": "off",
         "jsx-a11y/role-supports-aria-props": "off",
 
-        "matrix-org/require-copyright-header": "error",
+        // "matrix-org/require-copyright-header": "error", // :TCHAP:
     },
     overrides: [
         {
