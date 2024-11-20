@@ -1,5 +1,5 @@
 import { HttpApiEvent } from "matrix-js-sdk/src/matrix";
-import { defaultDispatcher, MatrixDispatcher } from "~tchap-web/src/dispatcher/dispatcher";
+import defaultDispatcher, { MatrixDispatcher } from "~tchap-web/src/dispatcher/dispatcher";
 import { ActionPayload } from "~tchap-web/src/dispatcher/payloads";
 import { stopMatrixClient } from "~tchap-web/src/Lifecycle";
 import { MatrixClientPeg } from "~tchap-web/src/MatrixClientPeg";

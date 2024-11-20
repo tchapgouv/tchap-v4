@@ -49,7 +49,7 @@ export default class TchapCreateRoomDialog extends React.Component<IProps, IStat
     private nameField = createRef<Field>();
     private readonly createRoomInSpace: boolean;
 
-    public constructor(props) {
+    public constructor(props: IProps) {
         super(props);
         this.createRoomInSpace = !!this.props.parentSpace;
 
@@ -66,7 +66,7 @@ export default class TchapCreateRoomDialog extends React.Component<IProps, IStat
 
     componentDidMount() {
         // move focus to first field when showing dialog
-        this.nameField.current.focus();
+        this.nameField?.current.focus();
     }
 
     private onCancel = () => {
@@ -157,7 +157,7 @@ export default class TchapCreateRoomDialog extends React.Component<IProps, IStat
         return (
             <BaseDialog
                 className="tc_TchapCreateRoomDialog"
-                onFinished={this.props.onFinished}
+                onFinished={this.onOk}
                 title={title}
                 screenName="CreateRoom"
             >

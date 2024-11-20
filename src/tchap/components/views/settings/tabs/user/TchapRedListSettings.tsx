@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import LabelledToggleSwitch from '~tchap-web/src/components/views/elements/LabelledToggleSwitch';
-import SettingsSubsection from '~tchap-web/src/components/views/settings/shared/SettingsSubsection';
+import { SettingsSubsection } from '~tchap-web/src/components/views/settings/shared/SettingsSubsection';
 import { _t } from "~tchap-web/src/languageHandler";
 import TchapUtils from '../../../../../util/TchapUtils';
 import ToggleSwitch from '~tchap-web/src/components/views/elements/ToggleSwitch';

@@ -149,7 +149,6 @@ export default class CreateSecretStorageDialog extends React.PureComponent<IProp
         }
     }
 
-<<<<<<< HEAD
     /**
      * Attempt to get information on the current backup from the server, and update the state.
      *
@@ -206,14 +205,14 @@ export default class CreateSecretStorageDialog extends React.PureComponent<IProp
             this.setState({ phase: Phase.LoadError });
             return undefined;
         }
-=======
+    }
+
     private initExtension(keyFromCustomisations: Uint8Array): void {
         logger.log("CryptoSetupExtension: Created key via extension, jumping to bootstrap step");
         this.recoveryKey = {
             privateKey: keyFromCustomisations,
         };
         this.bootstrapSecretStorage();
->>>>>>> v1.11.86
     }
 
     private async queryKeyUploadAuth(): Promise<void> {
