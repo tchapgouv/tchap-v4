@@ -234,10 +234,10 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
     private prevWindowWidth: number;
     private voiceBroadcastResumer?: VoiceBroadcastResumer;
 
-    private readonly loggedInView: React.RefObject<LoggedInViewType>;
-    private readonly dispatcherRef: string;
-    private readonly themeWatcher: ThemeWatcher;
-    private readonly fontWatcher: FontWatcher;
+    private readonly loggedInView = createRef<LoggedInViewType>();
+    private dispatcherRef?: string;
+    private themeWatcher?: ThemeWatcher;
+    private fontWatcher?: FontWatcher;
     private readonly stores: SdkContextClass;
 
     public constructor(props: IProps) {
@@ -258,8 +258,6 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
             resizeNotifier: new ResizeNotifier(),
             ready: false,
         };
-
-        this.loggedInView = createRef();
 
         SdkConfig.put(this.props.config);
 
@@ -285,32 +283,10 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
         }
 
         this.prevWindowWidth = UIStore.instance.windowWidth || 1000;
-        UIStore.instance.on(UI_EVENTS.Resize, this.handleResize);
-
-        // For PersistentElement
-        this.state.resizeNotifier.on("middlePanelResized", this.dispatchTimelineResize);
-
-        RoomNotificationStateStore.instance.on(UPDATE_STATUS_INDICATOR, this.onUpdateStatusIndicator);
-
-        this.dispatcherRef = dis.register(this.onAction);
-
-        this.themeWatcher = new ThemeWatcher();
-        this.fontWatcher = new FontWatcher();
-        this.themeWatcher.start();
-        this.fontWatcher.start();
 
         // object field used for tracking the status info appended to the title tag.
         // we don't do it as react state as i'm scared about triggering needless react refreshes.
         this.subTitleStatus = "";
-
-        initSentry(SdkConfig.get("sentry"));
-
-        if (!checkSessionLockFree()) {
-            // another instance holds the lock; confirm its theft before proceeding
-            setTimeout(() => this.setState({ view: Views.CONFIRM_LOCK_THEFT }), 0);
-        } else {
-            this.startInitSession();
-        }
     }
 
     /**
@@ -479,6 +455,29 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
     }
 
     public componentDidMount(): void {
+        UIStore.instance.on(UI_EVENTS.Resize, this.handleResize);
+
+        // For PersistentElement
+        this.state.resizeNotifier.on("middlePanelResized", this.dispatchTimelineResize);
+
+        RoomNotificationStateStore.instance.on(UPDATE_STATUS_INDICATOR, this.onUpdateStatusIndicator);
+
+        this.dispatcherRef = dis.register(this.onAction);
+
+        this.themeWatcher = new ThemeWatcher();
+        this.fontWatcher = new FontWatcher();
+        this.themeWatcher.start();
+        this.fontWatcher.start();
+
+        initSentry(SdkConfig.get("sentry"));
+
+        if (!checkSessionLockFree()) {
+            // another instance holds the lock; confirm its theft before proceeding
+            setTimeout(() => this.setState({ view: Views.CONFIRM_LOCK_THEFT }), 0);
+        } else {
+            this.startInitSession();
+        }
+
         window.addEventListener("resize", this.onWindowResized);
     }
 
@@ -500,8 +499,8 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
     public componentWillUnmount(): void {
         Lifecycle.stopMatrixClient();
         dis.unregister(this.dispatcherRef);
-        this.themeWatcher.stop();
-        this.fontWatcher.stop();
+        this.themeWatcher?.stop();
+        this.fontWatcher?.stop();
         UIStore.destroy();
         this.state.resizeNotifier.removeListener("middlePanelResized", this.dispatchTimelineResize);
         window.removeEventListener("resize", this.onWindowResized);
@@ -1023,7 +1022,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
 
         this.setStateForNewView(newState);
         ThemeController.isLogin = true;
-        this.themeWatcher.recheck();
+        this.themeWatcher?.recheck();
         this.notifyNewScreen(isMobileRegistration ? "mobile_register" : "register");
     }
 
@@ -1100,7 +1099,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
             },
             () => {
                 ThemeController.isLogin = false;
-                this.themeWatcher.recheck();
+                this.themeWatcher?.recheck();
                 this.notifyNewScreen("room/" + presentedId, replaceLast);
             },
         );
@@ -1125,7 +1124,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
         });
         this.notifyNewScreen("welcome");
         ThemeController.isLogin = true;
-        this.themeWatcher.recheck();
+        this.themeWatcher?.recheck();
     }
 
     private viewLogin(otherState?: any): void {
@@ -1135,7 +1134,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
         });
         this.notifyNewScreen("login");
         ThemeController.isLogin = true;
-        this.themeWatcher.recheck();
+        this.themeWatcher?.recheck();
     }
 
     // :TCHAP: sso-agentconnect-flow
@@ -1159,7 +1158,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
         this.setPage(PageType.HomePage);
         this.notifyNewScreen("home");
         ThemeController.isLogin = false;
-        this.themeWatcher.recheck();
+        this.themeWatcher?.recheck();
     }
 
     private viewUser(userId: string, subAction: string): void {
@@ -1380,7 +1379,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
      */
     private async onLoggedIn(): Promise<void> {
         ThemeController.isLogin = false;
-        this.themeWatcher.recheck();
+        this.themeWatcher?.recheck();
         StorageManager.tryPersistStorage();
 
         await this.onShowPostLoginScreen();

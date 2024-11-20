@@ -176,7 +176,7 @@ export default class MVideoBody extends React.PureComponent<IBodyProps, IState> 
     }
 
     public componentWillUnmount(): void {
-        if (this.sizeWatcher) SettingsStore.unwatchSetting(this.sizeWatcher);
+        SettingsStore.unwatchSetting(this.sizeWatcher);
     }
 
     private videoOnPlay = async (): Promise<void> => {
