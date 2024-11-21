@@ -29,11 +29,11 @@ jobs:
                   cache: "yarn"
                   node-version: ${{ steps.node_version.outputs.node_version }}
             - name: Install Dependencies
-              run: "./scripts/tchap/install-yarn-linked-repositories.sh"
+              run: "yarn install --pure-lockfile"
 
             - name: Get number of CPU cores
               id: cpu-cores
               uses: SimenB/github-actions-cpu-cores@97ba232459a8e02ff6121db9362b09661c875ab8 # v2
 
             - name: Run tests with coverage
-              run: "yarn coverage --ci"
+              run: "yarn coverage:tchap --ci"

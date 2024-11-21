@@ -1,9 +1,8 @@
 import React from "react";
-import { render, cleanup } from "@testing-library/react";
+import { render, cleanup } from "jest-matrix-react";
 import { MatrixClient } from "matrix-js-sdk/src/matrix";
 
-import { stubClient } from "~tchap-web/test/test-utils";
-import { wrapInMatrixClientContext, wrapInSdkContext } from "~tchap-web/test/test-utils";
+import { stubClient , wrapInMatrixClientContext, wrapInSdkContext } from "~tchap-web/test/test-utils";
 import { SdkContextClass } from "~tchap-web/src/contexts/SDKContext";
 import UnwrappedSpacePanel from "~tchap-web/src/components/views/spaces/SpacePanel";
 import SdkConfig, { ConfigOptions } from "~tchap-web/src/SdkConfig";

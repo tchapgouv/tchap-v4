@@ -1,10 +1,10 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "jest-matrix-react";
 import { MatrixClient } from "matrix-js-sdk/src/matrix";
 
-import UnwrappedUserMenu from "~matrix-react-sdk/src/components/structures/UserMenu";
-import { TestSdkContext } from "~matrix-react-sdk/test/TestSdkContext";
-import { stubClient, wrapInSdkContext } from "~matrix-react-sdk/test/test-utils";
+import UnwrappedUserMenu from "~tchap-web/src/components/structures/UserMenu";
+import { TestSdkContext } from "~tchap-web/test/unit-tests/TestSdkContext";
+import { stubClient, wrapInSdkContext } from "~tchap-web/test/test-utils";
 
 describe("<UserMenu>", () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

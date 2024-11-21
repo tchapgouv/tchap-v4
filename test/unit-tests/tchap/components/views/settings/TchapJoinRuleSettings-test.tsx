@@ -1,16 +1,16 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "jest-matrix-react";
 import { mocked } from "jest-mock";
+import { JoinRule, MatrixClient, Room } from "matrix-js-sdk/src/matrix";
+
+import TchapJoinRuleSettings from "~tchap-web/src/tchap/components/views/settings/TchapJoinRuleSettings";
+import { TchapRoomAccessRule, TchapRoomAccessRulesEventId } from "~tchap-web/src/tchap/@types/tchap";
 import {
     createTestClient,
     mkStubRoom,
     mockStateEventImplementation,
     mkEvent,
-} from "matrix-react-sdk/test/test-utils/test-utils";
-import { JoinRule, MatrixClient, Room } from "matrix-js-sdk/src/matrix";
-
-import TchapJoinRuleSettings from "../../../../../../src/tchap/components/views/settings/TchapJoinRuleSettings";
-import { TchapRoomAccessRule, TchapRoomAccessRulesEventId } from "../../../../../../src/tchap/@types/tchap";
+} from "~tchap-web/test/test-utils/test-utils";
 
 function mkStubRoomWithInviteRule(roomId: string, name: string, client: MatrixClient, joinRule: JoinRule): Room {
     const stubRoom: Room = mkStubRoom(roomId, name, client);

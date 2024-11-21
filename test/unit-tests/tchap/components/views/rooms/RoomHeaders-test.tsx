@@ -1,15 +1,15 @@
 import React from "react";
 import { KnownMembership, PendingEventOrdering, Room } from "matrix-js-sdk/src/matrix";
-import { screen, render, RenderOptions, getByLabelText, queryByLabelText } from "@testing-library/react";
+import { screen, render, RenderOptions, getByLabelText, queryByLabelText } from "jest-matrix-react";
 
-import { mkRoomMember, stubClient } from "~matrix-react-sdk/test/test-utils";
-import RoomHeader from "~matrix-react-sdk/src/components/views/rooms/RoomHeader";
-import DMRoomMap from "~matrix-react-sdk/src/utils/DMRoomMap";
-import { MatrixClientPeg } from "~matrix-react-sdk/src/MatrixClientPeg";
-import MatrixClientContext from "~matrix-react-sdk/src/contexts/MatrixClientContext";
-import SdkConfig from "~matrix-react-sdk/src/SdkConfig";
-import SettingsStore from "~matrix-react-sdk/src/settings/SettingsStore";
-import { UIFeature } from "~matrix-react-sdk/src/settings/UIFeature";
+import { mkRoomMember, stubClient } from "~tchap-web/test/test-utils";
+import RoomHeader from "~tchap-web/src/components/views/rooms/RoomHeader";
+import DMRoomMap from "~tchap-web/src/utils/DMRoomMap";
+import { MatrixClientPeg } from "~tchap-web/src/MatrixClientPeg";
+import MatrixClientContext from "~tchap-web/src/contexts/MatrixClientContext";
+import SdkConfig from "~tchap-web/src/SdkConfig";
+import SettingsStore from "~tchap-web/src/settings/SettingsStore";
+import { UIFeature } from "~tchap-web/src/settings/UIFeature";
 
 function getWrapper(): RenderOptions {
     return {
