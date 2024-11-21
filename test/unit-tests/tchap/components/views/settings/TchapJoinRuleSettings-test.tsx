@@ -98,6 +98,7 @@ describe("TchapJoinRule", () => {
         expect(screen.queryByText(spaceText)).toBe(null);
     });
 
+    // eslint-disable-next-line jest/no-commented-out-tests
     /*
     Impossible to mock a room to be considered as Public from TchapJoinRuleSettings point of view
     it("should render the tchap join rule with only public option", () => {

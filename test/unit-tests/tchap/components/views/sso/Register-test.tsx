@@ -131,6 +131,7 @@ describe("<Register />", () => {
      * Will need to fix this mocked request and it should be good
      *
      */
+    // eslint-disable-next-line jest/no-commented-out-tests
     // it("returns proconnect button in register when the config include sso flow", async () => {
     //     addSSOFlowToMockConfig(true);
 

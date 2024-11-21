@@ -130,7 +130,7 @@ describe("InviteDialog", () => {
         // Type and enter
         await enterIntoSearchField(aliceUppercaseEmail);
 
-        // Because it has been transoformed to lowercase, it shoyld not be found in the document
+        // Because it has been transoformed to lowercase, it should not be found in the document
         expect(screen.queryByText(aliceUppercaseEmail)).not.toBeInTheDocument();
 
         expect(screen.queryByText(aliceEmail)).toBeInTheDocument();

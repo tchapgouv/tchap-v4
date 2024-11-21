@@ -801,7 +801,10 @@ export default class InviteDialog extends React.PureComponent<Props, IInviteDial
     };
 
     private updateFilter = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        const term = e.target.value;
+        // :TCHAP: lowercase-invite - const term = e.target.value;
+        const term = e.target.value?.toLowerCase();
+        // end :TCHAP:
+
         this.setState({ filterText: term });
 
         // Debounce server lookups to reduce spam. We don't clear the existing server
@@ -871,8 +874,9 @@ export default class InviteDialog extends React.PureComponent<Props, IInviteDial
             // paste normally.
             return;
         }
-
-        const text = e.clipboardData.getData("text");
+        // :TCHAP: lowercase-invite - const text = e.clipboardData.getData("text");
+        const text = e.clipboardData.getData("text")?.toLowerCase();
+        // end :TCHAP:
         const potentialAddresses = this.parseFilter(text);
         // one search term which is not a mxid or email address
         if (potentialAddresses.length === 1 && !potentialAddresses[0].includes("@")) {
