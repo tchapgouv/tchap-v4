@@ -1,5 +1,5 @@
 import React from "react";
-import { MatrixCall , CallState } from "matrix-js-sdk/src/webrtc/call";
+import { MatrixCall, CallState } from "matrix-js-sdk/src/webrtc/call";
 import { fireEvent, render, waitFor } from "jest-matrix-react";
 import { MatrixClient } from "matrix-js-sdk/src/matrix";
 

@@ -12,11 +12,7 @@ import {
 import { cleanup, fireEvent, render, screen } from "jest-matrix-react";
 
 import Notifications from "~tchap-web/src/components/views/settings/Notifications";
-import {
-    clearAllModals,
-    getMockClientWithEventEmitter,
-    mockClientMethodsUser,
-} from "~tchap-web/test/test-utils";
+import { clearAllModals, getMockClientWithEventEmitter, mockClientMethodsUser } from "~tchap-web/test/test-utils";
 import SdkConfig from "~tchap-web/src/SdkConfig";
 
 // don't pollute test output with error logs from mock rejections

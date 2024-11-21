@@ -228,7 +228,7 @@ module.exports = (env, argv) => {
                 "$webapp": path.resolve(__dirname, "webapp"),
 
                 // :TCHAP:
-                "~tchap-web": path.resolve(__dirname, ".")
+                "~tchap-web": path.resolve(__dirname, "."),
             },
             fallback: {
                 // Mock out the NodeFS module: The opus decoder imports this wrongly.

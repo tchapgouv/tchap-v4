@@ -37,8 +37,9 @@ patches_legacy/
 .github/
 res/
 scripts/tchap
-src/tchap/
 /docs/changelogs
+# ignore all the src files from the linter now that we merged with matrix-react-sdk
+src/
 
 # Legacy skinning file that some people might still have
 /src/component-index.js

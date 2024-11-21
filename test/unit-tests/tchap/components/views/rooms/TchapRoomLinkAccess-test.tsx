@@ -4,17 +4,13 @@ import { mocked } from "jest-mock";
 import { EventType, GuestAccess, JoinRule, MatrixClient, Room } from "matrix-js-sdk/src/matrix";
 import userEvent from "@testing-library/user-event";
 
-import {
-    flushPromises,
-    waitEnoughCyclesForModal,
-} from "../../../../../test-utils";
+import { flushPromises, waitEnoughCyclesForModal } from "../../../../../test-utils";
 
 import { mkStubRoom, stubClient } from "~tchap-web//test/test-utils/test-utils";
 import { makeRoomPermalink } from "~tchap-web//src/utils/permalinks/Permalinks";
 import TchapRoomLinkAccess from "~tchap-web//src/tchap/components/views/rooms/TchapRoomLinkAccess";
 import { TchapRoomType } from "~tchap-web//src/tchap/@types/tchap";
 import TchapRoomUtils from "~tchap-web/src/tchap/util/TchapRoomUtils";
-
 
 jest.mock("~tchap-web/src/tchap/util/TchapRoomUtils");
 jest.mock("~tchap-web//src/utils/permalinks/Permalinks");
