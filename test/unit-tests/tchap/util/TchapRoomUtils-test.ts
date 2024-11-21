@@ -4,7 +4,7 @@ import TchapRoomUtils from "~tchap-web/src/tchap/util/TchapRoomUtils";
 describe("Provides utils method to get room type and state", () => {
     beforeEach(() => {});
 
-    it("returns room type depending on encryption and access rule", (done) => {
+    it("returns room type depending on encryption and access rule", () => {
         expect(TchapRoomUtils.getTchapRoomTypeInternal(true, TchapRoomAccessRule.Restricted)).toStrictEqual(
             TchapRoomType.Private,
         );
@@ -13,6 +13,5 @@ describe("Provides utils method to get room type and state", () => {
         );
         expect(TchapRoomUtils.getTchapRoomTypeInternal(true, "any")).toStrictEqual(TchapRoomType.Unknown);
         expect(TchapRoomUtils.getTchapRoomTypeInternal(true, undefined)).toStrictEqual(TchapRoomType.Unknown);
-        done();
     });
 });

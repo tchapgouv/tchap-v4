@@ -83,7 +83,7 @@ describe("Rageshakes", () => {
             expect(appName).toBe("tchap-web");
         });
 
-        it("should include custom app name ", async () => {
+        it("should include custom app name", async () => {
             const formData = await collectBugReport({ customApp: "toto" });
             const appName = formData.get("app");
 

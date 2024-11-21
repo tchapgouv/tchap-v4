@@ -6,7 +6,7 @@ import TchapCreateRoom from "../../../../src/tchap/lib/createTchapRoom";
 describe("Create room options", () => {
     beforeEach(() => {});
 
-    it("builds option for private room", (done) => {
+    it("builds option for private room", () => {
         const privateRoomExpectedOpts = {
             createOpts: {
                 name: "testName",
@@ -33,10 +33,9 @@ describe("Create room options", () => {
         expect(TchapCreateRoom.roomCreateOptions("testName", TchapRoomType.Private)).toStrictEqual(
             privateRoomExpectedOpts,
         );
-        done();
     });
 
-    it("builds option for public room without federation", (done) => {
+    it("builds option for public room without federation", () => {
         const publicRoomWithoutFederationExpectedOpts = {
             createOpts: {
                 name: "testName",
@@ -63,10 +62,9 @@ describe("Create room options", () => {
         expect(TchapCreateRoom.roomCreateOptions("testName", TchapRoomType.Forum, false)).toStrictEqual(
             publicRoomWithoutFederationExpectedOpts,
         );
-        done();
     });
 
-    it("builds option for public room with federation", (done) => {
+    it("builds option for public room with federation", () => {
         const publicRoomWithFederationExpectedOpts = {
             createOpts: {
                 name: "testName",
@@ -93,10 +91,9 @@ describe("Create room options", () => {
         expect(TchapCreateRoom.roomCreateOptions("testName", TchapRoomType.Forum, true)).toStrictEqual(
             publicRoomWithFederationExpectedOpts,
         );
-        done();
     });
 
-    it("builds option for external room", (done) => {
+    it("builds option for external room", () => {
         const externalRoomExpectedOpts = {
             createOpts: {
                 name: "testName",
@@ -123,11 +120,5 @@ describe("Create room options", () => {
         expect(TchapCreateRoom.roomCreateOptions("testName", TchapRoomType.External)).toStrictEqual(
             externalRoomExpectedOpts,
         );
-        done();
-    });
-
-    it("handles wrong inputs", (done) => {
-        //todo
-        done();
     });
 });
