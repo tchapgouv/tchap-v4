@@ -44,6 +44,7 @@ import defaultDispatcher from "../../../dispatcher/dispatcher";
 import { Action } from "../../../dispatcher/actions";
 import { Filter } from "../dialogs/spotlight/Filter";
 import { OpenSpotlightPayload } from "../../../dispatcher/payloads/OpenSpotlightPayload.ts";
+import TchapUrls from "~tchap-web/src/tchap/util/TchapUrls"; // :TCHAP: space-remove-public-and-subspace
 
 export const createSpace = async (
     client: MatrixClient,
@@ -273,71 +274,111 @@ const SpaceCreateMenu: React.FC<{
     };
 
     let body;
-    if (visibility === null) {
-        body = (
-            <React.Fragment>
-                <h2>{_t("create_space|label")}</h2>
-                <p>{_t("create_space|explainer")}</p>
+    // :TCHAP: space-remove-public-and-subspace
+    // if (visibility === null) {
+    //     body = (
+    //         <React.Fragment>
+    //             <h2>{_t("create_space|label")}</h2>
+    //             <p>{_t("create_space|explainer")}</p>
 
-                <SpaceCreateMenuType
-                    title={_t("common|public")}
-                    description={_t("create_space|public_description")}
-                    className="mx_SpaceCreateMenuType_public"
-                    onClick={() => setVisibility(Visibility.Public)}
-                />
-                <SpaceCreateMenuType
-                    title={_t("common|private")}
-                    description={_t("create_space|private_description")}
-                    className="mx_SpaceCreateMenuType_private"
-                    onClick={() => setVisibility(Visibility.Private)}
-                />
+    //             <SpaceCreateMenuType
+    //                 title={_t("common|public")}
+    //                 description={_t("create_space|public_description")}
+    //                 className="mx_SpaceCreateMenuType_public"
+    //                 onClick={() => setVisibility(Visibility.Public)}
+    //             />
+    //             <SpaceCreateMenuType
+    //                 title={_t("common|private")}
+    //                 description={_t("create_space|private_description")}
+    //                 className="mx_SpaceCreateMenuType_private"
+    //                 onClick={() => setVisibility(Visibility.Private)}
+    //             />
 
-                {supportsSpaceFiltering && (
-                    <AccessibleButton kind="primary_outline" onClick={onSearchClick}>
-                        {_t("create_space|search_public_button")}
-                    </AccessibleButton>
-                )}
-            </React.Fragment>
-        );
-    } else {
-        body = (
-            <React.Fragment>
-                <AccessibleButton
-                    className="mx_SpaceCreateMenu_back"
-                    onClick={() => setVisibility(null)}
-                    title={_t("action|go_back")}
-                />
+    //             {supportsSpaceFiltering && (
+    //                 <AccessibleButton kind="primary_outline" onClick={onSearchClick}>
+    //                     {_t("create_space|search_public_button")}
+    //                 </AccessibleButton>
+    //             )}
+    //         </React.Fragment>
+    //     );
+    // } else {
+    //     body = (
+    //         <React.Fragment>
+    //             <AccessibleButton
+    //                 className="mx_SpaceCreateMenu_back"
+    //                 onClick={() => setVisibility(null)}
+    //                 title={_t("action|go_back")}
+    //             />
 
-                <h2>
-                    {visibility === Visibility.Public
-                        ? _t("create_space|public_heading")
-                        : _t("create_space|private_heading")}
-                </h2>
-                <p>
-                    {_t("create_space|add_details_prompt")} {_t("create_space|add_details_prompt_2")}
-                </p>
+    //             <h2>
+    //                 {visibility === Visibility.Public
+    //                     ? _t("create_space|public_heading")
+    //                     : _t("create_space|private_heading")}
+    //             </h2>
+    //             <p>
+    //                 {_t("create_space|add_details_prompt")} {_t("create_space|add_details_prompt_2")}
+    //             </p>
 
-                <SpaceCreateForm
-                    busy={busy}
-                    onSubmit={onSpaceCreateClick}
-                    setAvatar={setAvatar}
-                    name={name}
-                    setName={setName}
-                    nameFieldRef={spaceNameField}
-                    topic={topic}
-                    setTopic={setTopic}
-                    alias={alias}
-                    setAlias={setAlias}
-                    showAliasField={visibility === Visibility.Public}
-                    aliasFieldRef={spaceAliasField}
-                />
+    //             <SpaceCreateForm
+    //                 busy={busy}
+    //                 onSubmit={onSpaceCreateClick}
+    //                 setAvatar={setAvatar}
+    //                 name={name}
+    //                 setName={setName}
+    //                 nameFieldRef={spaceNameField}
+    //                 topic={topic}
+    //                 setTopic={setTopic}
+    //                 alias={alias}
+    //                 setAlias={setAlias}
+    //                 showAliasField={visibility === Visibility.Public}
+    //                 aliasFieldRef={spaceAliasField}
+    //             />
 
-                <AccessibleButton kind="primary" onClick={onSpaceCreateClick} disabled={busy}>
-                    {busy ? _t("create_space|creating") : _t("action|create")}
-                </AccessibleButton>
-            </React.Fragment>
-        );
-    }
+    //             <AccessibleButton kind="primary" onClick={onSpaceCreateClick} disabled={busy}>
+    //                 {busy ? _t("create_space|creating") : _t("action|create")}
+    //             </AccessibleButton>
+    //         </React.Fragment>
+    //     );
+    // }
+    body = (
+        <React.Fragment>
+            <h2>
+                {_t("create_space|private_heading")}
+            </h2>
+            <p>
+                {_t("create_space|add_details_prompt")} {_t("create_space|add_details_prompt_2", {}, {
+                    a: (sub) => (
+                            <AccessibleButton kind="link_inline" onClick={() => {
+                                window.open(TchapUrls.helpCreateSpace, "_blank")
+                            }}>
+                                {sub}
+                            </AccessibleButton>
+                        ),
+                    })
+                }
+            </p>
+
+            <SpaceCreateForm
+                busy={busy}
+                onSubmit={onSpaceCreateClick}
+                setAvatar={setAvatar}
+                name={name}
+                setName={setName}
+                nameFieldRef={spaceNameField}
+                topic={topic}
+                setTopic={setTopic}
+                alias={alias}
+                setAlias={setAlias}
+                showAliasField={visibility === Visibility.Public}
+                aliasFieldRef={spaceAliasField}
+            />
+
+            <AccessibleButton kind="primary" onClick={onSpaceCreateClick} disabled={busy}>
+                {busy ? _t("create_space|creating") : _t("action|create")}
+            </AccessibleButton>
+        </React.Fragment>
+    );
+    // end :TCHAP:
 
     return (
         <ContextMenu

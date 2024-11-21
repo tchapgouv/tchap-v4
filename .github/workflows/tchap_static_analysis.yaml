@@ -90,7 +90,7 @@ jobs:
 
             # Needs branch matching as it inherits .stylelintrc.js from matrix-react-sdk
             - name: Install Dependencies
-              run: "./scripts/tchap/install-yarn-linked-repositories.sh"
+              run: "yarn install --pure-lockfile"
 
             - name: Run i18n-tchap
               run: "yarn i18n-tchap"
