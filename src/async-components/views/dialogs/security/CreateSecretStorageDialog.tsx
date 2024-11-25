@@ -138,6 +138,10 @@ export default class CreateSecretStorageDialog extends React.PureComponent<IProp
             passPhraseKeySelected,
             accountPassword,
         };
+
+        // :TCHAP: remove-passphrase-4S
+        this.showKeyPassphraseDirectly();
+        // end :TCHAP:
     }
 
     public componentDidMount(): void {
@@ -150,62 +154,26 @@ export default class CreateSecretStorageDialog extends React.PureComponent<IProp
     }
 
     /**
-     * Attempt to get information on the current backup from the server, and update the state.
-     *
-     * Updates {@link IState.backupInfo} and {@link IState.backupTrustInfo}, and picks an appropriate phase for
-     * {@link IState.phase}.
-     *
-     * @returns If the backup data was retrieved successfully, the trust info for the backup. Otherwise, undefined.
+     * :TCHAP: remove-passphrase-4S
+     * We don't show the choice between passphrase and key, we directly show the key phase
      */
-    private async fetchBackupInfo(): Promise<BackupTrustInfo | undefined> {
+    private async showKeyPassphraseDirectly(): Promise<void> {
         try {
-            const cli = MatrixClientPeg.safeGet();
-            const backupInfo = await cli.getKeyBackupVersion();
-            const backupTrustInfo =
-                // we may not have started crypto yet, in which case we definitely don't trust the backup
-                backupInfo ? await cli.getCrypto()?.isKeyBackupTrusted(backupInfo) : undefined;
-
-            const { forceReset } = this.props;
-            // :tchap: cross-signing-ui - const phase = backupInfo && !forceReset ? Phase.Migrate : Phase.ChooseKeyPassphrase;
-            const phase = backupInfo && !forceReset ? Phase.Migrate : Phase.ShowKey;//:tchap: cross-signing-ui - goes directly to showke
-
-            /* :TCHAP: cross-signing-ui - remove
+            this.recoveryKey = await MatrixClientPeg.safeGet().getCrypto()!.createRecoveryKeyFromPassphrase();
             this.setState({
-                phase,
-                backupInfo,
-                backupTrustInfo,
+                copied: false,
+                downloaded: false,
+                setPassphrase: false,
+                phase: Phase.ShowKey,
+                passPhraseKeySelected: SecureBackupSetupMethod.Key
             });
-            end :TCHAP: */
-
-            // add :TCHAP: cross-signing-ui
-            if (phase === Phase.ShowKey) {
-                this.recoveryKey = await cli.createRecoveryKeyFromPassphrase();
-                this.setState({
-                    phase,
-                    backupInfo,
-                    backupTrustInfo,
-                    passPhraseKeySelected:SecureBackupSetupMethod.Key,
-                    copied: false,
-                    downloaded: false,
-                    setPassphrase: false
-                });
-            } else {
-                //if phase is Phase.Migrate
-                this.setState({
-                    phase,
-                    backupInfo,
-                    backupTrustInfo,
-                });
-            }
-            // end :TCHAP:
-
-            return backupTrustInfo;
         } catch (e) {
             console.error("Error fetching backup data from server", e);
             this.setState({ phase: Phase.LoadError });
             return undefined;
         }
     }
+    // end :TCHAP:
 
     private initExtension(keyFromCustomisations: Uint8Array): void {
         logger.log("CryptoSetupExtension: Created key via extension, jumping to bootstrap step");

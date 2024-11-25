@@ -104,5 +104,13 @@
     "help-access-verify-device": {
         "issue": "https://github.com/tchapgouv/tchap-web-v4/issues/1140",
         "files": ["src/components/structures/auth/SetupEncryptionBody.tsx"]
+    },
+    "remove-passphrase-4S": {
+        "issue": "",
+        "files": [
+            "src/utils/WellKnownUtils.ts",
+            "src/async-components/views/dialogs/security/CreateSecretStorageDialog.tsx"
+        ],
+        "comment": "complete cross-signing-ui patch which was not working anymore"
     }
 }

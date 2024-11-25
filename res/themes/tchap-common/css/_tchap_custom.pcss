@@ -65,7 +65,7 @@
 
 .mx_ThreadsActivityCentreButton .mx_ThreadsActivityCentreButton_Icon,
 .mx_ThreadsActivityCentreButton .mx_ThreadsActivityCentreButton_Text {
-    color: white !important;
+    color: var(--sidebar-button-color) !important;
 }
 
 /* reset-password-warning-close-window */
@@ -90,3 +90,9 @@
       }
     }
   }
+
+/* tchap green badge color on verification success */
+.mx_E2EIcon_verified::after {
+    mask-image: url("$(res)/img/e2e/verified.svg");
+    background-color: var(--confirmation-color);
+}

@@ -95,7 +95,9 @@ export function getSecureBackupSetupMethods(matrixClient: MatrixClient): SecureB
             wellKnown["secure_backup_setup_methods"].includes(SecureBackupSetupMethod.Passphrase)
         )
     ) {
-        return [SecureBackupSetupMethod.Key, SecureBackupSetupMethod.Passphrase];
+        // :TCHAP: remove-passphrase-4S - return [SecureBackupSetupMethod.Key, SecureBackupSetupMethod.Passphrase];
+        return [SecureBackupSetupMethod.Key];
+        // end :TCHAP:
     }
     return wellKnown["secure_backup_setup_methods"];
 }
