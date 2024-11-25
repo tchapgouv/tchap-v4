@@ -329,11 +329,12 @@
         "relativePaths": true
     },
     "engines": {
-        "node": ">=20.0.0"
+        "node": "^20.9.0"
     },
     "engines-comment": {
         "2022-11-07": "matrix-js-sdk requires >=16.0.0. SSL librairies do not work with 18 and 19. 17 has incompatibilities with some deps.",
-        "2023-08-29": "matrix-js-sdk requires >=18.0.0"
+        "2023-08-29": "matrix-js-sdk requires >=18.0.0",
+        "2024-11-25": "change engine node to fix 20.0.0, because scalingo doesnt like semver >= "
     },
     "optionalDependencies": {
         "tchap-translations": "file:./modules/tchap-translations"
