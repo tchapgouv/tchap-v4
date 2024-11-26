@@ -43,9 +43,7 @@ describe("CreateSecretStorageDialog", () => {
     it("handles the happy path", async () => {
         const result = renderComponent();
         // In tchap we skip directly to the show key phase
-        await result.findByText(
-            "Save your Security Key",
-        );
+        await result.findByText("Save your Security Key");
         expect(result.container).toMatchSnapshot();
 
         // Copy the key to enable the continue button
@@ -60,7 +58,7 @@ describe("CreateSecretStorageDialog", () => {
         jest.spyOn(mockClient.getCrypto()!, "bootstrapSecretStorage").mockRejectedValue(new Error("error"));
 
         renderComponent();
-        await screen.findByText("Save your Security Key",);
+        await screen.findByText("Save your Security Key");
         await userEvent.click(screen.getByRole("button", { name: "Copy" }));
         await userEvent.click(screen.getByRole("button", { name: "I wrote down my code" }));
 
@@ -77,9 +75,7 @@ describe("CreateSecretStorageDialog", () => {
 
             const result = renderComponent();
 
-            await result.findByText(
-                "Save your Security Key",
-            );
+            await result.findByText("Save your Security Key");
 
             // We go though the dialog until we have to get the key backup
             await userEvent.click(screen.getByRole("button", { name: "Copy" }));

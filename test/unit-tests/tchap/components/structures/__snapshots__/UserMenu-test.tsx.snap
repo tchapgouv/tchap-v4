@@ -42,25 +42,10 @@ exports[`<UserMenu> <UserMenu> UI should render as expected 1`] = `
       class="mx_IconizedContextMenu_optionList mx_IconizedContextMenu_optionList_notFirst"
     >
       <li
-        aria-label="Link new device"
-        class="mx_AccessibleButton mx_IconizedContextMenu_item"
-        role="menuitem"
-        tabindex="0"
-      >
-        <span
-          class="mx_IconizedContextMenu_icon mx_UserMenu_iconQr"
-        />
-        <span
-          class="mx_IconizedContextMenu_label"
-        >
-          Link new device
-        </span>
-      </li>
-      <li
         aria-label="Notifications"
         class="mx_AccessibleButton mx_IconizedContextMenu_item"
         role="menuitem"
-        tabindex="-1"
+        tabindex="0"
       >
         <span
           class="mx_IconizedContextMenu_icon mx_UserMenu_iconBell"

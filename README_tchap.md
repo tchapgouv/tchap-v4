@@ -44,5 +44,5 @@ Then also update the `subtree-modifications.json` file. We continue to keep trac
 
 ### Tests
 
-- Now that `matrix-react-sdk` is merged inside tchap-web, we only target the `test/tchap` folder in order to run our tests on only the files that tchap has modified.
-- For every modification, we need to copy the existing test (if there is one) of the component, move it to tchap folder and modify it accordingly.
+-   Now that `matrix-react-sdk` is merged inside tchap-web, we only target the `test/tchap` folder in order to run our tests on only the files that tchap has modified.
+-   For every modification, we need to copy the existing test (if there is one) of the component, move it to tchap folder and modify it accordingly.

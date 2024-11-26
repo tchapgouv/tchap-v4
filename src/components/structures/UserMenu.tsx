@@ -349,7 +349,9 @@ export default class UserMenu extends React.Component<IProps, IState> {
         let primaryOptionList = (
             <IconizedContextMenuOptionList>
                 {homeButton}
-                {linkNewDeviceButton}
+                {/* :TCHAP: remove-link-new-device-qr-code */}
+                {/* {linkNewDeviceButton} */}
+                {/* end :TCHAP: */}
                 <IconizedContextMenuOption
                     iconClassName="mx_UserMenu_iconBell"
                     label={_t("notifications|enable_prompt_toast_title")}
@@ -366,11 +368,13 @@ export default class UserMenu extends React.Component<IProps, IState> {
                     onClick={(e) => this.onSettingsOpen(e)}
                 />
                 {feedbackButton}
+                {/* :TCHAP: */}
                 <IconizedContextMenuOption
                     iconClassName="mx_UserMenu_iconInfo"
                     label={_t("common|help")}
                     onClick={this.onOpenFAQPage}
                 />
+                {/* end :TCHAP: */}
                 <IconizedContextMenuOption
                     className="mx_IconizedContextMenu_option_red"
                     iconClassName="mx_UserMenu_iconSignOut"

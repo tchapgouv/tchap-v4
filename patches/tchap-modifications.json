@@ -112,5 +112,12 @@
             "src/async-components/views/dialogs/security/CreateSecretStorageDialog.tsx"
         ],
         "comment": "complete cross-signing-ui patch which was not working anymore"
+    },
+    "remove-link-new-device-qr-code": {
+        "issue": "",
+        "files": [
+            "src/components/structures/UserMenu.tsx",
+            "src/components/views/settings/tabs/user/SessionManagerTab.tsx"
+        ]
     }
 }
