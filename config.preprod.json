@@ -107,15 +107,15 @@
     ],
     "tchap_features": {
         "feature_email_notification": ["*"],
-        "feature_thread": ["i.tchap.gouv.fr", "e.tchap.gouv.fr"],
+        "feature_thread": ["*"],
         "feature_space": ["*"],
-        "feature_audio_call": ["i.tchap.gouv.fr", "e.tchap.gouv.fr"],
-        "feature_video_call": ["i.tchap.gouv.fr", "e.tchap.gouv.fr"],
+        "feature_audio_call": ["*"],
+        "feature_video_call": ["*"],
         "feature_video_group_call": [],
         "feature_screenshare_call": ["*"]
     },
     "tchap_sso_flow": {
-        "isActive": false
+        "isActive": true
     },
     "map_style_url": "https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json"
 }
