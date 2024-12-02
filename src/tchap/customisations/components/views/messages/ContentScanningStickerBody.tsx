@@ -17,11 +17,11 @@ limitations under the License.
 import "../../../../../../res/css/views/messages/ContentScanningImageBody.pcss";
 
 import React from "react";
-import { IBodyProps } from "matrix-react-sdk/src/components/views/messages/IBodyProps";
-import Spinner from "matrix-react-sdk/src/components/views/elements/Spinner";
-import { IMediaEventContent } from "matrix-react-sdk/src/customisations/models/IMediaEventContent";
-import { presentableTextForFile } from "matrix-react-sdk/src/utils/FileUtils";
-import { _t } from "matrix-react-sdk/src/languageHandler";
+import { IBodyProps } from "~tchap-web/src/components/views/messages/IBodyProps";
+import Spinner from "~tchap-web/src/components/views/elements/Spinner";
+import { IMediaEventContent } from "~tchap-web/src/customisations/models/IMediaEventContent";
+import { presentableTextForFile } from "~tchap-web/src/utils/FileUtils";
+import { _t } from "~tchap-web/src/languageHandler";
 
 import OriginalImageBody from "../../../../components/views/messages/OriginalImageBody";
 import { Media } from "../../../ContentScanningMedia";

@@ -23,16 +23,10 @@ import "setimmediate";
 // Require common CSS here; this will make webpack process it into bundle.css.
 // Our own CSS (which is themed) is imported via separate webpack entry points
 // in webpack.config.js
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 require("katex/dist/katex.css");
 
-/**
- * This require is necessary only for purposes of CSS hot-reload, as otherwise
- * webpack has some incredible problems figuring out which CSS files should be
- * hot-reloaded, even with proper hints for the loader.
- *
- * On production build it's going to be an empty module, so don't worry about that.
- */
-require("./devcss");
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 require("./localstorage-fix");
 
 async function settled(...promises: Array<Promise<any>>): Promise<void> {

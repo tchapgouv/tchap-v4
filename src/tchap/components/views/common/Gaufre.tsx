@@ -2,8 +2,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import '@gouvfr-lasuite/integration/dist/css/gaufre.css';
 
-import ContextMenu, { ChevronFace, alwaysAboveRightOf, useContextMenu } from 'matrix-react-sdk/src/components/structures/ContextMenu';
-import AccessibleButton from 'matrix-react-sdk/src/components/views/elements/AccessibleButton';
+import ContextMenu, { ChevronFace, alwaysAboveRightOf, useContextMenu } from '~tchap-web/src/components/structures/ContextMenu';
+import AccessibleButton from '~tchap-web/src/components/views/elements/AccessibleButton';
 import classNames from 'classnames';
 import { _t } from '../../../../languageHandler';
 import "../../../../../res/css/common/_TchapLeftPanel.pcss";

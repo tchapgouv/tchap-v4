@@ -14,35 +14,18 @@
 ## File structures
 
 -   modules -> used for translation
--   linked-dependencies -> subtree dependencies used for matrix-react-sdk
 -   yarn-linked-dependencies -> legacy dependencies used for matrix-js-sdk
 -   patches_legacy -> legacy patches directory in which code for the patches where put
 -   patches -> used for matrix-js-sdk patches
--   src -> code
+-   src -> code containing ex matrix-react-sdk lib and element-web code
 
 ## Local dev installation
 
 ```
 yarn install
-./scripts/tchap/install-yarn-linked-repositories.sh // this will install your local dependencies yarn-linked and subtree
 yarn start
 
 ```
-
-## Linked-dependencies
-
-For `matrix-react-sdk` we are using a subtree and our own fork:
-When you clone tchap-web-v4, you should be able to see the repo in `linked-dependencies/matrix-react-sdk`.
-Our `package.json` will be using this directory as local dependencies for `matrix-react-sdk`.
-
-You can make changes to the subtree repo as if it was code from the parent repo.
-Time to time (because it takes a long time to push the code to the remote, since it needs to rebuild all the upstream history), you can push your changes to the remote fork. Necessary before an upgrade to have all the latest changes !
-
-```
-git subtree push --prefix=./linked-dependencies/matrix-react-sdk  matrix-react-sdk-tchap org-35118060@github.com:tchapgouv/matrix-react-sdk-tchap.git develop_tchap
-```
-
-This command will take all the commits that touch the subtree repo and push them to the remote fork. If you don't want to take all the commits (shouldnt happen), you will have to cherry-pick and push manually to the remote.
 
 ## Dev guidelines
 
@@ -58,3 +41,8 @@ This command will take all the commits that touch the subtree repo and push them
 ```
 
 Then also update the `subtree-modifications.json` file. We continue to keep track of the changes we make to the sdk. It will also be easier to separate different functionnality that tchap added to the code
+
+### Tests
+
+-   Now that `matrix-react-sdk` is merged inside tchap-web, we only target the `test/tchap` folder in order to run our tests on only the files that tchap has modified.
+-   For every modification, we need to copy the existing test (if there is one) of the component, move it to tchap folder and modify it accordingly.

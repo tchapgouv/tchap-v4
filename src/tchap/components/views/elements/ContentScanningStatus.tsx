@@ -17,9 +17,9 @@ limitations under the License.
 import "../../../../../res/css/views/elements/ContentScanningStatus.pcss";
 
 import React, { useState } from "react";
-import TextWithTooltip from "matrix-react-sdk/src/components/views/elements/TextWithTooltip";
-import { _t } from "matrix-react-sdk/src/languageHandler";
-import SettingsStore from "matrix-react-sdk/src/settings/SettingsStore";
+import TextWithTooltip from "~tchap-web/src/components/views/elements/TextWithTooltip";
+import { _t } from "~tchap-web/src/languageHandler";
+import SettingsStore from "~tchap-web/src/settings/SettingsStore";
 
 interface ContentScanningStatusProps {
     fileName?: string;

@@ -1,0 +1,123 @@
+{
+    "onboarding-add-secure-backup": {
+        "PR": "https://github.com/tchapgouv/tchap-web-v4/pull/978/", 
+        "files": [
+            "src/hooks/useUserOnboardingContext.ts",
+            "src/hooks/useUserOnboardingTasks.ts"
+        ]
+    },
+    "hide-video-button-on-call-screen": {
+        "issue": "https://github.com/tchapgouv/tchap-web-v4/issues/952", 
+        "files": [
+            "src/components/views/voip/LegacyCallView.tsx"
+        ]
+    },
+    "email-notification-setting-caption": {
+        "issue": "https://github.com/tchapgouv/tchap-web-v4/issues/988",
+        "files": [
+            "src/components/views/settings/Notifications.tsx"
+        ]
+    },
+    "extend-remove-thread-buttons": {
+        "issue": "https://github.com/tchapgouv/tchap-web-v4/issues/988",
+        "files": [
+            "src/components/views/spaces/SpacePanel.tsx",
+            "src/components/views/rooms/RoomHeader.tsx",
+            "src/components/views/settings/Notifications.tsx"
+        ]
+    },
+    "lasuite-gaufre-integration": {
+        "issue": "https://github.com/tchapgouv/tchap-web-v4/issues/1012",
+        "files": [
+            "src/components/views/spaces/SpacePanel.tsx"
+        ]
+    },
+    "hide-screensharing-button": {
+        "issue": "https://github.com/tchapgouv/tchap-web-v4/issues/1042",
+        "files": [
+            "src/components/views/voip/LegacyCallView.tsx"
+        ]
+    },
+    "lowercase-invite": {
+        "issue": "https://github.com/tchapgouv/tchap-web-v4/issues/983",
+        "files": [
+            "src/components/views/dialogs/InviteDialog.tsx"
+        ]
+    },
+    "improve-faq-visibility": {
+        "issue": "https://github.com/tchapgouv/tchap-web-v4/issues/395",
+        "files": [
+            "src/components/views/spaces/SpacePanel.tsx"
+        ]
+    },
+    "space-remove-public-and-subspace": {
+        "issue": "https://github.com/tchapgouv/tchap-web-v4/issues/878",
+        "files": [
+            "src/components/views/spaces/SpaceCreateMenu.tsx",
+            "src/components/views/rooms/RoomListHeader.tsx",
+            "src/components/views/context_menus/SpaceContextMenu.tsx",
+            "src/components/structures/SpaceRoomView.tsx"
+        ]
+    },
+    "reset-password-warning-close-window": {
+        "issue": "https://github.com/tchapgouv/tchap-web-v4/issues/1067",
+        "files": [
+            "src/components/structures/auth/forgot-password/CheckEmail.tsx"
+        ]
+    },
+    "onboarding-add-tchap-guide": {
+        "issue": "https://github.com/tchapgouv/tchap-web-v4/issues/1069",
+        "files": [
+            "src/hooks/useUserOnboardingTasks.ts",
+            "src/hooks/useUserOnboardingContext.ts"
+
+        ]
+    },
+    "hide-discovery-email-phone-settings-updated": {
+        "issue": "https://github.com/tchapgouv/tchap-web-v4/issues/1080",
+        "files": [
+            "src/components/views/settings/tabs/user/AccountUserSettingsTab.tsx"
+        ]
+    }, 
+    "sso-agentconnect-flow": {
+        "issue": "https://github.com/tchapgouv/tchap-web-v4/issues/386",
+        "files": [
+        "src/components/structures/MatrixChat.tsx",
+            "src/components/structures/auth/Registration.tsx",
+            "src/components/structures/auth/Login.tsx",
+            "src/components/views/auth/Welcome.tsx"
+        ]
+    },
+    "hide-widgets-settings": {
+        "issue": "https://github.com/tchapgouv/tchap-web-v4/issues/1117",
+        "files": [
+            "src/components/views/right_panel/RightPanelTabs.tsx",
+            "src/components/views/settings/tabs/user/SecurityUserSettingsTab.tsx"
+        ]
+    },
+    "red-list-settings": {
+        "issue": "https://github.com/tchapgouv/tchap-web-v4/issues/1134",
+        "files": [
+            "src/components/views/settings/tabs/user/AccountUserSettingsTab.tsx"
+        ]
+    },
+    "help-access-verify-device": {
+        "issue": "https://github.com/tchapgouv/tchap-web-v4/issues/1140",
+        "files": ["src/components/structures/auth/SetupEncryptionBody.tsx"]
+    },
+    "remove-passphrase-4S": {
+        "issue": "",
+        "files": [
+            "src/utils/WellKnownUtils.ts",
+            "src/async-components/views/dialogs/security/CreateSecretStorageDialog.tsx"
+        ],
+        "comment": "complete cross-signing-ui patch which was not working anymore"
+    },
+    "remove-link-new-device-qr-code": {
+        "issue": "",
+        "files": [
+            "src/components/structures/UserMenu.tsx",
+            "src/components/views/settings/tabs/user/SessionManagerTab.tsx"
+        ]
+    }
+}

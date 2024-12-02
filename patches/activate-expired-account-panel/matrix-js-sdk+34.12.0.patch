@@ -1,0 +1,61 @@
+diff --git a/node_modules/matrix-js-sdk/src/http-api/fetch.ts b/node_modules/matrix-js-sdk/src/http-api/fetch.ts
+index bdf9cb1..f3ced2f 100644
+--- a/node_modules/matrix-js-sdk/src/http-api/fetch.ts
++++ b/node_modules/matrix-js-sdk/src/http-api/fetch.ts
+@@ -177,6 +177,12 @@ export class FetchHttpApi<O extends IHttpOpts> {
+             } else if (err.errcode == "M_CONSENT_NOT_GIVEN") {
+                 this.eventEmitter.emit(HttpApiEvent.NoConsent, err.message, err.data.consent_uri);
+             }
++            //:tchap: this error is sent by the synapse module (synapse-email-account-validity)[https://github.com/matrix-org/synapse-email-account-validity]
++            // when user account has expired
++            else if (err.errcode == 'ORG_MATRIX_EXPIRED_ACCOUNT') {
++                this.eventEmitter.emit(HttpApiEvent.ORG_MATRIX_EXPIRED_ACCOUNT, err);
++            }
++            //:tchap end
+ 
+             throw err;
+         }
+diff --git a/node_modules/matrix-js-sdk/src/http-api/interface.ts b/node_modules/matrix-js-sdk/src/http-api/interface.ts
+index 57e8e6b..87be545 100644
+--- a/node_modules/matrix-js-sdk/src/http-api/interface.ts
++++ b/node_modules/matrix-js-sdk/src/http-api/interface.ts
+@@ -104,6 +104,10 @@ export interface IContentUri {
+ export enum HttpApiEvent {
+     SessionLoggedOut = "Session.logged_out",
+     NoConsent = "no_consent",
++    //:tchap: this error is sent by the synapse module (synapse-email-account-validity)[https://github.com/matrix-org/synapse-email-account-validity] 
++    //when user account has expired
++    ORG_MATRIX_EXPIRED_ACCOUNT = "ORG_MATRIX_EXPIRED_ACCOUNT",
++    //:tchap end
+ }
+ 
+ export type HttpApiEventHandlerMap = {
+@@ -131,6 +135,9 @@ export type HttpApiEventHandlerMap = {
+      * ```
+      */
+     [HttpApiEvent.NoConsent]: (message: string, consentUri: string) => void;
++    //:tchap: this error is sent by the synapse module (synapse-email-account-validity)[https://github.com/matrix-org/synapse-email-account-validity] 
++    //when user account has expired
++    [HttpApiEvent.ORG_MATRIX_EXPIRED_ACCOUNT]: (err: MatrixError) => void;
+ };
+ 
+ export interface UploadProgress {
+diff --git a/node_modules/matrix-js-sdk/src/sync.ts b/node_modules/matrix-js-sdk/src/sync.ts
+index 2652a89..44cc62d 100644
+--- a/node_modules/matrix-js-sdk/src/sync.ts
++++ b/node_modules/matrix-js-sdk/src/sync.ts
+@@ -601,6 +601,14 @@ export class SyncApi {
+             this.updateSyncState(SyncState.Error, { error });
+             return true;
+         }
++        //:tchap: this error is sent by (synapse-email-account-validity)[https://github.com/matrix-org/synapse-email-account-validity] 
++        // when user account has expired. client must be stopped and sync aborted when the user account is not valid anymore
++        if (error.errcode === "ORG_MATRIX_EXPIRED_ACCOUNT") {
++            // The account is expired
++            this.stop();
++            this.updateSyncState(SyncState.Error, { error });
++            return true;
++        }
+         return false;
+     }
+ 

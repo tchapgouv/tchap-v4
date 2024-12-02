@@ -1,13 +1,13 @@
-import BasePlatform from "matrix-react-sdk/src/BasePlatform";
-import { MatrixClientPeg } from "matrix-react-sdk/src/MatrixClientPeg";
-import PlatformPeg from "matrix-react-sdk/src/PlatformPeg";
+import BasePlatform from "~tchap-web/src/BasePlatform";
+import { MatrixClientPeg } from "~tchap-web/src/MatrixClientPeg";
+import PlatformPeg from "~tchap-web/src/PlatformPeg";
 
 export default class TchapVersionManagement {
     static SYNC_STORE_NAME = "matrix-js-sdk:riot-web-sync";
 
     /**
      * replicate the behaviour of the button Clear Cache and Reload, and clear browser cache on firefox
-     * https://github.com/matrix-org/matrix-react-sdk/blob/3c5c2bef6dbac51ce6e1864056523815ca4c38d9/src/components/views/settings/tabs/user/HelpUserSettingsTab.tsx#L308
+     * https://github.com/matrix-org/~tchap-web/blob/3c5c2bef6dbac51ce6e1864056523815ca4c38d9/src/components/views/settings/tabs/user/HelpUserSettingsTab.tsx#L308
      * @returns nothing
      */
     public static clearCacheAndReload(): void {

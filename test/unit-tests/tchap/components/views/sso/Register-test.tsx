@@ -1,23 +1,23 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render } from "jest-matrix-react";
 import { mocked, MockedObject } from "jest-mock";
 import { MatrixClient, MatrixError, OidcClientConfig, createClient } from "matrix-js-sdk/src/matrix";
 import fetchMock from "fetch-mock";
 
-import SdkConfig, { ConfigOptions, DEFAULTS } from "~matrix-react-sdk/src/SdkConfig";
-import Registration from "~matrix-react-sdk/src/components/structures/auth/Registration";
+import SdkConfig, { ConfigOptions, DEFAULTS } from "~tchap-web/src/SdkConfig";
+import Registration from "~tchap-web/src/components/structures/auth/Registration";
 import {
     getMockClientWithEventEmitter,
     mkServerConfig,
     mockPlatformPeg,
     unmockPlatformPeg,
-} from "~matrix-react-sdk/test/test-utils";
-import { makeDelegatedAuthConfig } from "~matrix-react-sdk/test/test-utils/oidc";
-import SettingsStore from "~matrix-react-sdk/src/settings/SettingsStore";
-import AutoDiscoveryUtils from "~matrix-react-sdk/src/utils/AutoDiscoveryUtils";
-import { ValidatedServerConfig } from "~matrix-react-sdk/src/utils/ValidatedServerConfig";
+} from "~tchap-web/test/test-utils";
+import { makeDelegatedAuthConfig } from "~tchap-web/test/test-utils/oidc";
+import SettingsStore from "~tchap-web/src/settings/SettingsStore";
+import AutoDiscoveryUtils from "~tchap-web/src/utils/AutoDiscoveryUtils";
+import { ValidatedServerConfig } from "~tchap-web/src/utils/ValidatedServerConfig";
 
-jest.mock("~matrix-react-sdk/src/utils/oidc/authorize", () => ({
+jest.mock("~tchap-web/src/utils/oidc/authorize", () => ({
     startOidcLogin: jest.fn(),
 }));
 
@@ -131,6 +131,7 @@ describe("<Register />", () => {
      * Will need to fix this mocked request and it should be good
      *
      */
+    // eslint-disable-next-line jest/no-commented-out-tests
     // it("returns proconnect button in register when the config include sso flow", async () => {
     //     addSSOFlowToMockConfig(true);
 

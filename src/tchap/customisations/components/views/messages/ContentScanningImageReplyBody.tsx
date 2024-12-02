@@ -15,11 +15,11 @@
  */
 
 import React from "react";
-import Spinner from "matrix-react-sdk/src/components/views/elements/Spinner";
-import { IBodyProps } from "matrix-react-sdk/src/components/views/messages/IBodyProps";
-import { IMediaEventContent } from "matrix-react-sdk/src/customisations/models/IMediaEventContent";
-import { _t } from "matrix-react-sdk/src/languageHandler";
-import { presentableTextForFile } from "matrix-react-sdk/src/utils/FileUtils";
+import Spinner from "~tchap-web/src/components/views/elements/Spinner";
+import { IBodyProps } from "~tchap-web/src/components/views/messages/IBodyProps";
+import { IMediaEventContent } from "~tchap-web/src/customisations/models/IMediaEventContent";
+import { _t } from "~tchap-web/src/languageHandler";
+import { presentableTextForFile } from "~tchap-web/src/utils/FileUtils";
 
 import OriginalImageReplyBody from "../../../../components/views/messages/OriginalImageReplyBody";
 import { BlockedIcon } from "../../../../components/views/elements/BlockedIcon";

@@ -1,18 +1,18 @@
 import React from "react";
-import { render, cleanup, fireEvent, screen, act } from "@testing-library/react";
+import { render, cleanup, fireEvent, screen, act } from "jest-matrix-react";
 import { mocked, MockedObject } from "jest-mock";
 import { MatrixClient } from "matrix-js-sdk/src/matrix";
 
 import EmailVerificationPage from "~tchap-web/src/tchap/components/views/sso/EmailVerificationPage";
 import TchapUtils from "~tchap-web/src/tchap/util/TchapUtils";
-import { ValidatedServerConfig } from "~matrix-react-sdk/src/utils/ValidatedServerConfig";
-import { flushPromises, mockPlatformPeg, stubClient } from "~matrix-react-sdk/test/test-utils";
-import BasePlatform from "~matrix-react-sdk/src/BasePlatform";
-import Login from "~matrix-react-sdk/src/Login";
+import { ValidatedServerConfig } from "~tchap-web/src/utils/ValidatedServerConfig";
+import { flushPromises, mockPlatformPeg, stubClient } from "~tchap-web/test/test-utils";
+import BasePlatform from "~tchap-web/src/BasePlatform";
+import Login from "~tchap-web/src/Login";
 
-jest.mock("~matrix-react-sdk/src/PlatformPeg");
+jest.mock("~tchap-web/src/PlatformPeg");
 jest.mock("~tchap-web/src/tchap/util/TchapUtils");
-jest.mock("~matrix-react-sdk/src/Login");
+jest.mock("~tchap-web/src/Login");
 
 describe("<EmailVerificationPage />", () => {
     const userEmail = "marc@tchap.beta.gouv.fr";

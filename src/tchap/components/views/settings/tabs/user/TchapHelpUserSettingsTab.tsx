@@ -17,18 +17,18 @@ limitations under the License.
 import React, { ReactNode } from "react";
 import { logger } from "matrix-js-sdk/src/logger";
 
-import AccessibleButton from "matrix-react-sdk/src/components/views/elements/AccessibleButton";
-import { _t } from "matrix-react-sdk/src/languageHandler";
+import AccessibleButton from "~tchap-web/src/components/views/elements/AccessibleButton";
+import { _t } from "~tchap-web/src/languageHandler";
 
-import SdkConfig from "matrix-react-sdk/src/SdkConfig";
-import Modal from "matrix-react-sdk/src/Modal";
+import SdkConfig from "~tchap-web/src/SdkConfig";
+import Modal from "~tchap-web/src/Modal";
 
-import PlatformPeg from "matrix-react-sdk/src/PlatformPeg";
-import UpdateCheckButton from "matrix-react-sdk/src/components/views/settings/UpdateCheckButton";
-import BugReportDialog from "matrix-react-sdk/src/components/views/dialogs/BugReportDialog";
-import CopyableText from "matrix-react-sdk/src/components/views/elements/CopyableText";
-import ExternalLink from "matrix-react-sdk/src/components/views/elements/ExternalLink";
-import MatrixClientContext from "matrix-react-sdk/src/contexts/MatrixClientContext";
+import PlatformPeg from "~tchap-web/src/PlatformPeg";
+import UpdateCheckButton from "~tchap-web/src/components/views/settings/UpdateCheckButton";
+import BugReportDialog from "~tchap-web/src/components/views/dialogs/BugReportDialog";
+import CopyableText from "~tchap-web/src/components/views/elements/CopyableText";
+import ExternalLink from "~tchap-web/src/components/views/elements/ExternalLink";
+import MatrixClientContext from "~tchap-web/src/contexts/MatrixClientContext";
 
 interface IProps {
     closeSettingsFn: () => void;
@@ -39,7 +39,7 @@ interface IState {
     canUpdate: boolean;
 }
 
-//Tchap : This class is a replacement (via customizations) for matrix-react-sdk/src/components/views/settings/tabs/user/HelpUserSettingsTab.tsx
+//Tchap : This class is a replacement (via customizations) for ~tchap-web/src/components/views/settings/tabs/user/HelpUserSettingsTab.tsx
 export default class HelpUserSettingsTab extends React.Component<IProps, IState> {
     //those lines instantiate the 'context' which is kind of a singleton for a matrix client
     public static contextType = MatrixClientContext;

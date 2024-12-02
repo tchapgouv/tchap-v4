@@ -2,8 +2,8 @@
  * Tchap UI Feature flags
  */
 
-import { MatrixClientPeg } from "matrix-react-sdk/src/MatrixClientPeg";
-import SdkConfig from "matrix-react-sdk/src/SdkConfig";
+import { MatrixClientPeg } from "~tchap-web/src/MatrixClientPeg";
+import SdkConfig from "~tchap-web/src/SdkConfig";
 
 export default class TchapUIFeature {
     /**

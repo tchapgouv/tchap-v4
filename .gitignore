@@ -50,3 +50,5 @@ electron/pub
 
 # File from translations checkin scripts.
 modules/tchap-translations/tmp/*
+# version file and tarball created by `npm pack` / `yarn pack`
+/git-revision.txt

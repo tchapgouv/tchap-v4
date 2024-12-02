@@ -4,7 +4,7 @@
 
 import React, { forwardRef } from "react";
 import { MatrixEvent } from "matrix-js-sdk/src/matrix";
-import { _t } from "matrix-react-sdk/src/languageHandler"; // :TCHAP:
+import { _t } from "~tchap-web/src/languageHandler"; // :TCHAP:
 interface IProps {
     mxEvent: MatrixEvent;
     children?: React.ReactNode;

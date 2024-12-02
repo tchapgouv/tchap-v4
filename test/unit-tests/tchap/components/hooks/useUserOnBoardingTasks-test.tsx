@@ -1,6 +1,6 @@
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "jest-matrix-react";
 
-import { useUserOnboardingTasks } from "~matrix-react-sdk/src/hooks/useUserOnboardingTasks";
+import { useUserOnboardingTasks } from "~tchap-web/src/hooks/useUserOnboardingTasks";
 
 describe("useUserOnboardingTasks", () => {
     it.each([

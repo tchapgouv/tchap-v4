@@ -15,9 +15,9 @@ limitations under the License.
 */
 
 import React from "react";
-import BaseDialog from "matrix-react-sdk/src/components/views/dialogs/BaseDialog";
-import dis from "matrix-react-sdk/src/dispatcher/dispatcher";
-import { _t } from "matrix-react-sdk/src/languageHandler";
+import BaseDialog from "~tchap-web/src/components/views/dialogs/BaseDialog";
+import dis from "~tchap-web/src/dispatcher/dispatcher";
+import { _t } from "~tchap-web/src/languageHandler";
 
 import { TchapAnchor } from "../../../../components/views/common/TchapAnchor";
 import KeySavedImage from "../../../../../../res/img/tchap/key-saved.svg";

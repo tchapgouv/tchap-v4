@@ -57,5 +57,7 @@
     "room_list|add_space_label",
     "spaces|error_no_permission_add_space",
     "auth|continue_with_sso",
-    "room|header_avatar_open_settings_label"
+    "room|header_avatar_open_settings_label",
+    "voip|disabled_no_perms_start_voice_call",
+    "voip|disabled_no_perms_start_video_call"
 ]

@@ -1,10 +1,10 @@
 import { HttpApiEvent } from "matrix-js-sdk/src/matrix";
-import { defaultDispatcher, MatrixDispatcher } from "matrix-react-sdk/src/dispatcher/dispatcher";
-import { ActionPayload } from "matrix-react-sdk/src/dispatcher/payloads";
-import { stopMatrixClient } from "matrix-react-sdk/src/Lifecycle";
-import { MatrixClientPeg } from "matrix-react-sdk/src/MatrixClientPeg";
-import Modal from "matrix-react-sdk/src/Modal";
-import PlatformPeg from "matrix-react-sdk/src/PlatformPeg";
+import defaultDispatcher, { MatrixDispatcher } from "~tchap-web/src/dispatcher/dispatcher";
+import { ActionPayload } from "~tchap-web/src/dispatcher/payloads";
+import { stopMatrixClient } from "~tchap-web/src/Lifecycle";
+import { MatrixClientPeg } from "~tchap-web/src/MatrixClientPeg";
+import Modal from "~tchap-web/src/Modal";
+import PlatformPeg from "~tchap-web/src/PlatformPeg";
 import { logger } from "matrix-js-sdk/src/logger";
 
 import ExpiredAccountDialog from "../components/views/dialogs/ExpiredAccountDialog";

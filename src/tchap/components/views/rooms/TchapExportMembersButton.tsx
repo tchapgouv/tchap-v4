@@ -4,14 +4,14 @@
 
 import React from "react";
 
-import { FileDownloader } from "matrix-react-sdk/src/utils/FileDownloader";
-import AccessibleButton from "matrix-react-sdk/src/components/views/elements/AccessibleButton";
-import { ButtonEvent } from "matrix-react-sdk/src/components/views/elements/AccessibleButton";
+import { FileDownloader } from "~tchap-web/src/utils/FileDownloader";
+import AccessibleButton from "~tchap-web/src/components/views/elements/AccessibleButton";
+import { ButtonEvent } from "~tchap-web/src/components/views/elements/AccessibleButton";
 import { Room } from "matrix-js-sdk/src/models/room";
-import { _t } from "matrix-react-sdk/src/languageHandler";
-import { Icon as UserExportIcon } from "../../../../../res/img/tchap/user-export.svg";
+import { _t } from "~tchap-web/src/languageHandler";
+import { Icon as UserExportIcon } from "~tchap-web/res/img/tchap/user-export.svg";
 
-import "../../../../../res/css/views/rooms/TchapExportMembersButton.pcss";
+import "~tchap-web/res/css/views/rooms/TchapExportMembersButton.pcss";
 
 interface IProps {
   room: Room;

@@ -1,8 +1,9 @@
-import { IOpts } from "matrix-react-sdk/src/createRoom";
+import { IOpts } from "~tchap-web/src/createRoom";
 import { ICreateRoomOpts } from "matrix-js-sdk/src/@types/requests";
 import { HistoryVisibility, JoinRule, Preset, Visibility } from "matrix-js-sdk/src/@types/partials";
 
 import { TchapRoomAccessRule, TchapRoomAccessRulesEventId, TchapRoomType } from "../@types/tchap";
+import { Room } from "matrix-js-sdk/src/matrix";
 
 export const DEFAULT_FEDERATE_VALUE = true;
 

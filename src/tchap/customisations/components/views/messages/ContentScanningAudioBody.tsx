@@ -15,7 +15,7 @@
  */
 
 import React from "react";
-import { IBodyProps } from "matrix-react-sdk/src/components/views/messages/IBodyProps";
+import { IBodyProps } from "~tchap-web/src/components/views/messages/IBodyProps";
 
 import { Media } from "../../../ContentScanningMedia";
 import ContentScanningFileBody from "./ContentScanningFileBody";

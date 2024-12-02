@@ -19,11 +19,9 @@ node scripts/tchap/translations/extractENTranslations.js --file=$TCHAP_TRANSLATI
 
 # Merge element translations from both web and react-sdk repos, into OUTPUT_FILE
 export ELEMENT_WEB_TRANSLATION_FILE=`realpath src/i18n/strings/en_EN.json`
-export ELEMENT_REACT_TRANSLATION_FILE=`realpath linked-dependencies/matrix-react-sdk/src/i18n/strings/en_EN.json`
-merge_json_files $ELEMENT_WEB_TRANSLATION_FILE $ELEMENT_REACT_TRANSLATION_FILE $OUTPUT_FILE
 
 # Merge in tchap translations, into OUTPUT_FILE. Tchap values should override element values in case of conflict.
-merge_json_files $OUTPUT_FILE $TCHAP_TRANSLATION_EN_FILE $OUTPUT_FILE
+merge_json_files $ELEMENT_WEB_TRANSLATION_FILE $TCHAP_TRANSLATION_EN_FILE $OUTPUT_FILE
 
 # Some keys have been removed from the code by patches. Remove these keys from the reference file.
 REMOVED_TRANSLATION_FILE=`realpath modules/tchap-translations/tchap_translations_removed.json`

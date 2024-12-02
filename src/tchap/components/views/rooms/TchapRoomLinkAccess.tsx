@@ -1,17 +1,17 @@
 import { EventType, GuestAccess, JoinRule, Room } from "matrix-js-sdk/src/matrix";
 
 import React, { useEffect, useState } from 'react';
-import LabelledToggleSwitch from 'matrix-react-sdk/src/components/views/elements/LabelledToggleSwitch';
-import { _t } from 'matrix-react-sdk/src/languageHandler';
+import LabelledToggleSwitch from '~tchap-web/src/components/views/elements/LabelledToggleSwitch';
+import { _t } from '~tchap-web/src/languageHandler';
 import { randomString } from 'matrix-js-sdk/src/randomstring';
 import TchapRoomUtils from '../../../util/TchapRoomUtils';
-import { makeRoomPermalink } from "matrix-react-sdk/src/utils/permalinks/Permalinks";
+import { makeRoomPermalink } from "~tchap-web/src/utils/permalinks/Permalinks";
 import { TchapRoomType } from "../../../@types/tchap";
 import { RoomJoinRulesEventContent } from "matrix-js-sdk/lib/types";
-import CopyableText from "matrix-react-sdk/src/components/views/elements/CopyableText";
-import Modal from "matrix-react-sdk/src/Modal";
-import QuestionDialog from "matrix-react-sdk/src/components/views/dialogs/QuestionDialog";
-import ErrorDialog from "matrix-react-sdk/src/components/views/dialogs/ErrorDialog";
+import CopyableText from "~tchap-web/src/components/views/elements/CopyableText";
+import Modal from "~tchap-web/src/Modal";
+import QuestionDialog from "~tchap-web/src/components/views/dialogs/QuestionDialog";
+import ErrorDialog from "~tchap-web/src/components/views/dialogs/ErrorDialog";
 
 interface ITchapRoomLinkAccessProps {
     room: Room,

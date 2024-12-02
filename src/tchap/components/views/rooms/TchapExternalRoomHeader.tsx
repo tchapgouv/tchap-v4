@@ -1,7 +1,7 @@
 import { MatrixEvent, Room, RoomStateEvent } from "matrix-js-sdk/src/matrix";
-import { useTypedEventEmitter } from "matrix-react-sdk/src/hooks/useEventEmitter";
+import { useTypedEventEmitter } from "~tchap-web/src/hooks/useEventEmitter";
 import React, { useState } from "react";
-import { _t } from "matrix-react-sdk/src/languageHandler";
+import { _t } from "~tchap-web/src/languageHandler";
 
 import { TchapRoomAccessRule, TchapRoomAccessRulesEventId } from "../../../@types/tchap";
 import TchapRoomUtils from "../../../util/TchapRoomUtils";

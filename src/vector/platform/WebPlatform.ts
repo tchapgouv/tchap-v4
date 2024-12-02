@@ -7,16 +7,15 @@ SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
 Please see LICENSE files in the repository root for full details.
 */
 
-import { UpdateCheckStatus, UpdateStatus } from "matrix-react-sdk/src/BasePlatform";
-import dis from "matrix-react-sdk/src/dispatcher/dispatcher";
-import { hideToast as hideUpdateToast, showToast as showUpdateToast } from "matrix-react-sdk/src/toasts/UpdateToast";
-import { Action } from "matrix-react-sdk/src/dispatcher/actions";
-import { CheckUpdatesPayload } from "matrix-react-sdk/src/dispatcher/payloads/CheckUpdatesPayload";
 import UAParser from "ua-parser-js";
 import { logger } from "matrix-js-sdk/src/logger";
-import { MatrixClientPeg } from "matrix-react-sdk/src/MatrixClientPeg";
 
-import VectorBasePlatform from "./VectorBasePlatform";
+import { MatrixClientPeg } from "../../MatrixClientPeg";
+import BasePlatform, { UpdateCheckStatus, UpdateStatus } from "../../BasePlatform";
+import dis from "../../dispatcher/dispatcher";
+import { hideToast as hideUpdateToast, showToast as showUpdateToast } from "../../toasts/UpdateToast";
+import { Action } from "../../dispatcher/actions";
+import { CheckUpdatesPayload } from "../../dispatcher/payloads/CheckUpdatesPayload";
 import { parseQs } from "../url_utils";
 import { _t } from "../../languageHandler";
 
@@ -31,7 +30,7 @@ function getNormalizedAppVersion(version: string): string {
     return version;
 }
 
-export default class WebPlatform extends VectorBasePlatform {
+export default class WebPlatform extends BasePlatform {
     private static readonly VERSION = process.env.VERSION!; // baked in by Webpack
 
     public constructor() {
@@ -54,8 +53,8 @@ export default class WebPlatform extends VectorBasePlatform {
             return;
         }
 
-        await registration.update();
         navigator.serviceWorker.addEventListener("message", this.onServiceWorkerPostMessage.bind(this));
+        await registration.update();
     }
 
     private onServiceWorkerPostMessage(event: MessageEvent): void {

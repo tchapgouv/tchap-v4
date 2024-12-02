@@ -17,12 +17,12 @@
 import { MatrixEvent } from "matrix-js-sdk/src/matrix";
 import React from "react";
 import classNames from "classnames";
-import { MediaEventHelper } from "matrix-react-sdk/src/utils/MediaEventHelper";
-import { FileDownloader } from "matrix-react-sdk/src/utils/FileDownloader";
-import { _t } from "matrix-react-sdk/src/languageHandler";
-import Spinner from "matrix-react-sdk/src/components/views/elements/Spinner";
-import { RovingAccessibleButton } from "matrix-react-sdk/src/accessibility/RovingTabIndex";
-import { Icon as DownloadIcon } from "matrix-react-sdk/res/img/download.svg";
+import { MediaEventHelper } from "~tchap-web/src/utils/MediaEventHelper";
+import { FileDownloader } from "~tchap-web/src/utils/FileDownloader";
+import { _t } from "~tchap-web/src/languageHandler";
+import Spinner from "~tchap-web/src/components/views/elements/Spinner";
+import { RovingAccessibleButton } from "~tchap-web/src/accessibility/RovingTabIndex";
+import { Icon as DownloadIcon } from "~tchap-web/res/img/download.svg";
 
 import { Media } from "../../../ContentScanningMedia";
 import { BlockedIcon } from "../../../../components/views/elements/BlockedIcon";

@@ -17,12 +17,12 @@
 import "../../../../../../res/css/views/messages/ContentScanningFileBody.pcss";
 
 import React from "react";
-import InlineSpinner from "matrix-react-sdk/src/components/views/elements/InlineSpinner";
-import TextWithTooltip from "matrix-react-sdk/src/components/views/elements/TextWithTooltip";
-import { IBodyProps } from "matrix-react-sdk/src/components/views/messages/IBodyProps";
-import { IMediaEventContent } from "matrix-react-sdk/src/customisations/models/IMediaEventContent";
-import { _t } from "matrix-react-sdk/src/languageHandler";
-import { presentableTextForFile } from "matrix-react-sdk/src/utils/FileUtils";
+import InlineSpinner from "~tchap-web/src/components/views/elements/InlineSpinner";
+import TextWithTooltip from "~tchap-web/src/components/views/elements/TextWithTooltip";
+import { IBodyProps } from "~tchap-web/src/components/views/messages/IBodyProps";
+import { IMediaEventContent } from "~tchap-web/src/customisations/models/IMediaEventContent";
+import { _t } from "~tchap-web/src/languageHandler";
+import { presentableTextForFile } from "~tchap-web/src/utils/FileUtils";
 
 import { Media } from "../../../ContentScanningMedia";
 import OriginalFileBody from "../../../../components/views/messages/OriginalFileBody";

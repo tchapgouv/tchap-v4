@@ -1,9 +1,9 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "jest-matrix-react";
 import React from "react";
-import { flushPromises, stubClient } from "matrix-react-sdk/test/test-utils";
 import { mocked } from "jest-mock";
 import userEvent from "@testing-library/user-event";
 
+import { flushPromises, stubClient } from "~tchap-web/test/test-utils";
 import TchapRedListSettings from "~tchap-web/src/tchap/components/views/settings/tabs/user/TchapRedListSettings";
 import TchapUtils from "~tchap-web/src/tchap/util/TchapUtils";
 

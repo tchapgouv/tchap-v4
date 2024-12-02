@@ -42,14 +42,6 @@ rm -R examples/
 
 popd
 
-cd ../linked-dependencies
-pushd matrix-react-sdk
-yarn unlink # :TCHAP: for local build, undo previous links if present.
-yarn link
-yarn link matrix-js-sdk
-yarn install --pure-lockfile
-popd
-
 
 # :TCHAP: yarn-link modules
 cd .. # go back to root
@@ -66,7 +58,6 @@ done
 
 # Link the layers into element-web
 yarn link matrix-js-sdk
-yarn link matrix-react-sdk
 
 # yarn link matrix-react-sdk
 yarn install --pure-lockfile

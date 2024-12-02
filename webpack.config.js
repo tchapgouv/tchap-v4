@@ -27,30 +27,17 @@ if (!process.env.VERSION) {
 
 const cssThemes = {
     // CSS themes
-    //"theme-legacy-light": "./node_modules/matrix-react-sdk/res/themes/legacy-light/css/legacy-light.pcss",
-    //"theme-legacy-dark": "./node_modules/matrix-react-sdk/res/themes/legacy-dark/css/legacy-dark.pcss",
-    //"theme-light": "./node_modules/matrix-react-sdk/res/themes/light/css/light.pcss",
-    "theme-light-high-contrast":
-        "./node_modules/matrix-react-sdk/res/themes/light-high-contrast/css/light-high-contrast.pcss",
-    //"theme-dark": "./node_modules/matrix-react-sdk/res/themes/dark/css/dark.pcss",
-    //"theme-light-custom": "./node_modules/matrix-react-sdk/res/themes/light-custom/css/light-custom.pcss",
-    //"theme-dark-custom": "./node_modules/matrix-react-sdk/res/themes/dark-custom/css/dark-custom.pcss",
+    // "theme-legacy-light": "./res/themes/legacy-light/css/legacy-light.pcss",
+    // "theme-legacy-dark": "./res/themes/legacy-dark/css/legacy-dark.pcss",
+    // "theme-light": "./res/themes/light/css/light.pcss",
+    "theme-light-high-contrast": "./res/themes/light-high-contrast/css/light-high-contrast.pcss",
+    // "theme-dark": "./res/themes/dark/css/dark.pcss",
+    // "theme-light-custom": "./res/themes/light-custom/css/light-custom.pcss",
+    // "theme-dark-custom": "./res/themes/dark-custom/css/dark-custom.pcss",
     //:tchap: use path from our project
     "theme-light": "./res/themes/tchap-light/css/tchap-light.pcss",
     "theme-dark": "./res/themes/tchap-dark/css/tchap-dark.pcss",
 };
-
-function getActiveThemes() {
-    // :old: :TCHAP: We need both themes to avoid "unknown theme light-custom" or "unknown theme light"
-    // :old: :TCHAP: being thrown on login page.
-    // :old: :TCHAP: Browsers recover, but e2e tests crash, so we add both themes in default here.
-    // Default to `light,dark` theme when the MATRIX_THEMES environment variable is not defined.
-    const theme = process.env.MATRIX_THEMES ?? "light,dark";
-    return theme
-        .split(",")
-        .map((x) => x.trim())
-        .filter(Boolean);
-}
 
 // See docs/customisations.md
 let fileOverrides = {
@@ -85,8 +72,8 @@ function parseOverridesToReplacements(overrides) {
                 resource.request = path.resolve(__dirname, newPath);
                 resource.createData.resource = path.resolve(__dirname, newPath);
                 // Starting with Webpack 5 we also need to set the context as otherwise replacing
-                // files in e.g. matrix-react-sdk with files from element-web will try to resolve
-                // them within matrix-react-sdk (https://github.com/webpack/webpack/issues/17716)
+                // files in e.g. matrix-js-sdk with files from element-web will try to resolve
+                // them within matrix-js-sdk (https://github.com/webpack/webpack/issues/17716)
                 resource.context = path.dirname(resource.request);
                 resource.createData.context = path.dirname(resource.createData.resource);
             },
@@ -112,7 +99,6 @@ module.exports = (env, argv) => {
     //      (called to build nightly and develop.element.io)
     const nodeEnv = argv.mode;
     const devMode = nodeEnv !== "production";
-    const useHMR = process.env.CSS_HOT_RELOAD === "1" && devMode;
     const enableMinification = !devMode && !process.env.CI_PACKAGE;
 
     const development = {};
@@ -131,30 +117,10 @@ module.exports = (env, argv) => {
         }
     }
 
-    // Resolve the directories for the react-sdk and js-sdk for later use. We resolve these early, so we
+    // Resolve the directories for the js-sdk for later use. We resolve these early, so we
     // don't have to call them over and over. We also resolve to the package.json instead of the src
     // directory, so we don't have to rely on an index.js or similar file existing.
-    const reactSdkSrcDir = path.resolve(require.resolve("matrix-react-sdk/package.json"), "..", "src");
     const jsSdkSrcDir = path.resolve(require.resolve("matrix-js-sdk/package.json"), "..", "src");
-
-    const ACTIVE_THEMES = getActiveThemes();
-    function getThemesImports() {
-        const imports = ACTIVE_THEMES.map((t) => {
-            if (useHMR) {
-                //:tchap: path is taken from src/vector/devcss.ts more info -> search "use theming"
-                return cssThemes[`theme-${t}`].replace(".", "../../");
-            }
-
-            // return cssThemes[`theme-${t}`].replace("./node_modules/", ""); // theme import path
-            return cssThemes[`theme-${t}`];
-        });
-        const s = JSON.stringify(ACTIVE_THEMES);
-        return `
-            window.MX_insertedThemeStylesCounter = 0;
-            window.MX_DEV_ACTIVE_THEMES = (${s});
-            ${imports.map((i) => `import("${i}")`).join("\n")};
-        `;
-    }
 
     return {
         ...development,
@@ -165,12 +131,12 @@ module.exports = (env, argv) => {
             bundle: "./src/vector/index.ts",
             mobileguide: "./src/vector/mobile_guide/index.ts",
             jitsi: "./src/vector/jitsi/index.ts",
-            usercontent: "./node_modules/matrix-react-sdk/src/usercontent/index.ts",
+            usercontent: "./src/usercontent/index.ts",
             serviceworker: {
                 import: "./src/serviceworker/index.ts",
                 filename: "sw.js", // update WebPlatform if this changes
             },
-            ...(useHMR ? {} : cssThemes),
+            ...cssThemes,
         },
 
         optimization: {
@@ -249,7 +215,6 @@ module.exports = (env, argv) => {
 
                 // Same goes for js/react-sdk - we don't need two copies.
                 "matrix-js-sdk": path.resolve(__dirname, "node_modules/matrix-js-sdk"),
-                "matrix-react-sdk": path.resolve(__dirname, "node_modules/matrix-react-sdk"),
                 "@matrix-org/react-sdk-module-api": path.resolve(
                     __dirname,
                     "node_modules/@matrix-org/react-sdk-module-api",
@@ -257,9 +222,13 @@ module.exports = (env, argv) => {
                 // and matrix-events-sdk & matrix-widget-api
                 "matrix-events-sdk": path.resolve(__dirname, "node_modules/matrix-events-sdk"),
                 "matrix-widget-api": path.resolve(__dirname, "node_modules/matrix-widget-api"),
+                "oidc-client-ts": path.resolve(__dirname, "node_modules/oidc-client-ts"),
 
                 // Define a variable so the i18n stuff can load
                 "$webapp": path.resolve(__dirname, "webapp"),
+
+                // :TCHAP:
+                "~tchap-web": path.resolve(__dirname, "."),
             },
             fallback: {
                 // Mock out the NodeFS module: The opus decoder imports this wrongly.
@@ -293,25 +262,16 @@ module.exports = (env, argv) => {
                 /olm[\\/](javascript[\\/])?olm\.js$/,
             ],
             rules: [
-                useHMR && {
-                    test: /devcss\.ts$/,
-                    loader: "string-replace-loader",
-                    options: {
-                        search: '"use theming";',
-                        replace: getThemesImports(),
-                    },
-                },
                 {
                     test: /\.(ts|js)x?$/,
                     include: (f) => {
                         // our own source needs babel-ing
                         if (f.startsWith(path.resolve(__dirname, "src"))) return true;
 
-                        // we use the original source files of react-sdk and js-sdk, so we need to
+                        // we use the original source files of js-sdk, so we need to
                         // run them through babel. Because the path tested is the resolved, absolute
                         // path, these could be anywhere thanks to yarn link. We must also not
                         // include node modules inside these modules, so we add 'src'.
-                        if (f.startsWith(reactSdkSrcDir)) return true;
                         if (f.startsWith(jsSdkSrcDir)) return true;
 
                         // Some of the syntax in this package is not understood by
@@ -386,42 +346,7 @@ module.exports = (env, argv) => {
                 {
                     test: /\.pcss$/,
                     use: [
-                        /**
-                         * This code is hopeful that no .pcss outside of our themes will be directly imported in any
-                         * of the JS/TS files.
-                         * Should be MUCH better with webpack 5, but we're stuck to this solution for now.
-                         */
-                        useHMR
-                            ? {
-                                  loader: "style-loader",
-                                  /**
-                                   * If we refactor the `theme.js` in `matrix-react-sdk` a little bit,
-                                   * we could try using `lazyStyleTag` here to add and remove styles on demand,
-                                   * that would nicely resolve issues of race conditions for themes,
-                                   * at least for development purposes.
-                                   */
-                                  options: {
-                                      insert: function insertBeforeAt(element) {
-                                          const parent = document.querySelector("head");
-                                          // We're in iframe
-                                          if (!window.MX_DEV_ACTIVE_THEMES) {
-                                              parent.appendChild(element);
-                                              return;
-                                          }
-                                          // Properly disable all other instances of themes
-                                          element.disabled = true;
-                                          element.onload = () => {
-                                              element.disabled = true;
-                                          };
-                                          const theme =
-                                              window.MX_DEV_ACTIVE_THEMES[window.MX_insertedThemeStylesCounter];
-                                          element.setAttribute("data-mx-theme", theme);
-                                          window.MX_insertedThemeStylesCounter++;
-                                          parent.appendChild(element);
-                                      },
-                                  },
-                              }
-                            : MiniCssExtractPlugin.loader,
+                        MiniCssExtractPlugin.loader,
                         {
                             loader: "css-loader",
                             options: {
@@ -456,6 +381,8 @@ module.exports = (env, argv) => {
                         },
                     ],
                 },
+                // :TCHAP: we still use olm for the content scanner
+                // https://github.com/tchapgouv/tchap-web-v4/issues/1138
                 {
                     // the olm library wants to load its own wasm, rather than have webpack do it.
                     // We therefore use the `file-loader` to tell webpack to dump the contents to
@@ -470,6 +397,7 @@ module.exports = (env, argv) => {
                         outputPath: ".",
                     },
                 },
+                // end :TCHAP:
                 {
                     // Fix up the name of the opus-recorder worker (react-sdk dependency).
                     // We more or less just want it to be clear it's for opus and not something else.
@@ -511,8 +439,11 @@ module.exports = (env, argv) => {
                     },
                 },
                 {
-                    // Same deal as olm.wasm: the decoderWorker wants to load the wasm artifact
-                    // itself.
+                    // The decoderWorker wants to load its own wasm, rather than have webpack do it.
+                    // We therefore use the `file-loader` to tell webpack to dump the contents to
+                    // a separate file and return the name, and override the default `type` for `.wasm` files
+                    // (which is `webassembly/experimental` under webpack 4) to stop webpack trying to interpret
+                    // the filename as webassembly. (see also https://github.com/webpack/webpack/issues/6725)
                     test: /decoderWorker\.min\.wasm$/,
                     loader: "file-loader",
                     type: "javascript/auto",
@@ -670,8 +601,8 @@ module.exports = (env, argv) => {
 
             // This exports our CSS using the splitChunks and loaders above.
             new MiniCssExtractPlugin({
-                filename: useHMR ? "bundles/[name].css" : "bundles/[fullhash]/[name].css",
-                chunkFilename: useHMR ? "bundles/[name].css" : "bundles/[fullhash]/[name].css",
+                filename: "bundles/[fullhash]/[name].css",
+                chunkFilename: "bundles/[fullhash]/[name].css",
                 ignoreOrder: false, // Enable to remove warnings about conflicting order
             }),
 
@@ -723,7 +654,7 @@ module.exports = (env, argv) => {
 
             // This is the usercontent sandbox's entry point (separate for iframing)
             new HtmlWebpackPlugin({
-                template: "./node_modules/matrix-react-sdk/src/usercontent/index.html",
+                template: "./src/usercontent/index.html",
                 filename: "usercontent/index.html",
                 minify: false,
                 chunks: ["usercontent"],
@@ -765,8 +696,7 @@ module.exports = (env, argv) => {
                     { from: "themes/**", context: path.resolve(__dirname, "res") },
                     { from: "vector-icons/**", context: path.resolve(__dirname, "res") },
                     { from: "decoder-ring/**", context: path.resolve(__dirname, "res") },
-                    { from: "media/**", context: path.resolve(__dirname, "node_modules/matrix-react-sdk/res/") },
-                    "node_modules/@matrix-org/olm/olm_legacy.js",
+                    { from: "media/**", context: path.resolve(__dirname, "res/") },
                     { from: "config.json", noErrorOnMissing: true },
                     "contribute.json",
                 ],
@@ -840,6 +770,7 @@ function getAssetOutputPath(url, resourcePath) {
     // `res` is the parent dir for our own assets in various layers
     // `dist` is the parent dir for KaTeX assets
     const prefix = /^.*[/\\](dist|res)[/\\]/;
+
     /**
      * Only needed for https://github.com/element-hq/element-web/pull/15939
      * If keeping this, we are not able to load external assets such as SVG

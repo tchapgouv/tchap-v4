@@ -9,21 +9,17 @@ import {
     ThreepidMedium,
     TweakName,
 } from "matrix-js-sdk/src/matrix";
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen } from "jest-matrix-react";
 
-import Notifications from "~matrix-react-sdk/src/components/views/settings/Notifications";
-import {
-    clearAllModals,
-    getMockClientWithEventEmitter,
-    mockClientMethodsUser,
-} from "~matrix-react-sdk/test/test-utils";
-import SdkConfig from "~matrix-react-sdk/src/SdkConfig";
+import Notifications from "~tchap-web/src/components/views/settings/Notifications";
+import { clearAllModals, getMockClientWithEventEmitter, mockClientMethodsUser } from "~tchap-web/test/test-utils";
+import SdkConfig from "~tchap-web/src/SdkConfig";
 
 // don't pollute test output with error logs from mock rejections
 jest.mock("matrix-js-sdk/src/logger");
 
 // Avoid indirectly importing any eagerly created stores that would require extra setup
-// jest.mock("~matrix-react-sdk/src/Notifier");
+// jest.mock("~tchap-web/src/Notifier");
 
 const flushPromises = async () => await new Promise((resolve) => window.setTimeout(resolve));
 

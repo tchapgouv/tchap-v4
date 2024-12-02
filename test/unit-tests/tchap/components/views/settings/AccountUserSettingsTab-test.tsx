@@ -1,31 +1,32 @@
-import { render } from "@testing-library/react";
+import { render } from "jest-matrix-react";
 import React from "react";
 import { MatrixClient } from "matrix-js-sdk/src/matrix";
 import { logger } from "matrix-js-sdk/src/logger";
 import { mocked, MockedObject } from "jest-mock";
-import AccountUserSettingsTab from "matrix-react-sdk/src/components/views/settings/tabs/user/AccountUserSettingsTab";
-import { SdkContextClass, SDKContext } from "matrix-react-sdk/src/contexts/SDKContext";
-import SettingsStore from "matrix-react-sdk/src/settings/SettingsStore";
-import { UIFeature } from "matrix-react-sdk/src/settings/UIFeature";
-import { OidcClientStore } from "matrix-react-sdk/src/stores/oidc/OidcClientStore";
-import MatrixClientContext from "matrix-react-sdk/src/contexts/MatrixClientContext";
+
+import AccountUserSettingsTab from "~tchap-web/src/components/views/settings/tabs/user/AccountUserSettingsTab";
+import { SdkContextClass, SDKContext } from "~tchap-web/src/contexts/SDKContext";
+import SettingsStore from "~tchap-web/src/settings/SettingsStore";
+import { UIFeature } from "~tchap-web/src/settings/UIFeature";
+import { OidcClientStore } from "~tchap-web/src/stores/oidc/OidcClientStore";
+import MatrixClientContext from "~tchap-web/src/contexts/MatrixClientContext";
 import {
     getMockClientWithEventEmitter,
     mockClientMethodsServer,
     mockClientMethodsUser,
     mockPlatformPeg,
-} from "matrix-react-sdk/test/test-utils";
-import { useId } from "matrix-react-sdk/src/utils/useId";
+} from "~tchap-web/test/test-utils";
+import { useId } from "~tchap-web/src/utils/useId";
 
 jest.mock(
-    "matrix-react-sdk/src/components/views/settings/ChangePassword",
+    "~tchap-web/src/components/views/settings/ChangePassword",
     () =>
         ({ onError, onFinished }: { onError: (e: Error) => void; onFinished: () => void }) => {
             return <button>Mock change password</button>;
         },
 );
 
-jest.mock("matrix-react-sdk/src/utils/useId");
+jest.mock("~tchap-web/src/utils/useId");
 
 describe("<AccountUserSettingsTab />", () => {
     const defaultProps = {

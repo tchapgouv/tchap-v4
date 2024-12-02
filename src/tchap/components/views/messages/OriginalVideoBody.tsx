@@ -21,4 +21,4 @@ limitations under the License.
  * @see ../../../../customisations.json
  */
 
-export { default } from "matrix-react-sdk/src/components/views/messages/MVideoBody";
+export { default } from "~tchap-web/src/components/views/messages/MVideoBody";

@@ -3,9 +3,9 @@ import { HttpApiEvent, MatrixClient } from "matrix-js-sdk/src/matrix";
 
 import ExpiredAccountDialog from "~tchap-web/src/tchap/components/views/dialogs/ExpiredAccountDialog";
 import ExpiredAccountHandler from "~tchap-web/src/tchap/lib/ExpiredAccountHandler";
-import Modal from "~matrix-react-sdk/src/Modal";
-import defaultDispatcher from "~matrix-react-sdk/src/dispatcher/dispatcher";
-import { getMockClientWithEventEmitter } from "~matrix-react-sdk/test/test-utils";
+import Modal from "~tchap-web/src/Modal";
+import defaultDispatcher from "~tchap-web/src/dispatcher/dispatcher";
+import { getMockClientWithEventEmitter } from "~tchap-web/test/test-utils";
 
 describe("ExpiredAccountHandler", () => {
     let mockClient: MockedObject<MatrixClient>;

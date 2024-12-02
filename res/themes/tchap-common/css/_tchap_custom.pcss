@@ -65,7 +65,7 @@
 
 .mx_ThreadsActivityCentreButton .mx_ThreadsActivityCentreButton_Icon,
 .mx_ThreadsActivityCentreButton .mx_ThreadsActivityCentreButton_Text {
-    color: white !important;
+    color: var(--sidebar-button-color) !important;
 }
 
 /* reset-password-warning-close-window */
@@ -77,4 +77,22 @@
 /* help-access-verify-device added help button, so need to have wider width to avoid double line text in other buttons */
 .mx_CompleteSecurityBody {
     width: 726px;
+}
+
+
+/* tchap legacy call bytton*/
+.mx_LegacyCallEvent_wrapper {
+    .mx_LegacyCallEvent {
+      &.mx_LegacyCallEvent_voice {
+        .mx_LegacyCallEvent_content_button_reportBug span::before {
+          mask-image: url("$(res)/img/warning.svg");
+       }
+      }
+    }
+  }
+
+/* tchap green badge color on verification success */
+.mx_E2EIcon_verified::after {
+    mask-image: url("$(res)/img/e2e/verified.svg");
+    background-color: var(--confirmation-color);
 }

@@ -10,8 +10,8 @@ import {
 } from "matrix-js-sdk/src/matrix";
 import fetchMock from "fetch-mock-jest";
 
-import { getMockClientWithEventEmitter, mockClientMethodsCrypto } from "~matrix-react-sdk/test/test-utils";
-import { collectBugReport } from "~matrix-react-sdk/src/rageshake/submit-rageshake";
+import { getMockClientWithEventEmitter, mockClientMethodsCrypto } from "~tchap-web/test/test-utils";
+import { collectBugReport } from "~tchap-web/src/rageshake/submit-rageshake";
 
 /**
  * Based on react-sdk's test, removed unused things. Maybe this test has more mocks than strictly necessary.
@@ -83,7 +83,7 @@ describe("Rageshakes", () => {
             expect(appName).toBe("tchap-web");
         });
 
-        it("should include custom app name ", async () => {
+        it("should include custom app name", async () => {
             const formData = await collectBugReport({ customApp: "toto" });
             const appName = formData.get("app");
 

@@ -1,14 +1,13 @@
 import React from "react";
-import { RenderResult, render, screen } from "@testing-library/react";
+import { RenderResult, render, screen } from "jest-matrix-react";
 import userEvent from "@testing-library/user-event";
-import { MatrixClientPeg } from "matrix-react-sdk/src/MatrixClientPeg";
 import { EventEmitter } from "events";
 
-import { TchapRoomType } from "../../../../../../src/tchap/@types/tchap";
-import TchapUtils from "../../../../../../src/tchap/util/TchapUtils";
-import TchapCreateRoomDialog from "../../../../../../src/tchap/components/views/dialogs/TchapCreateRoomDialog";
-
-import { flushPromises } from "~matrix-react-sdk/test/test-utils";
+import { TchapRoomType } from "~tchap-web/src/tchap/@types/tchap";
+import TchapUtils from "~tchap-web/src/tchap/util/TchapUtils";
+import TchapCreateRoomDialog from "~tchap-web/src/tchap/components/views/dialogs/TchapCreateRoomDialog";
+import { MatrixClientPeg } from "~tchap-web/src/MatrixClientPeg";
+import { flushPromises } from "~tchap-web/test/test-utils";
 
 //mocking module with jest.mock should be done outside the test. Before any import of the mocked module.
 //I could not make a mock of TchapCreateRoomDialog, the real implementation was taken each time. Then I used jest spyOn

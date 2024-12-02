@@ -19,21 +19,13 @@
         /* :TCHAP: */
         "paths": {
             "~tchap-web/*": ["./*"],
-            "~matrix-react-sdk/*": ["./linked-dependencies/matrix-react-sdk/*"],
-            "matrix-react-sdk/*": ["./linked-dependencies/matrix-react-sdk/*"]
+            "jest-matrix-react": ["./test/test-utils/jest-matrix-react"]
         },
         "types": ["node", "jest", "@testing-library/jest-dom"]
         /* end :TCHAP: */
     },
     "include": [
         "./node_modules/matrix-js-sdk/src/@types/*.d.ts",
-        "./node_modules/matrix-react-sdk/src/@types/react.d.ts",
-        "./node_modules/matrix-react-sdk/src/@types/diff-dom.d.ts",
-        "./node_modules/matrix-react-sdk/src/@types/opus-recorder.d.ts",
-        "./node_modules/matrix-react-sdk/src/@types/png-chunks-extract.d.ts",
-        "./node_modules/matrix-react-sdk/src/@types/sanitize-html.d.ts",
-        "./node_modules/matrix-react-sdk/src/@types/matrix-js-sdk.d.ts",
-        "./node_modules/matrix-react-sdk/src/@types/electron-to-chromium.d.ts",
         "./src/**/*.ts",
         "./src/**/*.tsx",
         "./test/**/*.ts",

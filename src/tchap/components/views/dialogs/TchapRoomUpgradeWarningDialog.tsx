@@ -18,16 +18,16 @@ import React, { ReactNode, SyntheticEvent } from "react";
 import { EventType } from "matrix-js-sdk/src/@types/event";
 import { JoinRule } from "matrix-js-sdk/src/@types/partials";
 
-import { _t } from "matrix-react-sdk/src/languageHandler";
-import SdkConfig from "matrix-react-sdk/src/SdkConfig";
-import LabelledToggleSwitch from "matrix-react-sdk/src/components/views/elements/LabelledToggleSwitch";
-import { MatrixClientPeg } from "matrix-react-sdk/src/MatrixClientPeg";
-import Modal from "matrix-react-sdk/src/Modal";
-import BugReportDialog from "matrix-react-sdk/src/components/views/dialogs/BugReportDialog";
-import BaseDialog from "matrix-react-sdk/src/components/views/dialogs/BaseDialog";
-import DialogButtons from "matrix-react-sdk/src/components/views/elements/DialogButtons";
-import ProgressBar from "matrix-react-sdk/src/components/views/elements/ProgressBar";
-import AccessibleButton from "matrix-react-sdk/src/components/views/elements/AccessibleButton";
+import { _t } from "~tchap-web/src/languageHandler";
+import SdkConfig from "~tchap-web/src/SdkConfig";
+import LabelledToggleSwitch from "~tchap-web/src/components/views/elements/LabelledToggleSwitch";
+import { MatrixClientPeg } from "~tchap-web/src/MatrixClientPeg";
+import Modal from "~tchap-web/src/Modal";
+import BugReportDialog from "~tchap-web/src/components/views/dialogs/BugReportDialog";
+import BaseDialog from "~tchap-web/src/components/views/dialogs/BaseDialog";
+import DialogButtons from "~tchap-web/src/components/views/elements/DialogButtons";
+import ProgressBar from "~tchap-web/src/components/views/elements/ProgressBar";
+import AccessibleButton from "~tchap-web/src/components/views/elements/AccessibleButton";
 import { TchapRoomType } from "../../../@types/tchap";
 import TchapRoomUtils from "../../../util/TchapRoomUtils";
 

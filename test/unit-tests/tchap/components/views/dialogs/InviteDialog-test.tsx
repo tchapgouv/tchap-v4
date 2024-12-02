@@ -1,19 +1,19 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "jest-matrix-react";
 import userEvent from "@testing-library/user-event";
 import { MatrixClient, MatrixError, Room } from "matrix-js-sdk/src/matrix";
 import { Mocked } from "jest-mock";
 
-import InviteDialog from "~matrix-react-sdk/src/components/views/dialogs/InviteDialog";
-import { InviteKind } from "~matrix-react-sdk/src/components/views/dialogs/InviteDialogTypes";
-import DMRoomMap from "~matrix-react-sdk/src/utils/DMRoomMap";
-import SdkConfig from "~matrix-react-sdk/src/SdkConfig";
-import { ValidatedServerConfig } from "~matrix-react-sdk/src/utils/ValidatedServerConfig";
-import { IConfigOptions } from "~matrix-react-sdk/src/IConfigOptions";
-import { SdkContextClass } from "~matrix-react-sdk/src/contexts/SDKContext";
-import { IProfileInfo } from "~matrix-react-sdk/src/hooks/useProfileInfo";
-import Modal from "~matrix-react-sdk/src/Modal";
-import { filterConsole, flushPromises, getMockClientWithEventEmitter } from "~matrix-react-sdk/test/test-utils";
+import InviteDialog from "~tchap-web/src/components/views/dialogs/InviteDialog";
+import { InviteKind } from "~tchap-web/src/components/views/dialogs/InviteDialogTypes";
+import DMRoomMap from "~tchap-web/src/utils/DMRoomMap";
+import SdkConfig from "~tchap-web/src/SdkConfig";
+import { ValidatedServerConfig } from "~tchap-web/src/utils/ValidatedServerConfig";
+import { IConfigOptions } from "~tchap-web/src/IConfigOptions";
+import { SdkContextClass } from "~tchap-web/src/contexts/SDKContext";
+import { IProfileInfo } from "~tchap-web/src/hooks/useProfileInfo";
+import Modal from "~tchap-web/src/Modal";
+import { filterConsole, flushPromises, getMockClientWithEventEmitter } from "~tchap-web/test/test-utils";
 
 const getSearchField = () => screen.getByTestId("invite-dialog-input");
 
@@ -130,7 +130,7 @@ describe("InviteDialog", () => {
         // Type and enter
         await enterIntoSearchField(aliceUppercaseEmail);
 
-        // Because it has been transoformed to lowercase, it shoyld not be found in the document
+        // Because it has been transoformed to lowercase, it should not be found in the document
         expect(screen.queryByText(aliceUppercaseEmail)).not.toBeInTheDocument();
 
         expect(screen.queryByText(aliceEmail)).toBeInTheDocument();

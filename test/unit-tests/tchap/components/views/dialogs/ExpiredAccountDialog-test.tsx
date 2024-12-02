@@ -1,8 +1,8 @@
 import * as React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "jest-matrix-react";
 
 import ExpiredAccountDialog from "~tchap-web/src/tchap/components/views/dialogs/ExpiredAccountDialog";
-import { flushPromises } from "~matrix-react-sdk/test/test-utils";
+import { flushPromises } from "~tchap-web/test/test-utils";
 import TchapUtils from "~tchap-web/src/tchap/util/TchapUtils";
 
 describe("ExpiredAccountDialog", () => {

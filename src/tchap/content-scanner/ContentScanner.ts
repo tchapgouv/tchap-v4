@@ -15,12 +15,12 @@
  */
 
 import { getHttpUriForMxc } from "matrix-js-sdk/src/content-repo";
-import { IEncryptedFile } from "matrix-react-sdk/src/customisations/models/IMediaEventContent";
+import { IEncryptedFile } from "~tchap-web/src/customisations/models/IMediaEventContent";
 import { PkEncryption } from "@matrix-org/olm";
 import { ResizeMethod } from "matrix-js-sdk/src/@types/partials";
-import { MatrixClientPeg } from "matrix-react-sdk/src/MatrixClientPeg";
-import SdkConfig from "matrix-react-sdk/src/SdkConfig";
-import { IConfigOptions } from "matrix-react-sdk/src/IConfigOptions";
+import { MatrixClientPeg } from "~tchap-web/src/MatrixClientPeg";
+import SdkConfig from "~tchap-web/src/SdkConfig";
+import { IConfigOptions } from "~tchap-web/src/IConfigOptions";
 
 export enum ScanErrorReason {
     RequestFailed = "MCS_MEDIA_REQUEST_FAILED",
