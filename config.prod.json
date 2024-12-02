@@ -197,7 +197,7 @@
         "feature_thread": ["agent.dinum.tchap.gouv.fr", "agent.finances.tchap.gouv.fr"],
         "feature_space": ["*"],
         "feature_audio_call": ["*"],
-        "feature_video_call": ["agent.dinum.tchap.gouv.fr", "agent.tchap.gouv.fr", "agent.education.tchap.gouv.fr"],
+        "feature_video_call": ["*"],
         "feature_video_group_call": [],
         "feature_screenshare_call": ["*"]
     },
