@@ -119,5 +119,11 @@
             "src/components/structures/UserMenu.tsx",
             "src/components/views/settings/tabs/user/SessionManagerTab.tsx"
         ]
+    },
+    "last-admin-warning-room-settings": {
+        "issue": "https://github.com/tchapgouv/tchap-web-v4/issues/1092",
+        "files": [
+            "src/components/views/settings/PowerLevelSelector.tsx"
+        ]
     }
 }

@@ -7,6 +7,7 @@ import { MatrixClientPeg } from "~tchap-web/src/MatrixClientPeg";
 
 import { TchapRoomAccessRule, TchapRoomAccessRulesEventId, TchapRoomType } from "../@types/tchap";
 import { GuestAccess, JoinRule } from "matrix-js-sdk/src/matrix";
+import { RoomPowerLevelsEventContent } from "matrix-js-sdk/src/types";
 
 export default class TchapRoomUtils {
     //inspired by https://github.com/tchapgouv/tchap-android/blob/develop/vector/src/main/java/fr/gouv/tchap/core/utils/RoomUtils.kt#L31
@@ -81,5 +82,14 @@ export default class TchapRoomUtils {
             return GuestAccess.CanJoin;
         }
         return event;
+    }
+
+    // check at least one admin in the list
+    static roomHasAtLeastOneAdmin(usersLevels: Record<string, number>) : boolean{
+        const userLevelValues = Object.values(usersLevels);
+
+        // At least one user as the pL 100 which means he is admin
+        return userLevelValues.some((uL) => uL === 100);
+
     }
 }
