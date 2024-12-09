@@ -36,6 +36,7 @@ export function eventTriggersUnreadCount(client: MatrixClient, ev: MatrixEvent):
         case EventType.RoomServerAcl:
         case M_BEACON.name:
         case M_BEACON.altName:
+        case EventType.RoomPowerLevels: // :TCHAP: remove-notification-powerlevel-change
             return false;
     }
 

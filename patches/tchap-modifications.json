@@ -125,5 +125,11 @@
         "files": [
             "src/components/views/settings/PowerLevelSelector.tsx"
         ]
+    },
+    "remove-notification-powerlevel-change": {
+        "issue": "https://github.com/tchapgouv/tchap-web-v4/issues/1176",
+        "files": [
+            "src/Unread.ts"
+        ]
     }
 }
