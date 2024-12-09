@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, waitFor, waitForElementToBeRemoved } from "jest-matrix-react";
+import { logRoles, render, screen, waitFor, waitForElementToBeRemoved } from "jest-matrix-react";
 import { mocked } from "jest-mock";
 import { EventType, GuestAccess, JoinRule, MatrixClient, Room } from "matrix-js-sdk/src/matrix";
 import userEvent from "@testing-library/user-event";
@@ -11,9 +11,11 @@ import { makeRoomPermalink } from "~tchap-web//src/utils/permalinks/Permalinks";
 import TchapRoomLinkAccess from "~tchap-web//src/tchap/components/views/rooms/TchapRoomLinkAccess";
 import { TchapRoomType } from "~tchap-web//src/tchap/@types/tchap";
 import TchapRoomUtils from "~tchap-web/src/tchap/util/TchapRoomUtils";
+import SdkConfig, { ConfigOptions } from "~tchap-web/src/SdkConfig";
 
 jest.mock("~tchap-web/src/tchap/util/TchapRoomUtils");
 jest.mock("~tchap-web//src/utils/permalinks/Permalinks");
+jest.mock("~tchap-web/src/utils/permalinks/ElementPermalinkConstructor");
 
 describe("TchapRoomLinkAccess", () => {
     const client: MatrixClient = stubClient();
@@ -26,6 +28,9 @@ describe("TchapRoomLinkAccess", () => {
     const mockedLinked = "https://testmocked.matrix.org";
 
     const getComponent = () => render(<TchapRoomLinkAccess room={room} onUpdateParentView={onUpdateParentView} />);
+
+    const config: ConfigOptions = { permalink_prefix: "localhost" };
+    SdkConfig.put(config);
 
     beforeEach(() => {
         mockedTchapRoomUtils.getTchapRoomType.mockImplementation(() => TchapRoomType.Private);
@@ -100,9 +105,8 @@ describe("TchapRoomLinkAccess", () => {
     });
 
     it("should activate link when clicking on the switch", async () => {
-        // jest.useFakeTimers();
-
         mockedTchapRoomUtils.getRoomJoinRule.mockImplementation(() => JoinRule.Invite);
+
         getComponent();
 
         await flushPromises();
@@ -126,9 +130,43 @@ describe("TchapRoomLinkAccess", () => {
 
         await waitForElementToBeRemoved(dialog);
         // should activate the switch with public join rule value
-        expect(mockedMakeRoomPermalink).toHaveBeenCalledTimes(1);
+        expect(room.client.createAlias).toHaveBeenCalledTimes(1);
+
         // joinrule to public, guest access to forbiden and canonical alias
         expect(room.client.sendStateEvent).toHaveBeenCalledTimes(3);
+
+        expect(switchLink).toHaveAttribute("aria-checked", "true");
+    });
+
+    it("should use existing alias", async () => {
+        jest.spyOn(room, "getCanonicalAlias").mockImplementation(() => "alias:domaing@test.fr");
+        mockedTchapRoomUtils.getRoomJoinRule.mockImplementation(() => JoinRule.Invite);
+        const { container } = getComponent();
+
+        await flushPromises();
+
+        const switchLink = screen.getByRole("switch");
+
+        // should open dialog
+        userEvent.click(switchLink);
+
+        await waitEnoughCyclesForModal({
+            useFakeTimers: true,
+        });
+
+        const dialog = await screen.findByRole("dialog");
+
+        expect(dialog).toMatchSnapshot();
+
+        const confirmButton = screen.getByTestId("dialog-primary-button");
+
+        userEvent.click(confirmButton);
+
+        await waitForElementToBeRemoved(dialog);
+        // should activate the switch with public join rule value
+        expect(mockedMakeRoomPermalink).toHaveBeenCalledTimes(1);
+
+        logRoles(container);
         expect(switchLink).toHaveAttribute("aria-checked", "true");
     });
 

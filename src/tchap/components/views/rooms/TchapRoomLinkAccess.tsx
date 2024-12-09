@@ -1,17 +1,20 @@
-import { EventType, GuestAccess, JoinRule, Room } from "matrix-js-sdk/src/matrix";
+import { EventTimeline, EventType, GuestAccess, JoinRule, Room } from "matrix-js-sdk/src/matrix";
 
 import React, { useEffect, useState } from 'react';
 import LabelledToggleSwitch from '~tchap-web/src/components/views/elements/LabelledToggleSwitch';
 import { _t } from '~tchap-web/src/languageHandler';
 import { randomString } from 'matrix-js-sdk/src/randomstring';
 import TchapRoomUtils from '../../../util/TchapRoomUtils';
-import { makeRoomPermalink } from "~tchap-web/src/utils/permalinks/Permalinks";
+import { makeRoomPermalink, RoomPermalinkCreator } from "~tchap-web/src/utils/permalinks/Permalinks";
 import { TchapRoomType } from "../../../@types/tchap";
 import { RoomJoinRulesEventContent } from "matrix-js-sdk/lib/types";
 import CopyableText from "~tchap-web/src/components/views/elements/CopyableText";
 import Modal from "~tchap-web/src/Modal";
 import QuestionDialog from "~tchap-web/src/components/views/dialogs/QuestionDialog";
 import ErrorDialog from "~tchap-web/src/components/views/dialogs/ErrorDialog";
+import MatrixToPermalinkConstructor from "~tchap-web/src/utils/permalinks/MatrixToPermalinkConstructor";
+import ElementPermalinkConstructor from "~tchap-web/src/utils/permalinks/ElementPermalinkConstructor";
+import SdkConfig from "~tchap-web/src/SdkConfig";
 
 interface ITchapRoomLinkAccessProps {
     room: Room,
@@ -30,7 +33,6 @@ export default function TchapRoomLinkAccess({room, onUpdateParentView}: ITchapRo
         // We disable link sharing if its a forum or user not admin
         if (!TchapRoomUtils.isUserAdmin(room) || TchapRoomUtils.getTchapRoomType(room) === TchapRoomType.Forum) {
             setDisableLinkSharing(true);
-            return;
         }
 
         const isActivated = isJoinRulePublic();
@@ -51,17 +53,27 @@ export default function TchapRoomLinkAccess({room, onUpdateParentView}: ITchapRo
     // Create the permalink to share
     const _setUpRoomByLink = async () => {
         try {
+            let link = "";
             // create an alias if not existing
             if (!room.getCanonicalAlias()) {
                 const aliasName = (room.name?.replace(/[^a-z0-9]/gi, "") ?? "") + randomString(11);
                 const fullAlias = `#${aliasName}:${room.client.getDomain()}`;
+                
                 await room.client.createAlias(fullAlias, room.roomId)
                 await room.client.sendStateEvent(room.roomId, EventType.RoomCanonicalAlias, { alias: fullAlias }, "")
+                
+                // we don't know why he cant detect directly that the canonical alias was created previously
+                // so here we force the use of the newly created alias in the link
+                const permalinkCreator = new RoomPermalinkCreator(room);
+                permalinkCreator.load();
+                const tchapPrefix: string = SdkConfig.get("permalink_prefix")!
+                link = new ElementPermalinkConstructor(tchapPrefix).forRoom(fullAlias, permalinkCreator.serverCandidates || [])
+            } else {
+                // it will take the new alias created previously or the existing one to make a link
+                link = makeRoomPermalink(room.client, room.roomId);
             }
 
-            // it will take the new alias created previously or the existing one to make a link
-            const link = makeRoomPermalink(room.client, room.roomId);
-            setLinkSharingUrl(link);    
+            setLinkSharingUrl(link);
         } catch(err) {
             console.error(err);
             throw err;
