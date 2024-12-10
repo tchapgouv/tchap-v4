@@ -43,6 +43,7 @@ import { waitForMember } from "./utils/membership";
 import { PreferredRoomVersions } from "./utils/PreferredRoomVersions";
 import SettingsStore from "./settings/SettingsStore";
 import { MEGOLM_ENCRYPTION_ALGORITHM } from "./utils/crypto";
+import ExternalAccountHandler from "./tchap/lib/ExternalAccountHandler";
 
 // we define a number of interfaces which take their names from the js-sdk
 /* eslint-disable camelcase */
@@ -381,6 +382,13 @@ export default async function createRoom(client: MatrixClient, opts: IOpts): Pro
                     action: Action.JoinRoomError,
                     roomId,
                 });
+
+                // :TCHAP: externals-error-messages
+                if (ExternalAccountHandler.isUserExternal(client)) {
+                    ExternalAccountHandler.createRoomError();
+                    return;
+                }
+                // end :TCHAP: 
                 logger.error("Failed to create room " + roomId + " " + err);
                 let description = _t("create_room|generic_error");
                 if (err.errcode === "M_UNSUPPORTED_ROOM_VERSION") {
