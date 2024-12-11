@@ -664,6 +664,11 @@ module.exports = (env, argv) => {
                 files: [{ match: /.*Inter.*\.woff2$/ }],
             }),
 
+            // :TCHAP: marianne-typo
+            new HtmlWebpackInjectPreload({
+                files: [{ match: /.*Marianne.*\.woff2$/ }],
+            }),
+            // end :TCHAP:
             // Upload to sentry if sentry env is present
             // This plugin throws an error on import on some platforms like ppc64le & s390x even if the plugin isn't called,
             // so we require it conditionally.
