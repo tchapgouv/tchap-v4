@@ -339,7 +339,7 @@ export default class SecurityUserSettingsTab extends React.Component<IProps, ISt
             };
             privacySection = (
                 <SettingsSection heading={_t("common|privacy")}>
-                    <DiscoverySettings />
+                    {/* <DiscoverySettings /> :TCHAP: metrics-call we remove the discovery settings that appear when posthog is enabled */}
                     <SettingsSubsection
                         heading={_t("common|analytics")}
                         description={_t("settings|security|analytics_description")}
