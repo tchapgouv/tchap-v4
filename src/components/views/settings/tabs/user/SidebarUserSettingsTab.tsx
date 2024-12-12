@@ -129,13 +129,8 @@ const SidebarUserSettingsTab: React.FC = () => {
                         className="mx_SidebarUserSettingsTab_checkbox"
                     >
                         <SettingsSubsectionText>
-<<<<<<< HEAD
-                            <MembersIcon />
-                            {_t("Direct Messages") /* TCHAP: use-the-term-direct-messages-not-people - change label _t("common|people") */}
-=======
                             <UserProfileSolidIcon />
-                            {_t("common|people")}
->>>>>>> v1.11.87
+                            {_t("Direct Messages") /* TCHAP: use-the-term-direct-messages-not-people - change label _t("common|people") */}
                         </SettingsSubsectionText>
                         <SettingsSubsectionText>
                             {_t("settings|sidebar|metaspaces_people_description")}

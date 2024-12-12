@@ -422,15 +422,13 @@ export default class SecurityRoomSettingsTab extends React.Component<IProps, ISt
         const client = this.context;
         const room = this.props.room;
         const isEncrypted = this.state.encrypted;
-<<<<<<< HEAD
         /* :TCHAP: disable-access-options - does not allow changing encryption
-=======
         const isEncryptionLoading = isEncrypted === null;
->>>>>>> v1.11.87
         const hasEncryptionPermission = room.currentState.mayClientSendStateEvent(EventType.RoomEncryption, client);
         const isEncryptionForceDisabled = shouldForceDisableEncryption(client);
         const canEnableEncryption = !isEncrypted && !isEncryptionForceDisabled && hasEncryptionPermission;
         */
+        const isEncryptionLoading = isEncrypted === null;
         const isEncryptionForceDisabled = false;
         const canEnableEncryption = false;
         // end :TCHAP:
