@@ -8,15 +8,11 @@ SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
 Please see LICENSE files in the repository root for full details.
 */
 
-<<<<<<< HEAD
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import olmWasmPath from "@matrix-org/olm/olm.wasm";
 import Olm from "@matrix-org/olm";
-import * as ReactDOM from "react-dom";
-=======
 import { createRoot } from "react-dom/client";
->>>>>>> v1.11.87
 import React, { StrictMode } from "react";
 import { logger } from "matrix-js-sdk/src/logger";
 

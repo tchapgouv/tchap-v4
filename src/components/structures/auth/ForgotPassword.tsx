@@ -337,15 +337,13 @@ export default class ForgotPassword extends React.Component<Props, State> {
 
         /* :TCHAP: at this point we may not know the serverConfig to use yet. So don't check.
         // Refresh the server errors. Just in case the server came back online of went offline.
-<<<<<<< HEAD
-        await this.checkServerLiveliness(this.props.serverConfig);
-        end :TCHAP: */
-=======
+        
         const serverIsAlive = await this.checkServerLiveliness(this.props.serverConfig);
->>>>>>> v1.11.87
 
         // Server error
         if (!serverIsAlive) return;
+        
+        end :TCHAP: */
 
         switch (this.state.phase) {
             case Phase.EnterEmail:
