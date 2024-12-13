@@ -30,9 +30,9 @@ function merge_patches() {
   function merge_one_patch() {
       local PATCH_PATH=$1
       local PATCH_DIR=$(basename "$(dirname "$PATCH_PATH")")
-      local PATCH_FILE=$(basename $PATCH_PATH)    
+      local PATCH_FILE=$(basename $PATCH_PATH)
       local PACKAGE_NAME=$(echo "$PATCH_FILE" | cut -d'+' -f1)
-      local PACKAGE_VERSION=$(python -c "import json; f = open('$PACKAGE_JSON'); data = json.load(f); f.close(); print(data['dependencies'].get('$PACKAGE_NAME', 'null'))")
+      local PACKAGE_VERSION=$(grep \"$PACKAGE_NAME\" package.json  | cut -d '"' -f 4 | head -n 1)
       echo "# Manage $PATCH_PATH"
 
       # Check if the package version exists and if the patch needs to be updated
@@ -62,6 +62,7 @@ function merge_patches() {
       yarn add patch-package <> $LOG_FILE 2>&1
 
       # Apply the patch with --merge option
+      # if this fails on macos, use GNU patch instead of macos patch : brew install gpatch
       patch -p1 --no-backup-if-mismatch --input="$PATCH_PATH" --forward --merge 2>&1 >> $LOG_FILE || true
 
       # Check for conflicts
