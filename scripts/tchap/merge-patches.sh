@@ -30,7 +30,7 @@ function merge_patches() {
   function merge_one_patch() {
       local PATCH_PATH=$1
       local PATCH_DIR=$(basename "$(dirname "$PATCH_PATH")")
-      local PATCH_FILE=$(basename $PATCH_PATH)    
+      local PATCH_FILE=$(basename $PATCH_PATH)
       local PACKAGE_NAME=$(echo "$PATCH_FILE" | cut -d'+' -f1)
       local PACKAGE_VERSION=$(python -c "import json; f = open('$PACKAGE_JSON'); data = json.load(f); f.close(); print(data['dependencies'].get('$PACKAGE_NAME', 'null'))")
       echo "# Manage $PATCH_PATH"
@@ -121,6 +121,7 @@ function continue_patches() {
     local PATCH_FILE=$(basename $PATCH_PATH)
     local PACKAGE_NAME=$(echo "$PATCH_FILE" | cut -d'+' -f1)
     local LOG_FILE="$PACKAGE_TEMP_DIR".log
+    local PACKAGE_VERSION=$(python -c "import json; f = open('$PACKAGE_JSON'); data = json.load(f); f.close(); print(data['dependencies'].get('$PACKAGE_NAME', 'null'))")
     echo "# Manage $PATCH_PATH"
     echo "PACKAGE_NAME=$PACKAGE_NAME"
     echo "PACKAGE_TEMP_DIR=$PACKAGE_TEMP_DIR"
@@ -144,6 +145,15 @@ function continue_patches() {
       cp patches/*.patch "$PATCH_DIR"
       #cp patches/*.patch "$PATCH_DIR"
       #rm $PATCH_PATH
+
+      OLD="3.79.0" # todo
+
+      # Setup the git rename properly. Also keep the old version of the patch for review.
+      mv "$PATCH_DIR/$PACKAGE_NAME+$PACKAGE_VERSION.patch" "$PACKAGE_NAME+$PACKAGE_VERSION.patch"
+      cp $PATCH_DIR/$PACKAGE_NAME+$OLD.patch $PATCH_DIR/$PACKAGE_NAME+$OLD.old.patch
+      git mv $PATCH_DIR/$PACKAGE_NAME+$OLD.patch $PATCH_DIR/$PACKAGE_NAME+$PACKAGE_VERSION.patch
+      mv $PACKAGE_NAME+$PACKAGE_VERSION.patch $PATCH_DIR/$PACKAGE_NAME+$PACKAGE_VERSION.patch
+      git add $PATCH_DIR/$PACKAGE_NAME+$PACKAGE_VERSION.patch
 
       # Clean up the package subfolder
       cd "$TEMP_DIR"
