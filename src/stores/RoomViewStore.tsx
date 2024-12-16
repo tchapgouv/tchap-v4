@@ -56,6 +56,7 @@ import { CancelAskToJoinPayload } from "../dispatcher/payloads/CancelAskToJoinPa
 import { SubmitAskToJoinPayload } from "../dispatcher/payloads/SubmitAskToJoinPayload";
 import { ModuleRunner } from "../modules/ModuleRunner";
 import { setMarkedUnreadState } from "../utils/notifications";
+import ExternalAccountHandler from "../tchap/lib/ExternalAccountHandler";
 
 const NUM_JOIN_RETRY = 5;
 
@@ -619,6 +620,13 @@ export class RoomViewStore extends EventEmitter {
             description = _t("Access possible only by invitation of a member of the room.");
         }
         /* end :TCHAP: */
+        // :TCHAP: externals-error-messages
+        const cli = MatrixClientPeg.safeGet();
+        if (ExternalAccountHandler.isUserExternal(cli)) {
+            ExternalAccountHandler.joinRoomError(cli.getRoom(roomId)!);
+            return;
+        }
+        // end :TCHAP: 
 
         if (err.name === "ConnectionError") {
             description = _t("room|error_join_connection");

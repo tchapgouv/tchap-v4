@@ -925,5 +925,29 @@
     "user_info|demote_self_confirm_description_space": {
         "en": "Before removing the admin role, verify that there is at least one admin in the space. Otherwise, this space won't be manageable anymore. Note that only an admin can reaffect this role to a user",
         "fr": "Avant de retirer votre rôle d'administrateur, vérifiez qu'un autre administrateur est présent dans l'espace. Sans cela, l'espace ne pourra plus être géré. Notez que seul un administrateur pourra vous réattribuer ce rôle."
+    },
+    "room|error_join_generic_external": {
+        "en": "As an external user, you don't have access to this room.",
+        "fr": "En tant qu'invité externe, vous n'avez pas accès à ce salon."
+    },
+    "room|error_join_public_external": {
+        "en": "As an external user, you can not access public rooms",
+        "fr": "En tant qu'invité externe, vous n'avez pas accès aux salons publics"
+    },
+    "room|error_join_private_external": {
+        "en": "As an external user, you can not access private rooms. You can ask the room admin to invite",
+        "fr": "En tant qu'invité externe, vous n'avez pas accès aux salons privés. Demander à l'administrateur.ice de vous inviter"
+    },
+    "room|error_create_room_external": {
+        "en": "As an external user, you can not create a private room.",
+        "fr": "En tant qu'invité externe, vous n'avez pas la possibilité de créer un salon privé."
+    },
+    "create_space|error_external": {
+        "en": "As an external user, you can not create a space.",
+        "fr": "En tant qu'invité externe, vous n'avez pas la possibilité de créer un espace"
+    },
+    "create_space|error_title": {
+        "en": "Impossible to create the space",
+        "fr": "Impossible de créer l'espace"
     }
 }

@@ -45,6 +45,7 @@ import { Action } from "../../../dispatcher/actions";
 import { Filter } from "../dialogs/spotlight/Filter";
 import { OpenSpotlightPayload } from "../../../dispatcher/payloads/OpenSpotlightPayload.ts";
 import TchapUrls from "~tchap-web/src/tchap/util/TchapUrls"; // :TCHAP: space-remove-public-and-subspace
+import ExternalAccountHandler from "~tchap-web/src/tchap/lib/ExternalAccountHandler.ts";
 
 export const createSpace = async (
     client: MatrixClient,
@@ -262,6 +263,12 @@ const SpaceCreateMenu: React.FC<{
 
             onFinished();
         } catch (e) {
+            // :TCHAP: externals-error-messages
+            if (ExternalAccountHandler.isUserExternal(cli)) {
+                ExternalAccountHandler.createSpaceError();
+                return;
+            }
+            // end :TCHAP: 
             logger.error(e);
         }
     };
