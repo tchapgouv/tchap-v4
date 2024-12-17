@@ -969,6 +969,9 @@ export default class LegacyCallHandler extends EventEmitter {
 
         call.answer();
         this.setActiveCallRoomId(roomId);
+        /** :TCHAP: metrics-call **/
+        TchapPosthog.instance.trackCallStart(call);
+        /** end :TCHAP: **/
         dis.dispatch<ViewRoomPayload>({
             action: Action.ViewRoom,
             room_id: roomId,
