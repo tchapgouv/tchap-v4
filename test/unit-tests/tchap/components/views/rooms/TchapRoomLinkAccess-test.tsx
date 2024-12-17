@@ -174,7 +174,6 @@ describe("TchapRoomLinkAccess", () => {
         await waitFor(() => {
             expect(switchLink).toHaveAttribute("aria-checked", "true");
         });
-
     });
 
     it("should deactivate link when clicking on the switch", async () => {
