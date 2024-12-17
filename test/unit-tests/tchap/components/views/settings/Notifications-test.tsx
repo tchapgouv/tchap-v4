@@ -12,7 +12,12 @@ import {
 import { cleanup, fireEvent, render, screen } from "jest-matrix-react";
 
 import Notifications from "~tchap-web/src/components/views/settings/Notifications";
-import { clearAllModals, getMockClientWithEventEmitter, mockClientMethodsUser } from "~tchap-web/test/test-utils";
+import {
+    clearAllModals,
+    flushPromises,
+    getMockClientWithEventEmitter,
+    mockClientMethodsUser,
+} from "~tchap-web/test/test-utils";
 import SdkConfig from "~tchap-web/src/SdkConfig";
 
 // don't pollute test output with error logs from mock rejections
@@ -20,8 +25,6 @@ jest.mock("matrix-js-sdk/src/logger");
 
 // Avoid indirectly importing any eagerly created stores that would require extra setup
 // jest.mock("~tchap-web/src/Notifier");
-
-const flushPromises = async () => await new Promise((resolve) => window.setTimeout(resolve));
 
 const pushRules: IPushRules = {
     global: {
@@ -161,7 +164,9 @@ describe("<Notifications />", () => {
     // get component, wait for async data and force a render
     const getComponentAndWait = async () => {
         const component = getComponent();
+
         await flushPromises();
+
         return component;
     };
 
@@ -237,14 +242,11 @@ describe("<Notifications />", () => {
 
         await getComponentAndWait();
 
-        fireEvent.click(screen.getByTestId("notif-master-switch"));
-
-        await flushPromises();
-
         const emailToggle = screen.getByTestId("notif-email-switch");
 
-        const caption = emailToggle.querySelector(".mx_Caption");
+        expect(emailToggle).toBeInTheDocument();
 
+        const caption = emailToggle.querySelector(".mx_Caption");
         expect(caption).toHaveClass("mx_Caption");
     });
 

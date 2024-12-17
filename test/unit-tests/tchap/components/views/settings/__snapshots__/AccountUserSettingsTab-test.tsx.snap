@@ -50,13 +50,13 @@ exports[`<AccountUserSettingsTab /> common view snapshot should render section w
                 </div>
               </div>
               <form
-                class="_root_dgy0u_24 mx_UserProfileSettings_profile_displayName"
+                class="_root_ssths_24 mx_UserProfileSettings_profile_displayName"
               >
                 <div
-                  class="_field_dgy0u_34"
+                  class="_field_ssths_34"
                 >
                   <label
-                    class="_label_dgy0u_67"
+                    class="_label_ssths_67"
                     for="radix-:r0:"
                   >
                     Display Name

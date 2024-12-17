@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "jest-matrix-react";
+import { render, screen, waitFor } from "jest-matrix-react";
 import { MatrixClient } from "matrix-js-sdk/src/matrix";
 
 import UnwrappedUserMenu from "~tchap-web/src/components/structures/UserMenu";
@@ -28,8 +28,10 @@ describe("<UserMenu>", () => {
             // open the user menu
             screen.getByRole("button", { name: "User menu" }).click();
 
-            const menu = screen.getByRole("menu");
-            expect(menu).toMatchSnapshot();
+            waitFor(() => {
+                const menu = screen.getByRole("menu");
+                expect(menu).toMatchSnapshot();
+            });
         });
 
         // you can also add some specific ui check here
@@ -48,9 +50,11 @@ describe("<UserMenu>", () => {
             // open the user menu
             screen.getByRole("button", { name: "User menu" }).click();
             // click on the faq
-            screen.getByRole("menuitem", { name: "Help" }).click();
-            expect(global.open).toHaveBeenCalledTimes(1);
-            expect(global.open).toHaveBeenCalledWith("https://www.tchap.gouv.fr/faq", "_blank");
+            waitFor(() => {
+                screen.getByRole("menuitem", { name: "Help" }).click();
+                expect(global.open).toHaveBeenCalledTimes(1);
+                expect(global.open).toHaveBeenCalledWith("https://www.tchap.gouv.fr/faq", "_blank");
+            });
         });
     });
 

@@ -135,7 +135,9 @@ describe("TchapRoomLinkAccess", () => {
         // joinrule to public, guest access to forbiden and canonical alias
         expect(room.client.sendStateEvent).toHaveBeenCalledTimes(3);
 
-        expect(switchLink).toHaveAttribute("aria-checked", "true");
+        await waitFor(() => {
+            expect(switchLink).toHaveAttribute("aria-checked", "true");
+        });
     });
 
     it("should use existing alias", async () => {
@@ -164,10 +166,15 @@ describe("TchapRoomLinkAccess", () => {
 
         await waitForElementToBeRemoved(dialog);
         // should activate the switch with public join rule value
+
         expect(mockedMakeRoomPermalink).toHaveBeenCalledTimes(1);
 
         logRoles(container);
-        expect(switchLink).toHaveAttribute("aria-checked", "true");
+
+        await waitFor(() => {
+            expect(switchLink).toHaveAttribute("aria-checked", "true");
+        });
+
     });
 
     it("should deactivate link when clicking on the switch", async () => {

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { render, screen } from "jest-matrix-react";
+import { render, screen, waitFor } from "jest-matrix-react";
 
 import ExpiredAccountDialog from "~tchap-web/src/tchap/components/views/dialogs/ExpiredAccountDialog";
 import { flushPromises } from "~tchap-web/test/test-utils";
@@ -23,7 +23,9 @@ describe("ExpiredAccountDialog", () => {
 
             expect(onRequestNewEmailMock).toHaveBeenCalled();
             // wait spinner is displayed
-            expect(component.container.querySelector(".mx_InlineSpinner")).toBeTruthy();
+            await waitFor(() => {
+                expect(component.container.querySelector(".mx_InlineSpinner")).toBeTruthy();
+            });
 
             await flushPromises();
             // confirmation message is displayed
@@ -42,7 +44,9 @@ describe("ExpiredAccountDialog", () => {
 
             expect(onRequestNewEmailMock).toHaveBeenCalled();
             // wait spinner is displayed
-            expect(component.container.querySelector(".mx_InlineSpinner")).toBeTruthy();
+            await waitFor(() => {
+                expect(component.container.querySelector(".mx_InlineSpinner")).toBeTruthy();
+            });
 
             await flushPromises();
             // confirmation message is displayed
