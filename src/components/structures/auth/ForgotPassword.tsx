@@ -77,6 +77,7 @@ interface State {
 }
 
 export default class ForgotPassword extends React.Component<Props, State> {
+    private unmounted = false;
     private reset: PasswordReset;
     private fieldPassword: Field | null = null;
     private fieldPasswordConfirm: Field | null = null;
@@ -114,14 +115,20 @@ export default class ForgotPassword extends React.Component<Props, State> {
         end :TCHAP: */
     }
 
-    private async checkServerLiveliness(serverConfig: ValidatedServerConfig): Promise<void> {
+    public componentWillUnmount(): void {
+        this.unmounted = true;
+    }
+
+    private async checkServerLiveliness(serverConfig: ValidatedServerConfig): Promise<boolean> {
         try {
             await AutoDiscoveryUtils.validateServerConfigWithStaticUrls(serverConfig.hsUrl, serverConfig.isUrl);
+            if (this.unmounted) return false;
 
             this.setState({
                 serverIsAlive: true,
             });
         } catch (e: any) {
+            if (this.unmounted) return false;
             const { serverIsAlive, serverDeadError } = AutoDiscoveryUtils.authComponentStateForError(
                 e,
                 "forgot_password",
@@ -130,7 +137,9 @@ export default class ForgotPassword extends React.Component<Props, State> {
                 serverIsAlive,
                 errorText: serverDeadError,
             });
+            return serverIsAlive;
         }
+        return true;
     }
 
     // :TCHAP: forgot-password
@@ -328,11 +337,13 @@ export default class ForgotPassword extends React.Component<Props, State> {
 
         /* :TCHAP: at this point we may not know the serverConfig to use yet. So don't check.
         // Refresh the server errors. Just in case the server came back online of went offline.
-        await this.checkServerLiveliness(this.props.serverConfig);
-        end :TCHAP: */
+        
+        const serverIsAlive = await this.checkServerLiveliness(this.props.serverConfig);
 
         // Server error
-        if (!this.state.serverIsAlive) return;
+        if (!serverIsAlive) return;
+        
+        end :TCHAP: */
 
         switch (this.state.phase) {
             case Phase.EnterEmail:

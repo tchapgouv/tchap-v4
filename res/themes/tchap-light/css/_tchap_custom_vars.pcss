@@ -10,15 +10,17 @@ body {
     --external-color: #f07a12;
     --forum-color: #27ae60;
     --sidebar-color: #222777;
-    --sidebar-color-50pct: #030c1b4d; // used by the modal backdrop
+    --sidebar-color-50pct: #030c1b4d; /* used by the modal backdrop */
     --sidebar-button-color: #ffffff;
     --roomlist-background-color: #edf1f7;
+    --roomlist-background-color-0pct: #edf1f700;
     --roomlist-text-color: #2e2f32;
     --roomlist-text-secondary-color: #61708b;
     --roomlist-highlights-color: #ffffff;
     --roomlist-separator-color: #e3e8f0;
     --timeline-background-color: #ffffff;
     --timeline-text-color: #2e2f32;
+    --timeline-text-color-50pct: #2e2f3280;
     --timeline-text-secondary-color: #61708b;
     --timeline-highlights-color: #f3f8fd;
     --togglesw-off-color: #c1c9d6;
@@ -38,7 +40,9 @@ body {
     --cpd-color-bg-action-primary-rest: var(--accent);
     --cpd-color-text-on-solid-primary: #ffffff;
     --cpd-color-icon-accent-tertiary: var(--accent);
-    --cpd-color-icon-success-primary: var(--warning-color); // use for badge level color, we use red in tchap instead of element's green
+
+    /* use for badge level color, we use red in tchap instead of element's green */
+    --cpd-color-icon-success-primary: var(--warning-color);
 
     /* TODO default avatar colors are broken because of the switch to use Compound to manage colors.
     Try something like this:

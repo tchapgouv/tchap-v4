@@ -22,7 +22,7 @@ import { FileDownloader } from "~tchap-web/src/utils/FileDownloader";
 import { _t } from "~tchap-web/src/languageHandler";
 import Spinner from "~tchap-web/src/components/views/elements/Spinner";
 import { RovingAccessibleButton } from "~tchap-web/src/accessibility/RovingTabIndex";
-import { Icon as DownloadIcon } from "~tchap-web/res/img/download.svg";
+import { DownloadIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
 
 import { Media } from "../../../ContentScanningMedia";
 import { BlockedIcon } from "../../../../components/views/elements/BlockedIcon";
