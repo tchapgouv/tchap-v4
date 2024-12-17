@@ -139,5 +139,12 @@
             "src/components/views/spaces/SpaceCreateMenu.tsx",
             "src/createRoom.ts"
         ]
+    },
+    "metrics-call": {
+        "issue": "https://github.com/tchapgouv/tchap-web-v4/issues/1184",
+        "files": [
+            "src/components/views/settings/tabs/user/SecurityUserSettingsTab.tsx",
+            "src/LegacyCallHandler.tsx"
+        ]
     }
 }

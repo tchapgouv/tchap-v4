@@ -126,5 +126,9 @@
     "map_style_url": "https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json",
     "element_call": {
         "url": "https://element-call.tchap.incubateur.net/"
+    },
+    "posthog": {
+        "project_api_key": "phc_FFa4pkvmuWjF9nZOMmYJWUXMibuYnCnPyf3DqPGZs4L",
+        "api_host": "https://posthogdev.tchap.incubateur.net"
     }
 }

@@ -60,6 +60,7 @@ import { showCantStartACallDialog } from "./voice-broadcast/utils/showCantStartA
 import { isNotNull } from "./Typeguards";
 import { BackgroundAudio } from "./audio/BackgroundAudio";
 import { Jitsi } from "./widgets/Jitsi.ts";
+import TchapPosthog from "./tchap/util/TchapPosthog.ts";
 
 export const PROTOCOL_PSTN = "m.protocol.pstn";
 export const PROTOCOL_PSTN_PREFIXED = "im.vector.protocol.pstn";
@@ -618,6 +619,9 @@ export default class LegacyCallHandler extends EventEmitter {
                 if (isNotNull(mappedRoomId)) {
                     this.removeCallForRoom(mappedRoomId);
                 }
+                /** :TCHAP: metrics-call **/
+                TchapPosthog.instance.trackCallEnded(call);
+                /** end :TCHAP: **/
 
                 if (oldState === CallState.InviteSent && call.hangupParty === CallParty.Remote) {
                     this.play(AudioID.Busy);
@@ -842,12 +846,18 @@ export default class LegacyCallHandler extends EventEmitter {
 
         this.setActiveCallRoomId(roomId);
 
+        /** :TCHAP: metrics-call **/
+        TchapPosthog.instance.trackCallStart(call);
+        /** end :TCHAP: **/
         if (type === CallType.Voice) {
             call.placeVoiceCall();
         } else if (type === "video") {
             call.placeVideoCall();
         } else {
             logger.error("Unknown conf call type: " + type);
+            /** :TCHAP: metrics-call **/
+            TchapPosthog.instance.trackCallEnded(call);
+            /** end :TCHAP: **/
         }
     }
 
@@ -959,6 +969,9 @@ export default class LegacyCallHandler extends EventEmitter {
 
         call.answer();
         this.setActiveCallRoomId(roomId);
+        /** :TCHAP: metrics-call **/
+        TchapPosthog.instance.trackCallStart(call);
+        /** end :TCHAP: **/
         dis.dispatch<ViewRoomPayload>({
             action: Action.ViewRoom,
             room_id: roomId,
