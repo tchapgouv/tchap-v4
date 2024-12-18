@@ -265,9 +265,14 @@ we don't have an account and should hide them. No account == no guest account ei
             <a href="#/email-precheck-sso" class="tc_ButtonParent tc_ButtonProconnect tc_Button_iconPC">
                 <div class="mx_ButtonLabel">_t("auth|proconnect|email_title")</div>
             </a>
-            <a href="https://www.proconnect.gouv.fr/" class="tc_ButtonProconnect_explanation ">
-                <div>_t("welcome|sso|proconnect_explanation")</div>
-            </a>
+            <div>
+                <a href="https://www.proconnect.gouv.fr/" target="_blank" rel="noopener" class="tc_ButtonProconnect_explanation">
+                    <div>_t("welcome|sso|proconnect_explanation")</div>
+                </a>
+                <a href="$proconnectFaq" target="_blank" rel="noopener" class="tc_ButtonProconnect_explanation ">
+                    _t("welcome|sso|proconnect_instance_availability")
+                </a> 
+            </div>
             <a href="#/login" class="tc_ButtonParent tc_Button tc_ButtonBorder">
                 <div>_t("auth|proconnect|sign_in_password_instead")</div>
             </a>

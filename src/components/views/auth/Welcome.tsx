@@ -15,7 +15,9 @@ import { UIFeature } from "../../../settings/UIFeature";
 import LanguageSelector from "./LanguageSelector";
 import EmbeddedPage from "../../structures/EmbeddedPage";
 import { MATRIX_LOGO_HTML } from "../../structures/static-page-vars";
+
 import TchapUIFeature from "~tchap-web/src/tchap/util/TchapUIFeature";
+import TchapUrls from "~tchap-web/src/tchap/util/TchapUrls";
 
 interface IProps {}
 
@@ -41,6 +43,7 @@ export default class Welcome extends React.PureComponent<IProps> {
             replaceMap["$logoUrl"] = logoUrl;
             // :TCHAP: sso-agentconnect-flow - pageUrl = "welcome.html"; 
             pageUrl = TchapUIFeature.isSSOFlowActive() ? "welcome_sso.html" : "welcome.html";
+            replaceMap["$proconnectFaq"] = TchapUrls.helpProconnectInstances;
             // end :TCHAP:
         }
 

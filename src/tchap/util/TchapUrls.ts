@@ -25,4 +25,6 @@ export default class TchapUrls {
 
     // help manually import tchap keys
     public static helpManuallyImportKeys= "https://aide.tchap.beta.gouv.fr/fr/article/comment-importer-manuellement-mes-cles-tchap-cles-de-chiffrement-web-xh376r"
+
+    public static helpProconnectInstances = "https://aide.tchap.beta.gouv.fr/fr/article/se-connecter-a-tchap-avec-proconnect-1dh1peg";
 }
