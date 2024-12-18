@@ -146,5 +146,12 @@
             "src/components/views/settings/tabs/user/SecurityUserSettingsTab.tsx",
             "src/LegacyCallHandler.tsx"
         ]
+    },
+    "copy-link-room-behavior": {
+        "issue": "https://github.com/tchapgouv/tchap-web-v4/issues/1187",
+        "files": [
+            "src/components/views/context_menus/RoomGeneralContextMenu.tsx",
+            "src/components/views/right_panel/RoomSummaryCard.tsx"
+        ]
     }
 }

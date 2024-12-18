@@ -7,7 +7,7 @@ Please see LICENSE files in the repository root for full details.
 */
 
 import { logger } from "matrix-js-sdk/src/logger";
-import { Room } from "matrix-js-sdk/src/matrix";
+import { JoinRule, Room } from "matrix-js-sdk/src/matrix"; // :tchap: copy-link-room-behavior
 import React, { useContext } from "react";
 
 import { KeyBindingAction } from "../../../accessibility/KeyboardShortcuts";
@@ -34,6 +34,8 @@ import { shouldShowComponent } from "../../../customisations/helpers/UIComponent
 import { UIComponent } from "../../../settings/UIFeature";
 import { DeveloperToolsOption } from "./DeveloperToolsOption";
 import { useSettingValue } from "../../../hooks/useSettings";
+
+import TchapRoomUtils from "~tchap-web/src/tchap/util/TchapRoomUtils"; // :tchap: copy-link-room-behavior
 
 export interface RoomGeneralContextMenuProps extends IContextMenuProps {
     room: Room;
@@ -199,6 +201,9 @@ export const RoomGeneralContextMenu: React.FC<RoomGeneralContextMenuProps> = ({
                 )}
                 label={_t("room|context_menu|copy_link")}
                 iconClassName="mx_RoomGeneralContextMenu_iconCopyLink"
+                // :TCHAP: copy-link-room-behavior
+                disabled={TchapRoomUtils.getRoomJoinRule(room) === JoinRule.Invite}
+                // end :TCHAP:
             />
         );
     }
