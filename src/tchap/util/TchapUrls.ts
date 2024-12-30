@@ -8,8 +8,8 @@ export default class TchapUrls {
     //tchap status page
     public static statusPage =  "https://status.tchap.numerique.gouv.fr"
 
-    //tchap FAQ page on locked messages. Should redirect to the appropriate crisp page on https://aide.tchap.beta.gouv.fr
-    public static lockedMessagesPage = "https://tchap.beta.gouv.fr/faq/messages-verrouilles";
+    //tchap FAQ page on locked messages.
+    public static lockedMessagesPage = "https://aide.tchap.beta.gouv.fr/fr/article/dechiffrement-en-cours-mes-messages-restent-verrouilles-atnp15/";
 
     // help page to verify decices, used 
     public static helpVerifyDevicesPage = "https://aide.tchap.beta.gouv.fr/fr/article/comment-verifier-un-nouvel-appareil-sur-tchap-xm0b0y/";
