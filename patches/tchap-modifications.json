@@ -85,7 +85,9 @@
         "src/components/structures/MatrixChat.tsx",
             "src/components/structures/auth/Registration.tsx",
             "src/components/structures/auth/Login.tsx",
-            "src/components/views/auth/Welcome.tsx"
+            "src/components/views/auth/Welcome.tsx",
+            "src/dispatcher/actions.ts",
+            "src/Views.ts"
         ]
     },
     "hide-widgets-settings": {
