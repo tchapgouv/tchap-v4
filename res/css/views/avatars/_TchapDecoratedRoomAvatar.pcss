@@ -14,10 +14,10 @@ Copyright 2022 DINUM
     mask-repeat: no-repeat;
     mask-image: url("../../../img/tchap/padlock-forum.svg");
     background-color: var(--forum-color);
-    bottom: -25%;
-    right: -25%;
-    width: 150%;
-    height: 150%;
+    bottom: -13%;
+    right: -30%;
+    width: 140%;
+    height: 140%;
 }
 
 .mx_DecoratedRoomAvatar .mx_DecoratedRoomAvatar_icon.mx_DecoratedRoomAvatar_icon_private::before,
@@ -27,10 +27,10 @@ Copyright 2022 DINUM
     mask-repeat: no-repeat;
     mask-image: url("../../../img/tchap/padlock-private.svg");
     background-color: var(--private-color);
-    bottom: -25%;
-    right: -25%;
-    width: 150%;
-    height: 150%;
+    bottom: -13%;
+    right: -30%;
+    width: 140%;
+    height: 140%;
 }
 
 .mx_DecoratedRoomAvatar .mx_DecoratedRoomAvatar_icon.mx_DecoratedRoomAvatar_icon_external::before,
@@ -40,8 +40,16 @@ Copyright 2022 DINUM
     mask-repeat: no-repeat;
     mask-image: url("../../../img/tchap/padlock-external.svg");
     background-color: var(--external-color);
-    bottom: -25%;
-    right: -25%;
-    width: 150%;
-    height: 150%;
+    bottom: -13%;
+    right: -30%;
+    width: 140%;
+    height: 140%;
+}
+
+/* we have crop decorated icons lock if we don't add this */
+.mx_DecoratedRoomAvatar,
+.mx_ExtraTile {
+    .mx_DecoratedRoomAvatar_icon::before {
+        border-radius: 0px;
+    }
 }
