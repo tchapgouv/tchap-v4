@@ -148,5 +148,12 @@
             "src/components/views/settings/tabs/user/SecurityUserSettingsTab.tsx",
             "src/LegacyCallHandler.tsx"
         ]
+    },
+    "default-language-french": {
+        "issue": "https://github.com/tchapgouv/tchap-web-v4/issues/1199",
+        "files": [
+            "src/vector/init.tsx"
+        ]
+
     }
 }
