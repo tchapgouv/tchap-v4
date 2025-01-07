@@ -66,7 +66,7 @@ export default class AuthPage extends React.PureComponent<React.PropsWithChildre
 
         return (
             <div className="mx_AuthPage" style={pageStyle}>
-                {/* :TCHAP: */}
+                {/* :TCHAP: lasuite-header*/}
                 <TchapHeader />
                 {/* end :TCHAP: */}
                 <div className="mx_AuthPage_modal" style={modalStyle}>
