@@ -380,6 +380,12 @@ export default class SecurityRoomSettingsTab extends React.Component<IProps, ISt
             });
         }
 
+        // :TCHAP: hide-history-setting-since-selection
+        if (this.state.encrypted) {
+            // we remove HistoryVisibility.Shared, its not working on encrypted rooms
+            options.shift();
+        }
+        // end :TCHAP:
         const description = _t("room_settings|security|history_visibility_warning");
 
         return (

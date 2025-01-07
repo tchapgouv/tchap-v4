@@ -161,5 +161,11 @@
         "files": [
             "src/vector/init.tsx"
         ]
+    },
+    "hide-history-setting-since-selection": {
+        "issue": "https://github.com/tchapgouv/tchap-web-v4/issues/1160",
+        "files": [
+            "src/components/views/settings/tabs/room/SecurityRoomSettingsTab.tsx"
+        ]
     }
 }
