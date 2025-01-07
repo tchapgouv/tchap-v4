@@ -184,11 +184,11 @@
     "permalink_prefix": "https://tchap.gouv.fr",
     "terms_and_conditions_links": [
         {
-            "url": "https://www.tchap.beta.gouv.fr/cgu",
+            "url": "https://tchap.numerique.gouv.fr/cgu",
             "text": "Read the CGU"
         },
         {
-            "url": "https://tchap.beta.gouv.fr/politique-de-confidentialite",
+            "url": "https://tchap.numerique.gouv.fr/politique-de-confidentialite",
             "text": "Read the Privacy Policy"
         }
     ],
