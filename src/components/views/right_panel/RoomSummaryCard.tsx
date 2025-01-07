@@ -79,6 +79,8 @@ import { ReleaseAnnouncement } from "../../structures/ReleaseAnnouncement.tsx";
 
 import DecoratedRoomAvatar from "../avatars/DecoratedRoomAvatar"; // :TCHAP: tchap-room-icons
 
+import TchapRoomUtils from "~tchap-web/src/tchap/util/TchapRoomUtils.ts"; // :TCHAP: copy-link-room-behavior
+
 
 interface IProps {
     room: Room;
@@ -427,7 +429,14 @@ const RoomSummaryCard: React.FC<IProps> = ({
 
                 <Separator />
 
-                <MenuItem Icon={LinkIcon} label={_t("action|copy_link")} onSelect={onShareRoomClick} />
+                {/* :TCHAP: copy-link-room-behavior - <MenuItem Icon={LinkIcon} label={_t("action|copy_link")} onSelect={onShareRoomClick} /> */}
+                <MenuItem 
+                    Icon={LinkIcon} 
+                    label={_t("action|copy_link")} 
+                    onSelect={onShareRoomClick} 
+                    disabled={TchapRoomUtils.getRoomJoinRule(room) === JoinRule.Invite}
+                />
+                {/* end :TCHAP: */}
 
                 {!isVideoRoom && (
                     <>
