@@ -846,6 +846,10 @@
         "en": "Login with ProConnect",
         "fr": "Se connecter avec ProConnect"
     },
+    "auth|proconnect|button_title": {
+        "en": "Login with <br/><b>ProConnect </b>",
+        "fr": "Se connecter avec <br/><b>ProConnect </b>"
+    },
     "auth|proconnect|continue": {
         "en": "Continue with ProConnect",
         "fr": "Continuer avec ProConnect"
@@ -857,6 +861,10 @@
     "welcome|sso|proconnect_explanation": {
         "en": "-> What is ProConnect ?",
         "fr": "-> Qu'est-ce que ProConnect ?"
+    },
+    "welcome|sso|proconnect_instance_availability": {
+        "en": "-> Is it available for my administration ?",
+        "fr": "-> Est-ce activé pour mon administration ?"
     },
     "auth|proconnect|error": {
         "en": "An error occured during SSO login",

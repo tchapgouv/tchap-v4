@@ -110,10 +110,14 @@ export async function loadLanguage(): Promise<void> {
     const prefLang = SettingsStore.getValue("language", null, /*excludeDefault=*/ true);
     let langs: string[] = [];
 
+    console.log('preflang :TCHAP:', prefLang);
     if (!prefLang) {
-        languageHandler.getLanguagesFromBrowser().forEach((l) => {
-            langs.push(...languageHandler.getNormalizedLanguageKeys(l));
-        });
+        // :TCHAP: default-language-french
+        // languageHandler.getLanguagesFromBrowser().forEach((l) => {
+        //     langs.push(...languageHandler.getNormalizedLanguageKeys(l));
+        // });
+        langs.push(...languageHandler.getNormalizedLanguageKeys("fr"));
+        // end :TCHAP:
     } else {
         langs = [prefLang];
     }

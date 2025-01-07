@@ -46,6 +46,9 @@ enum Views {
 
     // Another instance of the application has started up. We just show an error page.
     LOCK_STOLEN,
+
+    // :TCHAP: sso-agentconnect-flow email precheck screen from proconnect login
+    EMAIL_PRECHECK_SSO
 }
 
 export default Views;
