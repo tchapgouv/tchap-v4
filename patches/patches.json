@@ -6,5 +6,11 @@
             "src/http-api/fetch.ts",
             "src/sync.ts"
         ]
+    },
+    "remove-font-lasuite-integration": {
+        "package": "@gouvfr-lasuite/integration",
+        "files": [
+            "dist/css/homepage-full.css"
+        ]
     }
 }

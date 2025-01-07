@@ -36,6 +36,10 @@ $e2e-verified-color: var(--confirmation-color);
         .mx_SpaceButton_selectionWrapper {
             border-color: $border-color_1;
         }
+        /* The icon on the left panel add 2px, so we see a weird gap */
+        .mx_SpaceButton_selectionWrapper:has(.mx_SpaceButton_avatarPlaceholder) {
+            width: 34px;
+        }
     }
 }
 .mx_EventTile_highlight {
@@ -43,7 +47,7 @@ $e2e-verified-color: var(--confirmation-color);
 }
 .mx_QuickSettingsButton {
     color: $color_2;
-    &:before {
+    &::before {
         background: white;
     }
 }
@@ -76,9 +80,6 @@ $e2e-verified-color: var(--confirmation-color);
         width: 100%;
         max-width: 1300px;
         margin: 0 auto;
-        width: 100%;
-        max-width: 100%;
-        margin: 0 auto;
     }
     .mx_RoomView_statusArea {
         width: 100%;
@@ -104,6 +105,9 @@ $e2e-verified-color: var(--confirmation-color);
     }
 }
 .mx_EventTile.mx_EventTile_highlight {
+    color: $background-color_1;
+    font-weight: 500;
+
     .markdown-body {
         color: $color_3;
     }
@@ -113,10 +117,6 @@ $e2e-verified-color: var(--confirmation-color);
     font-weight: 400;
 }
 
-.mx_EventTile.mx_EventTile_highlight {
-  color: $background-color_1;
-  font-weight: 500;
-}
 .mx_BaseAvatar.mx_RoomAvatar_isSpaceRoom .mx_BaseAvatar_image, .mx_BaseAvatar.mx_RoomAvatar_isSpaceRoom.mx_BaseAvatar_image, .mx_SpaceButton_avatarWrapper .mx_BaseAvatar span.mx_BaseAvatar_initial, .mx_SpaceButton_icon {
     border: 1px solid #c1c9d6;
 }

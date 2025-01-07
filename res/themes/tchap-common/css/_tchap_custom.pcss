@@ -63,6 +63,12 @@
     }
 }
 
+/* since we added a header in welcome pages, we need to add this margin for the footer */
+.mx_AuthPage_modal {
+    margin-bottom: 25px;
+    margin-top: 40px !important;
+}
+
 .mx_ThreadsActivityCentreButton .mx_ThreadsActivityCentreButton_Icon,
 .mx_ThreadsActivityCentreButton .mx_ThreadsActivityCentreButton_Text {
     color: var(--sidebar-button-color) !important;
@@ -100,4 +106,17 @@
 /* For analytics modal, using tchap icon */
 .mx_AnalyticsLearnMoreDialog .mx_AnalyticsLearnMore_image_holder {
     background-image: url("$(res)/themes/tchap/img/logos/tchap-logo.svg");
+}
+
+/* DSFR Button no border radius -- TODO put back when modals and input also removed border */
+/* .mx_AccessibleButton.mx_AccessibleButton_hasKind {
+    border-radius: 0px;
+} */
+
+:where(.lasuite) {
+    --ul-type: none;
+
+    .lasuite-header__service-title {
+        color: black;
+    }
 }

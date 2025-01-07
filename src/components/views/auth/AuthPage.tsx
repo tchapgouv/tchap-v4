@@ -12,6 +12,8 @@ import React from "react";
 import SdkConfig from "../../../SdkConfig";
 import AuthFooter from "./AuthFooter";
 
+import { TchapHeader } from "~tchap-web/src/tchap/components/views/common/TchapHeader";
+
 export default class AuthPage extends React.PureComponent<React.PropsWithChildren> {
     private static welcomeBackgroundUrl?: string;
 
@@ -64,6 +66,9 @@ export default class AuthPage extends React.PureComponent<React.PropsWithChildre
 
         return (
             <div className="mx_AuthPage" style={pageStyle}>
+                {/* :TCHAP: lasuite-header*/}
+                <TchapHeader />
+                {/* end :TCHAP: */}
                 <div className="mx_AuthPage_modal" style={modalStyle}>
                     <div className="mx_AuthPage_modalBlur" style={blurStyle} />
                     <div className="mx_AuthPage_modalContent" style={modalContentStyle}>

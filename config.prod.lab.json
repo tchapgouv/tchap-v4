@@ -204,5 +204,9 @@
     "tchap_sso_flow": {
         "isActive": false
     },
-    "map_style_url": "https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json"
+    "map_style_url": "https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json",
+    "posthog": {
+        "project_api_key": "phc_FFa4pkvmuWjF9nZOMmYJWUXMibuYnCnPyf3DqPGZs4L",
+        "api_host": "https://posthogdev.tchap.incubateur.net"
+    }
 }

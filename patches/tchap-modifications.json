@@ -173,5 +173,12 @@
         "files": [
             "src/components/views/rooms/MessageComposer.tsx"
         ]
+    },
+    "lasuite-header": {
+        "issue": "https://github.com/tchapgouv/tchap-web-v4/issues/1183",
+        "files": [
+            "src/components/views/auth/AuthPage.tsx",
+            "src/vector/index.html"
+        ]
     }
 }
