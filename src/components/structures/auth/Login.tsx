@@ -34,6 +34,8 @@ import { Features } from "../../../settings/Settings";
 import { startOidcLogin } from "../../../utils/oidc/authorize";
 import TchapUtils from '~tchap-web/src/tchap/util/TchapUtils'; // :TCHAP: login
 import Tchapi18nUtils from '~tchap-web/src/tchap/i18n/Tchapi18nUtils'; // :TCHAP: login
+import TchapUIFeature from "~tchap-web/src/tchap/util/TchapUIFeature";
+import ProconnectButton from "~tchap-web/src/tchap/components/views/sso/ProconnectButton";
 
 interface IProps {
     serverConfig: ValidatedServerConfig;
@@ -130,8 +132,7 @@ export default class LoginComponent extends React.PureComponent<IProps, IState> 
             // eslint-disable-next-line @typescript-eslint/naming-convention
             "m.login.cas": () => this.renderSsoStep("cas"),
             // eslint-disable-next-line @typescript-eslint/naming-convention
-            // :TCHAP: sso-agentconnect-flow
-            // "m.login.sso": () => this.renderSsoStep("sso"),
+            "m.login.sso": () => this.renderSsoStep("sso"),
             "oidcNativeFlow": () => this.renderOidcNativeStep(),
         };
     }
@@ -499,8 +500,8 @@ export default class LoginComponent extends React.PureComponent<IProps, IState> 
     };
 
     private renderSsoStep = (loginType: "cas" | "sso"): JSX.Element => {
+        /** :TCHAP:
         const flow = this.state.flows?.find((flow) => flow.type === "m.login." + loginType) as SSOFlow;
-
         return (
             <SSOButtons
                 matrixClient={this.loginLogic.createTemporaryClient()}
@@ -512,6 +513,16 @@ export default class LoginComponent extends React.PureComponent<IProps, IState> 
                 disabled={this.isBusy()}
             />
         );
+        */
+
+        if (TchapUIFeature.isSSOFlowActive()) {
+            return <div style={{marginBottom: "25px", position: "relative", top: "-15px"}}>
+                <p style={{textAlign: "center", fontWeight: "bold"}}>{_t("auth|proconnect|or")}</p>
+                <ProconnectButton />
+            </div>;
+        }
+        return <></>;
+        // end :TCHAP:
     };
 
     public render(): React.ReactNode {
