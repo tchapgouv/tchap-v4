@@ -12,6 +12,7 @@ import TchapRoomLinkAccess from "~tchap-web//src/tchap/components/views/rooms/Tc
 import { TchapRoomType } from "~tchap-web//src/tchap/@types/tchap";
 import TchapRoomUtils from "~tchap-web/src/tchap/util/TchapRoomUtils";
 import SdkConfig, { ConfigOptions } from "~tchap-web/src/SdkConfig";
+import DMRoomMap from "~tchap-web/src/utils/DMRoomMap";
 
 jest.mock("~tchap-web/src/tchap/util/TchapRoomUtils");
 jest.mock("~tchap-web//src/utils/permalinks/Permalinks");
@@ -40,6 +41,8 @@ describe("TchapRoomLinkAccess", () => {
         mockedMakeRoomPermalink.mockImplementation(() => mockedLinked);
 
         client.createAlias = jest.fn().mockResolvedValue("alias");
+        DMRoomMap.makeShared(client);
+        jest.spyOn(DMRoomMap.shared(), "getUserIdForRoomId").mockReturnValue(null);
 
         jest.spyOn(client, "sendStateEvent").mockResolvedValue(Promise.resolve({ event_id: "" }));
         jest.spyOn(client, "sendStateEvent").mockResolvedValue(Promise.resolve({ event_id: "" }));
@@ -88,6 +91,27 @@ describe("TchapRoomLinkAccess", () => {
     it("should disable link if user is not admin", async () => {
         mockedTchapRoomUtils.getRoomJoinRule.mockImplementation(() => JoinRule.Invite);
         mockedTchapRoomUtils.isUserAdmin.mockImplementation(() => false);
+
+        getComponent();
+
+        await flushPromises();
+
+        const switchLink = screen.queryByRole("switch");
+
+        const linkDisplay = screen.queryByText(mockedLinked);
+
+        // linked should not appear because the share link is deactivated
+        expect(linkDisplay).toBe(null);
+
+        // the user should not be able to click on the button
+        expect(switchLink).toHaveAttribute("aria-disabled", "true");
+    });
+
+    it("should disable link if room is a DM", async () => {
+        mockedTchapRoomUtils.getRoomJoinRule.mockImplementation(() => JoinRule.Invite);
+        mockedTchapRoomUtils.isUserAdmin.mockImplementation(() => false);
+
+        jest.spyOn(DMRoomMap.shared(), "getUserIdForRoomId").mockReturnValue("userB");
 
         getComponent();
 
