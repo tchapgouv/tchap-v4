@@ -11,6 +11,7 @@ import {
     mockStateEventImplementation,
     mkEvent,
 } from "~tchap-web/test/test-utils/test-utils";
+import DMRoomMap from "~tchap-web/src/utils/DMRoomMap";
 
 function mkStubRoomWithInviteRule(roomId: string, name: string, client: MatrixClient, joinRule: JoinRule): Room {
     const stubRoom: Room = mkStubRoom(roomId, name, client);
@@ -44,7 +45,10 @@ function mkStubRoomWithAccessRule(
 }
 
 describe("TchapJoinRule", () => {
-    beforeEach(() => {});
+    beforeEach(() => {
+        DMRoomMap.makeShared(createTestClient());
+        jest.spyOn(DMRoomMap.shared(), "getUserIdForRoomId").mockReturnValue(null);
+    });
 
     it("should render the tchap join rule with only private option", () => {
         //build stub private room

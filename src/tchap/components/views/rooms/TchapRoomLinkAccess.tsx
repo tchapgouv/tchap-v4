@@ -15,6 +15,7 @@ import ErrorDialog from "~tchap-web/src/components/views/dialogs/ErrorDialog";
 import MatrixToPermalinkConstructor from "~tchap-web/src/utils/permalinks/MatrixToPermalinkConstructor";
 import ElementPermalinkConstructor from "~tchap-web/src/utils/permalinks/ElementPermalinkConstructor";
 import SdkConfig from "~tchap-web/src/SdkConfig";
+import DMRoomMap from "~tchap-web/src/utils/DMRoomMap";
 
 interface ITchapRoomLinkAccessProps {
     room: Room,
@@ -30,8 +31,9 @@ export default function TchapRoomLinkAccess({room, onUpdateParentView}: ITchapRo
     // Getting the initial value of the link. We need to check if it was previsouly activated or not
     const initialLinkSharingValue = () => {
 
+        const isDm = DMRoomMap.shared().getUserIdForRoomId(room.roomId);
         // We disable link sharing if its a forum or user not admin
-        if (!TchapRoomUtils.isUserAdmin(room) || TchapRoomUtils.getTchapRoomType(room) === TchapRoomType.Forum) {
+        if (!TchapRoomUtils.isUserAdmin(room) || TchapRoomUtils.getTchapRoomType(room) === TchapRoomType.Forum || isDm) {
             setDisableLinkSharing(true);
         }
 
