@@ -2,11 +2,11 @@
 
 ## What are all these translation files ?
 
--   `tchap_translations.json` : translations for strings that Tchap code adds to the web and react-sdk repos.
+- `tchap_translations.json` : translations for strings that Tchap code adds to the web and react-sdk repos.
 
--   `tchap_translations_removed.json` : strings that tchap modifications have removed from element code. They are listed explicitly because otherwise the translation-checking script will fail (see below).
+- `tchap_translations_removed.json` : strings that tchap modifications have removed from element code. They are listed explicitly because otherwise the translation-checking script will fail (see below).
 
--   `old/tchap_translations_lost.json` : translations that were present in previous versions, but that don't correspond to any existing code now. Many correspond to customisations made in tchap-web v2. Keeping them around in case they're useful.
+- `old/tchap_translations_lost.json` : translations that were present in previous versions, but that don't correspond to any existing code now. Many correspond to customisations made in tchap-web v2. Keeping them around in case they're useful.
 
 ## The translation-checking script
 

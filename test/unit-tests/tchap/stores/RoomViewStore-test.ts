@@ -9,7 +9,6 @@ import { SlidingSyncManager } from "~tchap-web/src/SlidingSyncManager";
 import { PosthogAnalytics } from "~tchap-web/src/PosthogAnalytics";
 import { MatrixDispatcher } from "~tchap-web/src/dispatcher/dispatcher";
 import { SpaceStoreClass } from "~tchap-web/src/stores/spaces/SpaceStore";
-import { VoiceBroadcastPlaybacksStore } from "~tchap-web/src/voice-broadcast";
 import Modal from "~tchap-web/src/Modal";
 import ExternalAccountHandler from "~tchap-web/src/tchap/lib/ExternalAccountHandler";
 import { _t } from "~tchap-web/src/languageHandler";
@@ -95,7 +94,6 @@ describe("RoomViewStore", function () {
         stores._SlidingSyncManager = slidingSyncManager;
         stores._PosthogAnalytics = new MockPosthogAnalytics();
         stores._SpaceStore = new MockSpaceStore();
-        stores._VoiceBroadcastPlaybacksStore = new VoiceBroadcastPlaybacksStore(stores.voiceBroadcastRecordingsStore);
         roomViewStore = new RoomViewStore(dis, stores);
         stores._RoomViewStore = roomViewStore;
 

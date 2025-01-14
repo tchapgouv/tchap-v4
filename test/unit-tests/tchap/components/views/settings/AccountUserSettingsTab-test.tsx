@@ -2,7 +2,7 @@ import { render } from "jest-matrix-react";
 import React from "react";
 import { MatrixClient } from "matrix-js-sdk/src/matrix";
 import { logger } from "matrix-js-sdk/src/logger";
-import { mocked, MockedObject } from "jest-mock";
+import { MockedObject } from "jest-mock";
 
 import AccountUserSettingsTab from "~tchap-web/src/components/views/settings/tabs/user/AccountUserSettingsTab";
 import { SdkContextClass, SDKContext } from "~tchap-web/src/contexts/SDKContext";
@@ -16,7 +16,6 @@ import {
     mockClientMethodsUser,
     mockPlatformPeg,
 } from "~tchap-web/test/test-utils";
-import { useId } from "~tchap-web/src/utils/useId";
 
 jest.mock(
     "~tchap-web/src/components/views/settings/ChangePassword",
@@ -25,8 +24,6 @@ jest.mock(
             return <button>Mock change password</button>;
         },
 );
-
-jest.mock("~tchap-web/src/utils/useId");
 
 describe("<AccountUserSettingsTab />", () => {
     const defaultProps = {
@@ -78,9 +75,6 @@ describe("<AccountUserSettingsTab />", () => {
         jest.spyOn(SettingsStore, "getValue").mockImplementation(
             (settingName: string) => settingName === UIFeature.Deactivate,
         );
-
-        // labelled id on username is autogeneraed, we fix it so that snapshot is always the same
-        mocked(useId).mockImplementation(() => "1234");
     });
 
     afterEach(() => {
