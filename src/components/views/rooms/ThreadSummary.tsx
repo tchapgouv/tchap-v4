@@ -16,7 +16,6 @@ import { CardContext } from "../right_panel/context";
 import AccessibleButton, { ButtonEvent } from "../elements/AccessibleButton";
 import PosthogTrackers from "../../../PosthogTrackers";
 import { useTypedEventEmitterState } from "../../../hooks/useEventEmitter";
-import RoomContext from "../../../contexts/RoomContext";
 import MemberAvatar from "../avatars/MemberAvatar";
 import { Action } from "../../../dispatcher/actions";
 import { ShowThreadPayload } from "../../../dispatcher/payloads/ShowThreadPayload";
@@ -24,8 +23,12 @@ import defaultDispatcher from "../../../dispatcher/dispatcher";
 import { useUnreadNotifications } from "../../../hooks/useUnreadNotifications";
 import { notificationLevelToIndicator } from "../../../utils/notifications";
 import { EventPreviewTile, useEventPreview } from "./EventPreview.tsx";
+<<<<<<< HEAD
 import ExternalLink from "../elements/ExternalLink"; // :TCHAP: better-text-for-locked-messages
 import TchapUrls from "~tchap-web/src/tchap/util/TchapUrls"; // :TCHAP: better-text-for-locked-messages
+=======
+import { useScopedRoomContext } from "../../../contexts/ScopedRoomContext.tsx";
+>>>>>>> v1.11.89
 
 interface IProps {
     mxEvent: MatrixEvent;
@@ -33,7 +36,7 @@ interface IProps {
 }
 
 const ThreadSummary: React.FC<IProps> = ({ mxEvent, thread, ...props }) => {
-    const roomContext = useContext(RoomContext);
+    const roomContext = useScopedRoomContext("narrow");
     const cardContext = useContext(CardContext);
     const count = useTypedEventEmitterState(thread, ThreadEvent.Update, () => thread.length);
     const { level } = useUnreadNotifications(thread.room, thread.id);
