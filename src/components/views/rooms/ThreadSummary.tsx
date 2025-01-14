@@ -23,12 +23,9 @@ import defaultDispatcher from "../../../dispatcher/dispatcher";
 import { useUnreadNotifications } from "../../../hooks/useUnreadNotifications";
 import { notificationLevelToIndicator } from "../../../utils/notifications";
 import { EventPreviewTile, useEventPreview } from "./EventPreview.tsx";
-<<<<<<< HEAD
 import ExternalLink from "../elements/ExternalLink"; // :TCHAP: better-text-for-locked-messages
 import TchapUrls from "~tchap-web/src/tchap/util/TchapUrls"; // :TCHAP: better-text-for-locked-messages
-=======
 import { useScopedRoomContext } from "../../../contexts/ScopedRoomContext.tsx";
->>>>>>> v1.11.89
 
 interface IProps {
     mxEvent: MatrixEvent;
@@ -84,20 +81,6 @@ export const ThreadMessagePreview: React.FC<IPreviewProps> = ({ thread, showDisp
     if (!preview || !lastReply) {
         return null;
     }
-
-    // :TCHAP: better-text-for-locked-messages
-    const undecryptedText = _t(
-        "threads|unable_to_decrypt_with_info_message",
-        {},
-        {
-            a: (sub) => (
-                <ExternalLink href={TchapUrls.lockedMessagesPage}>
-                    {sub}
-                </ExternalLink>
-            ),
-        },
-    );
-    // end :TCHAP:
 
     return (
         <>

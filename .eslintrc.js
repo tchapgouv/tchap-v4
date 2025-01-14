@@ -174,7 +174,7 @@ module.exports = {
     overrides: [
         {
             // :TCHAP: also lint our cypress files, copied from react-sdk, because react-sdk lints them.
-            files: ["cypress/**/*.ts", "src/**/*.{ts,tsx}", "test/**/*.{ts,tsx}", "scripts/*.ts", "playwright/**/*.ts"],
+            files: ["src/**/*.{ts,tsx}", "test/**/*.{ts,tsx}", "scripts/tchap/*.ts", "playwright/**/*.ts"],
             extends: ["plugin:matrix-org/typescript", "plugin:matrix-org/react"],
             rules: {
                 "@typescript-eslint/explicit-function-return-type": [
