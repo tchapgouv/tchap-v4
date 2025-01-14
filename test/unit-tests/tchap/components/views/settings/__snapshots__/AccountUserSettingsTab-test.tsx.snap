@@ -57,7 +57,7 @@ exports[`<AccountUserSettingsTab /> common view snapshot should render section w
                 >
                   <label
                     class="_label_ssths_67"
-                    for="radix-:r0:"
+                    for="radix-:r1:"
                   >
                     Display Name
                   </label>
@@ -67,7 +67,7 @@ exports[`<AccountUserSettingsTab /> common view snapshot should render section w
                     <input
                       class="_control_9gon8_18"
                       disabled=""
-                      id="radix-:r0:"
+                      id="radix-:r1:"
                       name="input"
                       title=""
                       value=""
@@ -81,12 +81,12 @@ exports[`<AccountUserSettingsTab /> common view snapshot should render section w
             >
               <div
                 class="mx_UserProfileSettings_profile_controls_userId_label"
-                id="1234"
+                id=":r2:"
               >
                 Username
               </div>
               <div
-                aria-labelledby="1234"
+                aria-labelledby=":r2:"
                 class="mx_CopyableText mx_CopyableText_border"
               >
                 @alice:server.org

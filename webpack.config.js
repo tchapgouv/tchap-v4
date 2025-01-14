@@ -191,18 +191,6 @@ module.exports = (env, argv) => {
         },
 
         resolve: {
-            // We define an alternative import path so we can safely use src/ across the react-sdk
-            // and js-sdk. We already import from src/ where possible to ensure our source maps are
-            // extremely accurate (and because we're capable of compiling the layers manually rather
-            // than relying on partially-mangled output from babel), though we do need to fix the
-            // package level import (stuff like `import {Thing} from "matrix-js-sdk"` for example).
-            // We can't use the aliasing down below to point at src/ because that'll fail to resolve
-            // the package.json for the dependency. Instead, we rely on the package.json of each
-            // layer to have our custom alternate fields to load things in the right order. These are
-            // the defaults of webpack prepended with `matrix_src_`.
-            mainFields: ["matrix_src_browser", "matrix_src_main", "browser", "main"],
-            aliasFields: ["matrix_src_browser", "browser"],
-
             // We need to specify that TS can be resolved without an extension
             extensions: [".js", ".json", ".ts", ".tsx"],
             alias: {
@@ -238,12 +226,13 @@ module.exports = (env, argv) => {
 
                 // Polyfill needed by counterpart
                 "util": require.resolve("util/"),
-                // Polyfill needed by matrix-js-sdk/src/crypto
-                "buffer": require.resolve("buffer/"),
                 // Polyfill needed by sentry
                 "process/browser": require.resolve("process/browser"),
             },
         },
+
+        // Some of our deps have broken source maps, so we have to ignore warnings or exclude them one-by-one
+        ignoreWarnings: [/Failed to parse source map/],
 
         module: {
             noParse: [
@@ -261,6 +250,11 @@ module.exports = (env, argv) => {
                 /olm[\\/](javascript[\\/])?olm\.js$/,
             ],
             rules: [
+                {
+                    test: /\.js$/,
+                    enforce: "pre",
+                    use: ["source-map-loader"],
+                },
                 {
                     test: /\.(ts|js)x?$/,
                     include: (f) => {
@@ -702,7 +696,6 @@ module.exports = (env, argv) => {
             // Automatically load buffer & process modules as we use them without explicitly
             // importing them
             new webpack.ProvidePlugin({
-                Buffer: ["buffer", "Buffer"],
                 process: "process/browser",
             }),
 
@@ -773,9 +766,11 @@ module.exports = (env, argv) => {
  */
 function getAssetOutputPath(url, resourcePath) {
     const isKaTeX = resourcePath.includes("KaTeX");
+    const isFontSource = resourcePath.includes("@fontsource");
     // `res` is the parent dir for our own assets in various layers
     // `dist` is the parent dir for KaTeX assets
-    const prefix = /^.*[/\\](dist|res)[/\\]/;
+    // `files` is the parent dir for @fontsource assets
+    const prefix = /^.*[/\\](dist|res|files)[/\\]/;
 
     /**
      * Only needed for https://github.com/element-hq/element-web/pull/15939
@@ -799,6 +794,10 @@ function getAssetOutputPath(url, resourcePath) {
     const compoundMatch = outputDir.match(compoundImportsPrefix);
     if (compoundMatch) {
         outputDir = outputDir.substring(compoundMatch.index + compoundMatch[0].length);
+    }
+
+    if (isFontSource) {
+        outputDir = "fonts";
     }
 
     if (isKaTeX) {

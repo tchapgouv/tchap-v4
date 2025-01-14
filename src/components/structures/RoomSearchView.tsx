@@ -26,8 +26,8 @@ import ErrorDialog from "../views/dialogs/ErrorDialog";
 import ResizeNotifier from "../../utils/ResizeNotifier";
 import MatrixClientContext from "../../contexts/MatrixClientContext";
 import { RoomPermalinkCreator } from "../../utils/permalinks/Permalinks";
-import RoomContext from "../../contexts/RoomContext";
 import Tchapi18nUtils from "~tchap-web/src/tchap/i18n/Tchapi18nUtils"; // :tchap: error-tchap-is-down
+import { useScopedRoomContext } from "../../contexts/ScopedRoomContext.tsx";
 
 const DEBUG = false;
 let debuglog = function (msg: string): void {};
@@ -54,7 +54,7 @@ interface Props {
 export const RoomSearchView = forwardRef<ScrollPanel, Props>(
     ({ term, scope, promise, abortController, resizeNotifier, className, onUpdate, inProgress }: Props, ref) => {
         const client = useContext(MatrixClientContext);
-        const roomContext = useContext(RoomContext);
+        const roomContext = useScopedRoomContext("showHiddenEvents");
         const [highlights, setHighlights] = useState<string[] | null>(null);
         const [results, setResults] = useState<ISearchResults | null>(null);
         const aborted = useRef(false);

@@ -16,7 +16,6 @@ import { CardContext } from "../right_panel/context";
 import AccessibleButton, { ButtonEvent } from "../elements/AccessibleButton";
 import PosthogTrackers from "../../../PosthogTrackers";
 import { useTypedEventEmitterState } from "../../../hooks/useEventEmitter";
-import RoomContext from "../../../contexts/RoomContext";
 import MemberAvatar from "../avatars/MemberAvatar";
 import { Action } from "../../../dispatcher/actions";
 import { ShowThreadPayload } from "../../../dispatcher/payloads/ShowThreadPayload";
@@ -26,6 +25,7 @@ import { notificationLevelToIndicator } from "../../../utils/notifications";
 import { EventPreviewTile, useEventPreview } from "./EventPreview.tsx";
 import ExternalLink from "../elements/ExternalLink"; // :TCHAP: better-text-for-locked-messages
 import TchapUrls from "~tchap-web/src/tchap/util/TchapUrls"; // :TCHAP: better-text-for-locked-messages
+import { useScopedRoomContext } from "../../../contexts/ScopedRoomContext.tsx";
 
 interface IProps {
     mxEvent: MatrixEvent;
@@ -33,7 +33,7 @@ interface IProps {
 }
 
 const ThreadSummary: React.FC<IProps> = ({ mxEvent, thread, ...props }) => {
-    const roomContext = useContext(RoomContext);
+    const roomContext = useScopedRoomContext("narrow");
     const cardContext = useContext(CardContext);
     const count = useTypedEventEmitterState(thread, ThreadEvent.Update, () => thread.length);
     const { level } = useUnreadNotifications(thread.room, thread.id);
@@ -81,20 +81,6 @@ export const ThreadMessagePreview: React.FC<IPreviewProps> = ({ thread, showDisp
     if (!preview || !lastReply) {
         return null;
     }
-
-    // :TCHAP: better-text-for-locked-messages
-    const undecryptedText = _t(
-        "threads|unable_to_decrypt_with_info_message",
-        {},
-        {
-            a: (sub) => (
-                <ExternalLink href={TchapUrls.lockedMessagesPage}>
-                    {sub}
-                </ExternalLink>
-            ),
-        },
-    );
-    // end :TCHAP:
 
     return (
         <>

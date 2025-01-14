@@ -1,12 +1,12 @@
 # How to run cypress tests locally
 
--   run a local instance of tchap-web in your environment
+- run a local instance of tchap-web in your environment
 
 ```
 yarn start
 ```
 
--   run cypress
+- run cypress
 
 Make a .env file, by coying .env.example. Set values for the `E2E_TEST_*` variables. Tests will run on your localhost, so make sure the test user exists in the backend called by localhost.
 
